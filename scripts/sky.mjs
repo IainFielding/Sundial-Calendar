@@ -318,58 +318,80 @@ export function daylight(calendar, components, midsummerDay = midsummer(calendar
 }
 
 /**
- * The SVG paths for the day wheel's day face and its edges, for a wheel of radius `r` drawn about (0, 0) with noon
+ * The SVG path for the day wheel's day face, for a wheel of radius `r` drawn about (0, 0) with noon
  * at the bottom. The wheel turns a whole turn a day, so daylight takes up its share of the turn, from where the
  * wheel's lowest point will be at sunrise round to where it will be at sunset.
  * @param {number} sunrise   In hours.
  * @param {number} sunset    In hours.
  * @param {number} hoursPerDay
  * @param {number} r
- * @returns {{face: string, edges: string}}
+ * @returns {{face: string}}
  */
 export function dayFacePaths(sunrise, sunset, hoursPerDay, r) {
   const span = wrap(sunset - sunrise, hoursPerDay) / hoursPerDay * 360;
   const from = wheelPoint(sunset, hoursPerDay, r);
   const to = wheelPoint(sunrise, hoursPerDay, r);
   return {
-    face: `M0,0 L${from} A${r} ${r} 0 ${span > 180 ? 1 : 0} 1 ${to} Z`,
-    edges: `M${from} L0,0 L${to}`
+    face: `M0,0 L${from} A${r} ${r} 0 ${span > 180 ? 1 : 0} 1 ${to} Z`
   };
 }
 
 /** How long dawn's and dusk's glow lasts either side of the night, in hours, as {@link dayPhase} counts them. */
 export const TWILIGHT_HOURS = 1;
 
+/** How strong the dawn and dusk glow is at sunrise and sunset, where it is strongest. */
+export const TWILIGHT_GLOW = 0.55;
+
 /**
- * The SVG paths of the twilight glow on the day wheel, either side of sunrise and sunset: into the night, for dawn
- * and dusk, and into the day, for the low sun of early morning and late evening, so the edge between them sits in
- * the middle of one blend. Each is a wedge reaching out from the edge a little further than the last, so drawn one
- * over another, faintly, they build a glow that is strongest at the edge and fades out over the hour.
+ * The SVG paths that blend day into night on the day wheel, across the hour either side of sunrise and sunset. The
+ * day face is drawn whole only from an hour after sunrise to an hour before sunset; either side of that, its colour
+ * fades smoothly out into the night, and over the blend a twilight glow swells to its strongest at sunrise and sunset
+ * and fades away either side. Each fade is built from wedges stacked one over another, each a little wider than the
+ * last and faint enough that together they make the fade, so no two wedges meet edge to edge and leave a seam.
  * @param {number} sunrise   In hours.
  * @param {number} sunset    In hours.
  * @param {number} hoursPerDay
  * @param {number} r
- * @param {number} [steps=12]  How many wedges each glow is built from.
- * @returns {{night: string[], day: string[]}}
+ * @param {number} [steps=24]  How many wedges each fade is built from.
+ * @returns {{core: string, day: {d: string, opacity: number}[], glow: {d: string, opacity: number}[]}}
  */
-export function twilightPaths(sunrise, sunset, hoursPerDay, r, steps = 12) {
-  const wedge = (from, to) => `M0,0 L${wheelPoint(to, hoursPerDay, r)} A${r} ${r} 0 0 1 `
-    + `${wheelPoint(from, hoursPerDay, r)} Z`;
-  // On a short night, or a short day, the glows meet in the middle rather than overlap.
-  const glow = (length, outward) => {
-    const paths = [];
-    if ( length <= 0 ) return paths;
-    for ( let i = 1; i <= steps; i++ ) {
-      const reach = length * i / steps;
-      paths.push(...(outward ? [wedge(sunrise - reach, sunrise), wedge(sunset, sunset + reach)]
-        : [wedge(sunrise, sunrise + reach), wedge(sunset - reach, sunset)]));
-    }
-    return paths;
+export function twilightPaths(sunrise, sunset, hoursPerDay, r, steps = 24) {
+  const dayLength = wrap(sunset - sunrise, hoursPerDay);
+  // On a short night, or a short day, the blends meet in the middle rather than overlap.
+  const blend = Math.min(TWILIGHT_HOURS, dayLength / 2, (hoursPerDay - dayLength) / 2);
+  const wedge = (from, to) => {
+    const large = wrap(to - from, hoursPerDay) / hoursPerDay > 0.5 ? 1 : 0;
+    return `M0,0 L${wheelPoint(to, hoursPerDay, r)} A${r} ${r} 0 ${large} 1 ${wheelPoint(from, hoursPerDay, r)} Z`;
   };
-  return {
-    night: glow(Math.min(TWILIGHT_HOURS, wrap(sunrise - sunset, hoursPerDay) / 2), true),
-    day: glow(Math.min(TWILIGHT_HOURS, wrap(sunset - sunrise, hoursPerDay) / 2), false)
+  const core = dayLength - (2 * blend) > 0 ? wedge(sunrise + blend, sunset - blend) : "";
+  if ( blend <= 0 ) return { core, day: [], glow: [] };
+
+  const smooth = t => t * t * (3 - (2 * t));
+  // The opacity of each stacked layer, narrowest first, so that the band `j` steps out, covered by layer `j` and
+  // every wider one, shows `target` at its middle, `t` running from 0 at the inside of the fade to 1 at its end.
+  const layers = target => {
+    const shown = Array.from({ length: steps }, (_, j) => target((j + 0.5) / steps));
+    return shown.map((a, j) => round3(1 - ((1 - a) / (1 - (shown[j + 1] ?? 0)))));
   };
+
+  // The day's colour, whole beside the core and gone at the far side of the blend, reaching out from the core.
+  const dayOpacity = layers(t => 1 - smooth(t));
+  const day = [];
+  dayOpacity.forEach((opacity, k) => {
+    const reach = 2 * blend * (k + 1) / steps;
+    day.push({ d: wedge(sunrise + blend - reach, sunrise + blend), opacity });
+    day.push({ d: wedge(sunset - blend, sunset - blend + reach), opacity });
+  });
+
+  // The glow, strongest at sunrise and sunset and fading out either side, centred on each.
+  const glowOpacity = layers(t => TWILIGHT_GLOW * (1 - smooth(t)));
+  const glow = [];
+  glowOpacity.forEach((opacity, k) => {
+    const reach = blend * (k + 1) / steps;
+    glow.push({ d: wedge(sunrise - reach, sunrise + reach), opacity });
+    glow.push({ d: wedge(sunset - reach, sunset + reach), opacity });
+  });
+  return { core, day, glow };
 }
 
 /**
@@ -642,4 +664,13 @@ export function moonPath(phase, r) {
  */
 function round(n) {
   return Math.round(n * 100) / 100;
+}
+
+/**
+ * Round to three decimal places, for opacities, which fine fades need finer than {@link round}.
+ * @param {number} n
+ * @returns {number}
+ */
+function round3(n) {
+  return Math.round(n * 1000) / 1000;
 }

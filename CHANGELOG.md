@@ -2,6 +2,14 @@
 
 All notable changes to Simple D&D Calendar.
 
+## 1.6.1 — 2026-11-01
+
+### Changed
+
+- **Dawn and dusk blend more smoothly on the day wheel.** The day's colour fades into the night across the hour either
+  side of sunrise and sunset, under a glow that is brightest at sunrise and sunset, without visible bands. The gold
+  line that marked sunrise and sunset is gone.
+
 ## 1.6.0 — 2026-10-27
 
 ### New

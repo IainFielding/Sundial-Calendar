@@ -309,14 +309,11 @@
 #sdc-calendar .sdc-stop-twilight-0 { stop-color: var(--sdc-twilight-0); }
 #sdc-calendar .sdc-stop-twilight-1 { stop-color: var(--sdc-twilight-1); }
 #sdc-calendar .sdc-stop-twilight-2 { stop-color: var(--sdc-twilight-2); }
-/* Each wedge of the dawn and dusk glow is faint; where they pile up at the day's edge, the glow is strongest. */
-#sdc-calendar .sdc-wheel-twilight path { fill-opacity: 0.12; }
 #sdc-calendar .sdc-wheel-ring { fill: none; stroke: rgb(255 255 255 / 30%); stroke-width: 1; }
 #sdc-calendar .sdc-ray { fill: rgb(255 255 255 / 38%); }
 #sdc-calendar .sdc-night-star { fill: rgb(255 255 255 / 85%); }
 #sdc-calendar .sdc-wheel-rim { fill: none; stroke: var(--sdc-gold); stroke-width: 3; }
 #sdc-calendar .sdc-tick { fill: var(--sdc-gold-light); }
-#sdc-calendar .sdc-wheel-axis { fill: none; stroke: var(--sdc-gold); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 #sdc-calendar .sdc-rim { fill: none; stroke: var(--sdc-gold); stroke-width: 2.5; }
 
 /* Moons ride the bowl between the wheel and its rim. */

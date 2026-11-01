@@ -53,15 +53,14 @@
                     <g class="sdc-wheel">
                         <circle r="{{ sky.wheel }}" fill="url(#sdc-night-fill)"/>
                         {{#each nightStars}}<circle class="sdc-night-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}"/>{{/each}}
-                        <g class="sdc-wheel-twilight night" fill="url(#sdc-twilight-fill)"></g>
-                        <path class="sdc-wheel-day" d="{{ dayFace.face }}" fill="url(#sdc-day-fill)"/>
-                        <g class="sdc-wheel-twilight day" fill="url(#sdc-twilight-fill)"></g>
+                        <path class="sdc-wheel-day" d="{{ twilight.core }}" fill="url(#sdc-day-fill)"/>
+                        <g class="sdc-wheel-day-fade" fill="url(#sdc-day-fill)">{{#each twilight.day}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
+                        <g class="sdc-wheel-twilight" fill="url(#sdc-twilight-fill)">{{#each twilight.glow}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
                         <circle class="sdc-wheel-ring" r="88"/>
                         <circle class="sdc-wheel-ring" r="58"/>
                         <g clip-path="url(#sdc-day-clip)">{{#each rays}}<polygon class="sdc-ray" points="{{ this }}"/>{{/each}}</g>
                         <circle class="sdc-wheel-rim" r="{{ sky.wheel }}"/>
                         {{#each ticks}}<polygon class="sdc-tick" points="{{ this }}"/>{{/each}}
-                        <path class="sdc-wheel-axis" d="{{ dayFace.edges }}"/>
                     </g>
                 </g>
 
