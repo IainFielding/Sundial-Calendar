@@ -362,6 +362,72 @@
 #sdl-calendar .sdl-tears svg { display: block; overflow: visible; }
 #sdl-calendar .sdl-tear { fill: var(--moon-color); animation: sdl-twinkle 3.5s ease-in-out infinite; }
 
+/* The scene's weather, over the sky, the sun and the moons, clipped to the bowl. It lets the pointer through to the
+   moons beneath, and dims the stars, sun and moons behind its clouds. */
+#sdl-calendar {
+  --sdl-cloud: rgb(196 200 222);
+  --sdl-cloud-dark: rgb(70 72 92);
+  --sdl-rain: rgb(170 195 235 / 70%);
+  --sdl-fog: rgb(205 210 225 / 55%);
+}
+
+#sdl-calendar .sdl-weather {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#sdl-calendar .sdl-weather-clouds { fill: var(--sdl-cloud); }
+#sdl-calendar .sdl-weather-clouds.dark { fill: var(--sdl-cloud-dark); }
+#sdl-calendar .sdl-weather-fall.rain { stroke: var(--sdl-rain); stroke-width: 0.9; stroke-linecap: round; }
+#sdl-calendar .sdl-stop-fog-0 { stop-color: var(--sdl-fog); }
+#sdl-calendar .sdl-stop-fog-1 { stop-color: var(--sdl-fog); stop-opacity: 0; }
+
+#sdl-calendar .sdl-weather-drift { animation: sdl-drift 150s linear infinite; }
+#sdl-calendar .sdl-weather-clouds.dark .sdl-weather-drift { animation-duration: 70s; }
+#sdl-calendar .sdl-weather-fog .sdl-weather-drift { animation-duration: 110s; }
+#sdl-calendar .sdl-weather-fall { animation: sdl-fall 0.8s linear infinite; }
+#sdl-calendar[data-weather="storm"] .sdl-weather-fall { animation-duration: 0.55s; }
+#sdl-calendar .sdl-weather-fall.snow { animation-duration: 9s; }
+#sdl-calendar[data-weather="blizzard"] .sdl-weather-fall { animation-duration: 1.8s; }
+#sdl-calendar .sdl-weather-fall.leaves { animation-duration: 11s; }
+
+/* Now and then, lightning lights up a storm. */
+#sdl-calendar .sdl-weather-flash {
+  fill: rgb(235 240 255);
+  opacity: 0;
+  animation: sdl-flash 9s linear infinite;
+}
+
+#sdl-calendar[data-weather] .sdl-stars { opacity: 0.4; transition: opacity 1s; }
+#sdl-calendar[data-weather="leaves"] .sdl-stars { opacity: 1; }
+#sdl-calendar[data-weather] .sdl-moons { transition: opacity 1s; }
+#sdl-calendar:is([data-weather="rain"], [data-weather="snow"], [data-weather="clouds"]) .sdl-moons { opacity: 0.8; }
+#sdl-calendar:is([data-weather="storm"], [data-weather="blizzard"], [data-weather="fog"]) .sdl-moons { opacity: 0.6; }
+
+@keyframes sdl-drift {
+  to { transform: translateX(var(--drift)); }
+}
+
+@keyframes sdl-fall {
+  from { transform: translate(0, 0); }
+  to { transform: translate(var(--fall-x), var(--fall-y)); }
+}
+
+@keyframes sdl-flash {
+  0%, 61%, 63.5%, 66%, 100% { opacity: 0; }
+  62% { opacity: 0.55; }
+  64.5% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sdl-calendar .sdl-weather-drift,
+  #sdl-calendar .sdl-weather-fall,
+  #sdl-calendar .sdl-weather-flash { animation: none; }
+}
+
 /* Any festival, out to the right of the bowl. */
 #sdl-calendar .sdl-corner {
   position: absolute;
@@ -397,6 +463,10 @@
 /* ---------------------------------------------------------------------------------------------- */
 
 #sdl-calendar[data-theme="parchment"] {
+  --sdl-cloud: rgb(250 246 236);
+  --sdl-cloud-dark: rgb(96 98 112);
+  --sdl-rain: rgb(40 70 120 / 60%);
+  --sdl-fog: rgb(250 246 236 / 65%);
   --sdl-gold: #8a5a2b;
   --sdl-gold-light: #6b3f17;
   --sdl-gold-dark: #b98a55;

@@ -132,20 +132,58 @@ export function sunHeight(hour, sunrise = 6, sunset = 18, hoursPerDay = 24) {
  * @returns {number}
  */
 export function darkness(hour, sunrise = 6, sunset = 18, hoursPerDay = 24, moonlight = 0) {
-  const height = sunHeight(hour, sunrise, sunset, hoursPerDay);
-  const points = DARKNESS_BY_SUN_HEIGHT;
-  let dark = 1;
-  if ( height >= points[0][0] ) dark = 0;
-  else {
-    for ( let i = 1; i < points.length; i++ ) {
-      const [high, from] = points[i - 1];
-      const [low, to] = points[i];
-      if ( height < low ) continue;
-      dark = from + ((to - from) * (high - height) / (high - low));
-      break;
-    }
-  }
+  const dark = byHeight(DARKNESS_BY_SUN_HEIGHT, sunHeight(hour, sunrise, sunset, hoursPerDay));
   return round(dark * (1 - (MOONLIGHT * moonlight)));
+}
+
+/**
+ * How golden the light is with the sun at each height, in degrees, from 0 to 1: none until the sun is low, warmest
+ * with it on the horizon, and gone once twilight deepens into night.
+ * @type {[number, number][]}
+ */
+export const GOLDEN_BY_SUN_HEIGHT = [[16, 0], [6, 0.7], [0, 1], [-6, 0.6], [-12, 0]];
+
+/** How strongly the golden light tints a scene at its warmest, as a scene's ambience intensity. */
+export const GOLDEN_INTENSITY = 0.6;
+
+/** The golden light's hue at dawn, a paler gold, and at dusk, a deeper amber, as fractions of the colour wheel. */
+export const DAWN_HUE = 0.1;
+export const DUSK_HUE = 0.06;
+
+/**
+ * The warm light of dawn and dusk at an hour: a hue, gold in the morning and amber in the evening, and how strongly it
+ * tints the scene, by the height of the sun, so it comes and goes with the darkness.
+ * @param {number} hour             Decimal hours since midnight.
+ * @param {number} [sunrise=6]      Sunrise, in hours.
+ * @param {number} [sunset=18]      Sunset, in hours.
+ * @param {number} [hoursPerDay=24]
+ * @returns {{hue: number, intensity: number}}
+ */
+export function goldenLight(hour, sunrise = 6, sunset = 18, hoursPerDay = 24) {
+  const weight = byHeight(GOLDEN_BY_SUN_HEIGHT, sunHeight(hour, sunrise, sunset, hoursPerDay));
+  // Morning runs from the middle of the night to the middle of the day.
+  const day = wrap(sunset - sunrise, hoursPerDay);
+  const sinceSunrise = wrap(hour - sunrise, hoursPerDay);
+  const morning = (sinceSunrise <= day / 2) || (sinceSunrise > day + ((hoursPerDay - day) / 2));
+  return { hue: morning ? DAWN_HUE : DUSK_HUE, intensity: round(weight * GOLDEN_INTENSITY) };
+}
+
+/**
+ * Read a value off a table by the height of the sun, between the heights it lists from highest to lowest. Above the
+ * first it is the first's value, and below the last the last's.
+ * @param {[number, number][]} points  Heights in degrees, and the value at each.
+ * @param {number} height
+ * @returns {number}
+ */
+function byHeight(points, height) {
+  if ( height >= points[0][0] ) return points[0][1];
+  for ( let i = 1; i < points.length; i++ ) {
+    const [high, from] = points[i - 1];
+    const [low, to] = points[i];
+    if ( height < low ) continue;
+    return from + ((to - from) * (high - height) / (high - low));
+  }
+  return points.at(-1)[1];
 }
 
 /**

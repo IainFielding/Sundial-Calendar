@@ -50,6 +50,8 @@ The module's settings are in **Game Settings → Configure Settings → Sundial 
 | **Dress the Sky for the Season** | World | None | Trims the rim of the sky round the day wheel. **Follow the Seasons** changes with the year and dresses festival days for the festival. **Just Winter**, **Just Spring**, **Just Summer** or **Just Autumn** keeps to one season all year. |
 | **Dress the Bar for Your Adventure** | World | None | Trims the bar for the adventure you're running, or the world it's set in. See [Adventure trims](#adventure-trims). |
 | **Darken Scenes at Night** | World | Off | Keeps the active scene's darkness in step with the sky. See [Darkness](#darkness). |
+| **Warm Light at Dawn and Dusk** | World | On | Tints the active scene gold around sunrise and amber around sunset, while **Darken Scenes at Night** is on. See [Dawn and dusk](#dawn-and-dusk). |
+| **Show the Weather in the Sky** | Player | On | Draws the weather of the scene you're looking at in the sky. See [Weather](#weather). |
 | **Long Summer Days** | World | Off | Moves sunrise and sunset with the seasons: sixteen hours of daylight at midsummer and eight at midwinter. See [Long summer days](#long-summer-days). |
 | **Announce Each Dawn** | World | Off | Posts each new day to the chat as the sun rises. See [Dawn announcements](#dawn-announcements). |
 | **Additional Calendars** | World | None | A button that opens a list of the module's own calendars to add to D&D 5e's. See [Additional calendars](#additional-calendars). |
@@ -116,9 +118,37 @@ With **Darken Scenes at Night** on, the active scene's darkness follows the sun:
 Things to know:
 
 - **Only the active scene** is changed. Switching scenes brings the new one into step.
-- **Scenes with their darkness locked are left alone.** Tick **Darkness Level Lock** in a scene's configuration to keep its darkness as you set it, such as a dungeon that's always dark or a fey glade that's always bright.
+- **Scenes with no sky can be left out.** Each scene has **Follow the Sky** in its configuration, on the **Environment** tab under **Darkness**, ticked to start with. Untick it for a scene that shouldn't follow the time of day, such as a dungeon, the Underdark or a fey glade that's always bright, and set its darkness yourself as usual. Tick it again and the scene comes back into step.
+- **Scenes with their darkness locked are left alone too.** **Darkness Level Lock** also stops you changing the darkness yourself, so use **Follow the Sky** for a scene you only want to keep off the sky.
 - **A GM must be logged in.** The active GM's client updates the scene, so time moved while no GM is connected catches up when one joins.
 - Small steps, such as a combat round's six seconds, don't update the scene. The darkness moves once the change is large enough to see.
+
+## Dawn and dusk
+
+With **Darken Scenes at Night** and **Warm Light at Dawn and Dusk** both on, the active scene's light turns warm as the sun nears the horizon: pale gold for about an hour either side of sunrise, deep amber either side of sunset. It fades in and out with the darkness, by the height of the sun, and follows [Long summer days](#long-summer-days).
+
+- **Nothing is saved to the scene.** Each player's Foundry works the tint out for itself, so turning it off puts every scene back as it was.
+- **A scene with a tint of its own keeps it.** If you've set the scene's own colour in **Scene Configuration → Environment** (its **Intensity** above 0), the module leaves its light alone.
+- **Scenes off the sky are left alone**, the same as for darkness: those with **Follow the Sky** unticked or their darkness locked.
+
+## Weather
+
+Set a scene's **Weather** in its configuration, on the **Basics** tab, and the sky shows it:
+
+| Scene weather | The sky |
+| --- | --- |
+| Rain | Clouds and rain |
+| Rain Storm | Dark clouds, heavy rain and the odd flash of lightning |
+| Snow | Clouds and falling snow |
+| Blizzard | Clouds and snow driving across the sky |
+| Fog | Banks of fog drifting slowly over the sky |
+| Autumn Leaves | Leaves blowing past |
+
+The clouds pass in front of the sun and moons and dim the stars. The snow and leaves are Foundry's own, the same as on the canvas.
+
+- **Each player sees their own scene's weather**, the scene they're looking at. A player with the canvas off sees the active scene's.
+- **Weather from other modules** that add to Foundry's weather list is shown when its name says what it is: anything named for rain, drizzle, storms, thunder, snow, sleet, hail, fog, mist, leaves, clouds or overcast.
+- **Each player can turn it off** for themselves with **Show the Weather in the Sky**. It also stays still for anyone whose system asks for reduced motion.
 
 ## Long summer days
 
@@ -154,7 +184,7 @@ A jump over several days posts only the last dawn, not one for every day passed.
 - Moons and festivals depend on the world's **Calendar**. Khorvaire, Gregorian and Krynn have no festivals, and a calendar other than D&D 5e's four and the module's own has no moons until a module adds some. See [The Moons](moons.md#changing-the-moons).
 
 **The scene doesn't darken.**
-- Check **Darken Scenes at Night** is on, the scene is the active one, and its darkness isn't locked.
+- Check **Darken Scenes at Night** is on, the scene is the active one, **Follow the Sky** is ticked in its configuration, and its darkness isn't locked.
 - A GM must be logged in.
 
 **Items recover on the wrong schedule.**

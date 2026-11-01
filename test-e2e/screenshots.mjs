@@ -23,6 +23,11 @@
  * And the sun's course across the bowl, into docs/screenshots/sun-*.png. To take only those:
  *
  *   npm run docs:screenshots -- --sun
+ *
+ * And the weather in the sky, into docs/screenshots/weather-*.png, and the warm light of dawn and dusk on the scene,
+ * into docs/screenshots/light-*.png. To take only those:
+ *
+ *   npm run docs:screenshots -- --weather
  */
 
 import fs from "node:fs";
@@ -52,6 +57,9 @@ const HERO_ONLY = process.argv.includes("--hero");
 
 /** Take only the sun's shots. */
 const SUN_ONLY = process.argv.includes("--sun");
+
+/** Take only the weather's and the warm light's shots. */
+const WEATHER_ONLY = process.argv.includes("--weather");
 
 /** The calendar and a margin around it, for a cropped shot. */
 const CLIP = { x: 480, y: 0, width: 640, height: 230 };
@@ -91,10 +99,11 @@ try {
     console.log(`  ${OUT}/${name}.png`);
   };
 
-  const all = !TRIMS_ONLY && !LUNAR_ONLY && !HERO_ONLY && !SUN_ONLY;
+  const all = !TRIMS_ONLY && !LUNAR_ONLY && !HERO_ONLY && !SUN_ONLY && !WEATHER_ONLY;
   if ( all || HERO_ONLY ) await heroShot(ctx, shoot);
   if ( all ) await docShots(ctx, shoot);
   if ( all || SUN_ONLY ) await sunShots(ctx, shoot);
+  if ( all || WEATHER_ONLY ) await weatherShots(ctx, shoot);
   if ( all || LUNAR_ONLY ) await lunarShots(ctx, backdrop);
   if ( all || TRIMS_ONLY ) await trimShots(ctx, shoot, backdrop);
 
@@ -148,6 +157,61 @@ async function sunShots(ctx, shoot) {
   await setTime(ctx, { year: 1525, day: 170, hour: 6, minute: 0 });
   await shoot(gm, "sun-midsummer-dawn");
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonalDaylight", false), MODULE_ID);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Each kind of weather in the sky, each at a time of day that suits it, on the active scene; then the warm light of
+ * dawn and dusk on the scene, with its darkness following the sky. The scene's own weather and lighting are put back
+ * after.
+ * @param {{gm: Session, player: Session}} ctx
+ * @param {(session: Session, name: string, clip?: object) => Promise<void>} shoot
+ */
+async function weatherShots(ctx, shoot) {
+  const { gm } = ctx;
+  const setWeather = weather => gm.eval(weather => game.scenes.active.update({ weather }), weather);
+  const shots = [
+    ["clouds", "overcast", { year: 1525, day: 120, hour: 10 }],
+    ["rain", "rain", { year: 1525, day: 120, hour: 14 }],
+    ["storm", "rainStorm", { year: 1525, day: 200, hour: 20, minute: 30 }],
+    ["snow", "snow", { year: 1525, day: 10, hour: 11 }],
+    ["blizzard", "blizzard", { year: 1525, day: 20, hour: 15 }],
+    ["fog", "fog", { year: 1525, day: 290, hour: 7 }],
+    ["leaves", "leaves", { year: 1525, day: 280, hour: 16 }]
+  ];
+  const original = await gm.eval(() => game.scenes.active.weather);
+  // Hold the weather still for the shots: the test browser draws without a graphics card, and a moving layer can
+  // be caught half drawn.
+  await gm.eval(() => {
+    const style = document.createElement("style");
+    style.id = "sdl-shot-still-weather";
+    style.textContent = "#sdl-calendar .sdl-weather * { animation: none !important; }";
+    document.head.append(style);
+  });
+  // Foundry has no overcast weather of its own, so lend it one for the clouds' shot.
+  await gm.eval(() => CONFIG.weatherEffects.overcast ??= { id: "overcast", label: "Overcast", effects: [] });
+  for ( const [name, weather, when] of shots ) {
+    await setWeather(weather);
+    await setTime(ctx, when);
+    await shoot(gm, `weather-${name}`);
+  }
+  await setWeather(original ?? "");
+  await gm.eval(() => document.getElementById("sdl-shot-still-weather")?.remove());
+
+  // The warm light falls on the scene, so these take the calendar and the scene beneath it.
+  const screen = { x: 300, y: 0, width: 1000, height: 560 };
+  await gm.eval(moduleId => game.settings.set(moduleId, "sceneDarkness", true), MODULE_ID);
+  await setTime(ctx, { year: 1525, day: 120, hour: 12 });
+  await gm.page.waitForTimeout(2500);
+  await shoot(gm, "light-noon", screen);
+  await setTime(ctx, { year: 1525, day: 120, hour: 18, minute: 0 });
+  await gm.page.waitForTimeout(2500);
+  await shoot(gm, "light-dusk", screen);
+  await setTime(ctx, { year: 1525, day: 120, hour: 6, minute: 0 });
+  await gm.page.waitForTimeout(2500);
+  await shoot(gm, "light-dawn", screen);
+  await gm.eval(moduleId => game.settings.set(moduleId, "sceneDarkness", false), MODULE_ID);
 }
 
 /* -------------------------------------------- */
