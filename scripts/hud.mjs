@@ -218,6 +218,7 @@ export function createCalendarHUD(CalendarHUD) {
         rimPath: `M${(cx - halfChord).toFixed(1)},0 A${bowl} ${bowl} 0 0 0 ${(cx + halfChord).toFixed(1)},0`,
         stars, ticks, rays, nightStars,
         dayFace: sky.dayFacePaths(6, 18, 24, wheel),
+        twilight: sky.twilightPaths(6, 18, 24, wheel),
         seasonGradient: sky.seasonGradient(game.time.calendar),
         seasonWidth: SEASON_BAR_WIDTH * 3
       };
@@ -247,9 +248,8 @@ export function createCalendarHUD(CalendarHUD) {
         wheel: find(".sdc-wheel"),
         wheelDay: find(".sdc-wheel-day"),
         wheelDayClip: find(".sdc-wheel-day-clip"),
-        nightTwilight: find(".sdc-wheel-twilight.night"),
-        dayTwilight: find(".sdc-wheel-twilight.day"),
-        wheelAxis: find(".sdc-wheel-axis"),
+        dayFade: find(".sdc-wheel-day-fade"),
+        twilight: find(".sdc-wheel-twilight"),
         barTrim: find(".sdc-trim-bar"),
         bowlTrim: find(".sdc-trim-bowl"),
         festivalIcon: find(".sdc-festival-icon"),
@@ -433,13 +433,13 @@ export function createCalendarHUD(CalendarHUD) {
       const daylight = `${sunrise.toFixed(2)}-${sunset.toFixed(2)}`;
       if ( this.#text.daylight !== daylight ) {
         this.#text.daylight = daylight;
-        const { face, edges } = sky.dayFacePaths(sunrise, sunset, hoursPerDay, SKY.wheel);
-        el.wheelDay.setAttribute("d", face);
+        const { face } = sky.dayFacePaths(sunrise, sunset, hoursPerDay, SKY.wheel);
         el.wheelDayClip.setAttribute("d", face);
-        el.wheelAxis.setAttribute("d", edges);
         const twilight = sky.twilightPaths(sunrise, sunset, hoursPerDay, SKY.wheel);
-        el.nightTwilight.innerHTML = twilight.night.map(d => `<path d="${d}"/>`).join("");
-        el.dayTwilight.innerHTML = twilight.day.map(d => `<path d="${d}"/>`).join("");
+        const layers = paths => paths.map(({ d, opacity }) => `<path d="${d}" fill-opacity="${opacity}"/>`).join("");
+        el.wheelDay.setAttribute("d", twilight.core);
+        el.dayFade.innerHTML = layers(twilight.day);
+        el.twilight.innerHTML = layers(twilight.glow);
       }
       // The part of the day, for styles and other modules to follow.
       this.element.dataset.dayPhase = sky.dayPhase(hour, sunrise, sunset);

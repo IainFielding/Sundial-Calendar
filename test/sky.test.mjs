@@ -126,17 +126,30 @@ describe("the day wheel", () => {
     expect(sky.sunAngle(0.5, { ...sun, offset: 0 }, 24)).toBeCloseTo(Math.PI / 2);
   });
 
-  it("builds the twilight glow from wedges reaching out from sunrise and sunset", () => {
-    const { night, day } = sky.twilightPaths(6, 18, 24, 100, 4);
-    expect(night).toHaveLength(8);
+  it("fades the day into the night across the hour either side of sunrise and sunset", () => {
+    const { core, day, glow } = sky.twilightPaths(6, 18, 24, 100, 4);
+    // The whole day face runs from seven round to five.
+    expect(core).toBe("M0,0 L96.59,25.88 A100 100 0 0 1 -96.59,25.88 Z");
     expect(day).toHaveLength(8);
-    // The widest dawn wedge runs from five o'clock round to sunrise, on the wheel's left as drawn; the widest morning
-    // wedge from sunrise round to seven.
-    expect(night.at(-2)).toMatch(/^M0,0 L-100,0 A100 100 0 0 1 -96\.\d+,-25\.\d+ Z$/);
-    expect(day.at(-2)).toMatch(/^M0,0 L-96\.\d+,25\.\d+ A100 100 0 0 1 -100,0 Z$/);
-    // A night of an hour has half an hour of glow either side of it, meeting at midnight.
-    const [short] = sky.twilightPaths(0.5, 23.5, 24, 100, 1).night;
-    expect(short).toMatch(/^M0,0 L-?\d+(\.\d+)?,-?\d+(\.\d+)? A100 100 0 0 1 -?0(\.\d+)?,-100 Z$/);
+    expect(glow).toHaveLength(8);
+    // The widest fade reaches from seven back to five, faintly; the narrowest, beside the core, is nearly whole.
+    expect(day.at(-2).d).toBe("M0,0 L-96.59,25.88 A100 100 0 0 1 -96.59,-25.88 Z");
+    expect(day.at(-2).opacity).toBeLessThan(0.1);
+    expect(day[0].opacity).toBeGreaterThan(0.5);
+    // Stacked, the layers show the day's colour fading from whole beside the core to nothing at the far side.
+    const shown = j => 1 - day.filter((_, i) => i % 2 === 0).slice(j).reduce((left, { opacity }) => left * (1 - opacity), 1);
+    expect(shown(0)).toBeCloseTo(1 - ((0.125 ** 2) * (3 - 0.25)), 2);
+    expect(shown(3)).toBeLessThan(shown(2));
+    // The glow is strongest over sunrise itself.
+    const strongest = 1 - glow.filter((_, i) => i % 2 === 0).reduce((left, { opacity }) => left * (1 - opacity), 1);
+    expect(strongest).toBeLessThan(sky.TWILIGHT_GLOW);
+    expect(strongest).toBeGreaterThan(sky.TWILIGHT_GLOW * 0.9);
+  });
+
+  it("meets the blends in the middle of a short night, and leaves no core on a short day", () => {
+    const short = sky.twilightPaths(0.5, 23.5, 24, 100, 1);
+    expect(short.day[1].d).toMatch(/^M0,0 L0,-100 /);
+    expect(sky.twilightPaths(11.5, 12.5, 24, 100).core).toBe("");
   });
 
   it("reddens the sun towards the horizon", () => {
@@ -177,7 +190,7 @@ describe("the length of the day", () => {
   });
 
   it("draws the day face on the bottom of the wheel, as wide as the day is long", () => {
-    expect(sky.dayFacePaths(6, 18, 24, 100)).toEqual({ face: "M0,0 L100,0 A100 100 0 0 1 -100,0 Z", edges: "M100,0 L0,0 L-100,0" });
+    expect(sky.dayFacePaths(6, 18, 24, 100)).toEqual({ face: "M0,0 L100,0 A100 100 0 0 1 -100,0 Z" });
     expect(sky.dayFacePaths(4, 20, 24, 100).face).toBe("M0,0 L86.6,-50 A100 100 0 1 1 -86.6,-50 Z");
     expect(sky.dayFacePaths(8, 16, 24, 100).face).toBe("M0,0 L86.6,50 A100 100 0 0 1 -86.6,50 Z");
   });
