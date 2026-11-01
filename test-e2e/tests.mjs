@@ -381,6 +381,32 @@ test("the active scene darkens at night, once the GM turns it on", async ctx => 
   await gm.page.waitForTimeout(300);
   assertEqual(await darkness(), full, "a locked scene's darkness");
   await gm.eval(() => game.scenes.active.update({ "environment.darknessLock": false }));
+  assertEqual(await settle("noon, once unlocked"), 0, "noon, once unlocked");
+
+  // A scene taken off the sky is left as it is, and comes back into step when it's put back on.
+  const flag = `flags.${MODULE_ID}.followSky`;
+  await gm.eval(flag => game.scenes.active.update({ [flag]: false }), flag);
+  await setTime(ctx, { year: 1501, day: 30, hour: 0 });
+  await gm.page.waitForTimeout(300);
+  assertEqual(await darkness(), 0, "a scene that doesn't follow the sky");
+  await gm.eval(flag => game.scenes.active.update({ [flag]: true }), flag);
+  assertEqual(await settle("a moonlit midnight, followed again"), full, "a scene that follows the sky again");
+
+  // The setting is in the Darkness section of the scene's configuration, under the lock, and saves with the sheet.
+  const sheet = await gm.eval(async flag => {
+    const app = game.scenes.active.sheet;
+    await app.render({ force: true });
+    const input = app.element.querySelector(`[name="${flag}"]`);
+    const after = input?.closest(".form-group").previousElementSibling?.querySelector("[name]")?.name;
+    input.checked = false;
+    await app.submit();
+    await app.close();
+    return { checked: input.defaultChecked, after, saved: foundry.utils.getProperty(game.scenes.active, flag) };
+  }, flag);
+  assertEqual(sheet.checked, true, "Follow the Sky ticked on the sheet");
+  assertEqual(sheet.after, "environment.darknessLock", "Follow the Sky under Darkness Level Lock");
+  assertEqual(sheet.saved, false, "Follow the Sky saved from the sheet");
+  await gm.eval(flag => game.scenes.active.update({ [flag]: true }), flag);
 });
 
 test("each player picks the calendar's style for themselves", async ({ gm, player }) => {

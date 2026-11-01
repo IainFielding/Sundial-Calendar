@@ -116,7 +116,8 @@ With **Darken Scenes at Night** on, the active scene's darkness follows the sun:
 Things to know:
 
 - **Only the active scene** is changed. Switching scenes brings the new one into step.
-- **Scenes with their darkness locked are left alone.** Tick **Darkness Level Lock** in a scene's configuration to keep its darkness as you set it, such as a dungeon that's always dark or a fey glade that's always bright.
+- **Scenes with no sky can be left out.** Each scene has **Follow the Sky** in its configuration, on the **Environment** tab under **Darkness**, ticked to start with. Untick it for a scene that shouldn't follow the time of day, such as a dungeon, the Underdark or a fey glade that's always bright, and set its darkness yourself as usual. Tick it again and the scene comes back into step.
+- **Scenes with their darkness locked are left alone too.** **Darkness Level Lock** also stops you changing the darkness yourself, so use **Follow the Sky** for a scene you only want to keep off the sky.
 - **A GM must be logged in.** The active GM's client updates the scene, so time moved while no GM is connected catches up when one joins.
 - Small steps, such as a combat round's six seconds, don't update the scene. The darkness moves once the change is large enough to see.
 
@@ -154,7 +155,7 @@ A jump over several days posts only the last dawn, not one for every day passed.
 - Moons and festivals depend on the world's **Calendar**. Khorvaire, Gregorian and Krynn have no festivals, and a calendar other than D&D 5e's four and the module's own has no moons until a module adds some. See [The Moons](moons.md#changing-the-moons).
 
 **The scene doesn't darken.**
-- Check **Darken Scenes at Night** is on, the scene is the active one, and its darkness isn't locked.
+- Check **Darken Scenes at Night** is on, the scene is the active one, **Follow the Sky** is ticked in its configuration, and its darkness isn't locked.
 - A GM must be logged in.
 
 **Items recover on the wrong schedule.**

@@ -4,6 +4,12 @@ All notable changes to Sundial Calendar.
 
 ## 2.0.0 — Unreleased
 
+### New
+
+- **Scenes can be left off the sky.** With **Darken Scenes at Night** on, each scene has **Follow the Sky** in its
+  configuration, on the **Environment** tab under **Darkness**. Untick it for a dungeon, the Underdark or anywhere
+  else with no sky, and its darkness stays as you set it, without locking it.
+
 ### Changed
 
 - **Simple D&D Calendar is now Sundial Calendar.** The module has a new name, a new module id

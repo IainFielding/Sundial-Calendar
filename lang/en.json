@@ -129,7 +129,7 @@
       },
       "SceneDarkness": {
         "Name": "Darken Scenes at Night",
-        "Hint": "Keep the active scene's darkness in step with the sky: light by day, fading through the late afternoon and twilight as the sun sinks, dark at night, and a little lighter under a bright moon. Scenes with their darkness locked are left alone."
+        "Hint": "Keep the active scene's darkness in step with the sky: light by day, fading through the late afternoon and twilight as the sun sinks, dark at night, and a little lighter under a bright moon. Untick Follow the Sky in a scene's configuration to leave that scene alone, and scenes with their darkness locked are left alone too."
       },
       "SeasonalDaylight": {
         "Name": "Long Summer Days",
@@ -143,6 +143,12 @@
         "Name": "Additional Calendars",
         "Label": "Choose Calendars",
         "Hint": "Add calendars for settings D&D 5e doesn't cover, such as Exandria and Krynn, to its Configure Calendar."
+      }
+    },
+    "Scene": {
+      "FollowSky": {
+        "Name": "Follow the Sky",
+        "Hint": "While Darken Scenes at Night is on, darken this scene at night and lighten it by day with the calendar's sky. Untick it for a scene with no sky, such as a dungeon or the Underdark, to set its darkness yourself."
       }
     },
     "Chat": {
