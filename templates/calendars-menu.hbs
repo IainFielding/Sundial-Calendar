@@ -1,15 +1,15 @@
-<section class="sdc-calendars-menu">
-    <p class="hint">{{ localize "SDC.Calendars.Hint" }}</p>
+<section class="sdl-calendars-menu">
+    <p class="hint">{{ localize "SDL.Calendars.Hint" }}</p>
     {{#each calendars}}
     <div class="form-group">
-        <label for="sdc-calendar-{{ key }}">{{ label }}</label>
+        <label for="sdl-calendar-{{ key }}">{{ label }}</label>
         <div class="form-fields">
-            <input type="checkbox" id="sdc-calendar-{{ key }}" name="{{ key }}" {{ checked checked }}
+            <input type="checkbox" id="sdl-calendar-{{ key }}" name="{{ key }}" {{ checked checked }}
                    {{#if inUse}}disabled{{/if}}>
         </div>
         <p class="hint">
             {{ hint }}
-            {{#if inUse}}<strong>{{ localize "SDC.Calendars.InUse" }}</strong>{{/if}}
+            {{#if inUse}}<strong>{{ localize "SDL.Calendars.InUse" }}</strong>{{/if}}
         </p>
     </div>
     {{/each}}

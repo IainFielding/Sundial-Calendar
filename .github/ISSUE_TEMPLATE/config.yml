@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://github.com/IainFielding/simple-dnd-calendar#readme
+    url: https://github.com/IainFielding/Sundial-Calendar#readme
     about: What the calendar shows and how to drive it — check here before filing an issue.
   - name: Support the module
     url: https://ko-fi.com/sogrom

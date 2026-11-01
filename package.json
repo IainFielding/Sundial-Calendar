@@ -1,9 +1,9 @@
 {
-  "name": "sogrom-simple-dnd-calendar",
+  "name": "sogrom-sundial-calendar",
   "private": true,
   "license": "MIT",
   "type": "module",
-  "description": "Dev tooling (lint, manifest validation, unit and end-to-end tests) for the Simple D&D Calendar Foundry module. Not shipped in the module archive.",
+  "description": "Dev tooling (lint, manifest validation, unit and end-to-end tests) for the Sundial Calendar Foundry module. Not shipped in the module archive.",
   "scripts": {
     "lint": "eslint --max-warnings=0 scripts tools test test-e2e",
     "validate:json": "node tools/validate-json.mjs",

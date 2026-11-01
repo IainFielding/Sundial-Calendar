@@ -1,6 +1,6 @@
 # End-to-end tests
 
-These tests run Simple D&D Calendar in a real Foundry, with one browser joined as the GM and another as a player.
+These tests run Sundial Calendar in a real Foundry, with one browser joined as the GM and another as a player.
 They set the world time, click the real buttons on the calendar, and check what each user sees.
 
 The harness is not shipped: the release archive in `.github/workflows/main.yml` lists its contents.
@@ -13,7 +13,7 @@ The harness is not shipped: the release archive in `.github/workflows/main.yml` 
    no administrator rights. From a Command Prompt:
 
    ```
-   mklink /J "%LOCALAPPDATA%\FoundryVTT\Data\modules\sogrom-simple-dnd-calendar" "H:\Code\FoundryModules\simple-dnd-calendar"
+   mklink /J "%LOCALAPPDATA%\FoundryVTT\Data\modules\sogrom-sundial-calendar" "H:\Code\FoundryModules\Sundial-Calendar"
    ```
 
 3. `npm install`, then `npx playwright install chromium` if Playwright has no browser yet.
@@ -29,7 +29,7 @@ HEADED=1 npm run test:e2e        # watch the browsers
 npm run docs:screenshots         # retake the screenshots in docs/screenshots
 ```
 
-Foundry is started on port 30099 with the `sdc-e2e` world, which is created on the first run. Every run deletes
+Foundry is started on port 30099 with the `sdl-e2e` world, which is created on the first run. Every run deletes
 the world's actors and scenes, then creates:
 
 - **Player**, a player user, with **Aria** as their character;
@@ -39,7 +39,7 @@ The world's calendar is set to the Calendar of Harptos in D&D 5e's settings and 
 with it open and not animating. Tests of other calendars pick them the same way, reload,
 and put Harptos back.
 
-The browsers run without the canvas, as nothing tested draws on it. `SDC_CANVAS=1` turns it on; the screenshot
+The browsers run without the canvas, as nothing tested draws on it. `SDL_CANVAS=1` turns it on; the screenshot
 script uses it so the calendar hangs over a scene.
 
 A failed test saves a screenshot from each browser as `fail-NN-gm.png` and `fail-NN-player.png`, and prints the

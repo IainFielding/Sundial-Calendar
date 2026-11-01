@@ -29,7 +29,7 @@ export function announceDaybreak(worldTime, deltaTime) {
   if ( dawn <= worldTime - deltaTime ) return;
   return ChatMessage.implementation.create({
     content: daybreakCard(dawn),
-    speaker: { alias: _loc("SDC.Chat.Speaker") }
+    speaker: { alias: _loc("SDL.Chat.Speaker") }
   });
 }
 
@@ -67,12 +67,12 @@ export function daybreakCard(dawn) {
   const festival = festivalName(calendar, components);
   const date = formatComponents(calendar, components, "date", "monthDayYear");
   const rows = [
-    weekday ? `<p class="sdc-chat-when">${escape(_loc("SDC.Announce.Weekday", { day: _loc(weekday.name).capitalize() }))}</p>` : "",
+    weekday ? `<p class="sdl-chat-when">${escape(_loc("SDL.Announce.Weekday", { day: _loc(weekday.name).capitalize() }))}</p>` : "",
     season && (components.season !== yesterday.season)
-      ? `<p><i class="fa-solid fa-leaf"></i> ${escape(_loc("SDC.Announce.Season", { season: _loc(season.name) }))}</p>` : "",
+      ? `<p><i class="fa-solid fa-leaf"></i> ${escape(_loc("SDL.Announce.Season", { season: _loc(season.name) }))}</p>` : "",
     festival ? `<p><i class="fa-solid fa-star-christmas"></i> ${escape(festival)}</p>` : "",
     ...moonEventLabels(dawn).map(label => `<p><i class="fa-solid fa-moon"></i> ${escape(label)}</p>`)
   ];
-  return `<div class="sdc-chat sdc-daybreak"><h3><i class="fa-solid fa-sunrise"></i> `
-    + `${escape(_loc("SDC.Announce.Title", { date }))}</h3>${rows.join("")}</div>`;
+  return `<div class="sdl-chat sdl-daybreak"><h3><i class="fa-solid fa-sunrise"></i> `
+    + `${escape(_loc("SDL.Announce.Title", { date }))}</h3>${rows.join("")}</div>`;
 }

@@ -1,73 +1,73 @@
 <div>
-    <div class="sdc-bar" aria-hidden="true"></div>
-    <svg class="sdc-trim" viewBox="0 0 600 64" width="600" height="64" aria-hidden="true"><g class="sdc-trim-bar"></g></svg>
-    <time class="sdc-time"></time>
-    <div class="sdc-visual">
-        <div class="sdc-season" style="background-image: {{ seasonGradient }}; background-size: {{ seasonWidth }}px 100%">
-            <svg class="sdc-season-frame" viewBox="0 0 460 26" preserveAspectRatio="none" aria-hidden="true">
+    <div class="sdl-bar" aria-hidden="true"></div>
+    <svg class="sdl-trim" viewBox="0 0 600 64" width="600" height="64" aria-hidden="true"><g class="sdl-trim-bar"></g></svg>
+    <time class="sdl-time"></time>
+    <div class="sdl-visual">
+        <div class="sdl-season" style="background-image: {{ seasonGradient }}; background-size: {{ seasonWidth }}px 100%">
+            <svg class="sdl-season-frame" viewBox="0 0 460 26" preserveAspectRatio="none" aria-hidden="true">
                 <polyline points="1,0 29,25 431,25 459,0"/>
                 <polyline class="inner" points="7,0 32,21.5 428,21.5 453,0"/>
             </svg>
-            <span class="sdc-date"></span>
+            <span class="sdl-date"></span>
         </div>
-        <div class="sdc-corner sdc-right">
-            <i class="sdc-festival-icon fa-solid fa-star-christmas" hidden></i>
-            <i class="sdc-moon-event-icon fa-solid fa-moon" hidden></i>
+        <div class="sdl-corner sdl-right">
+            <i class="sdl-festival-icon fa-solid fa-star-christmas" hidden></i>
+            <i class="sdl-moon-event-icon fa-solid fa-moon" hidden></i>
         </div>
-        <div class="sdc-sky">
+        <div class="sdl-sky">
             <svg viewBox="0 0 {{ sky.width }} {{ sky.height }}" width="{{ sky.width }}" height="{{ sky.height }}" aria-hidden="true">
                 <defs>
-                    <radialGradient id="sdc-bowl-fill" gradientUnits="userSpaceOnUse" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="{{ sky.bowl }}">
-                        <stop offset="0.55" class="sdc-stop-bowl-inner"/>
-                        <stop offset="1" class="sdc-stop-bowl-outer"/>
+                    <radialGradient id="sdl-bowl-fill" gradientUnits="userSpaceOnUse" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="{{ sky.bowl }}">
+                        <stop offset="0.55" class="sdl-stop-bowl-inner"/>
+                        <stop offset="1" class="sdl-stop-bowl-outer"/>
                     </radialGradient>
-                    <radialGradient id="sdc-day-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
-                        <stop offset="0" class="sdc-stop-day-0"/>
-                        <stop offset="0.6" class="sdc-stop-day-1"/>
-                        <stop offset="1" class="sdc-stop-day-2"/>
+                    <radialGradient id="sdl-day-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
+                        <stop offset="0" class="sdl-stop-day-0"/>
+                        <stop offset="0.6" class="sdl-stop-day-1"/>
+                        <stop offset="1" class="sdl-stop-day-2"/>
                     </radialGradient>
-                    <radialGradient id="sdc-night-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
-                        <stop offset="0" class="sdc-stop-night-0"/>
-                        <stop offset="0.6" class="sdc-stop-night-1"/>
-                        <stop offset="1" class="sdc-stop-night-2"/>
+                    <radialGradient id="sdl-night-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
+                        <stop offset="0" class="sdl-stop-night-0"/>
+                        <stop offset="0.6" class="sdl-stop-night-1"/>
+                        <stop offset="1" class="sdl-stop-night-2"/>
                     </radialGradient>
-                    <radialGradient id="sdc-twilight-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
-                        <stop offset="0" class="sdc-stop-twilight-0"/>
-                        <stop offset="0.6" class="sdc-stop-twilight-1"/>
-                        <stop offset="1" class="sdc-stop-twilight-2"/>
+                    <radialGradient id="sdl-twilight-fill" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="{{ sky.wheel }}">
+                        <stop offset="0" class="sdl-stop-twilight-0"/>
+                        <stop offset="0.6" class="sdl-stop-twilight-1"/>
+                        <stop offset="1" class="sdl-stop-twilight-2"/>
                     </radialGradient>
-                    <clipPath id="sdc-bowl-clip"><path d="{{ bowlPath }}"/></clipPath>
-                    <clipPath id="sdc-day-clip"><path class="sdc-wheel-day-clip" d="{{ dayFace.face }}"/></clipPath>
+                    <clipPath id="sdl-bowl-clip"><path d="{{ bowlPath }}"/></clipPath>
+                    <clipPath id="sdl-day-clip"><path class="sdl-wheel-day-clip" d="{{ dayFace.face }}"/></clipPath>
                 </defs>
 
                 {{!-- The bowl of the sky --}}
-                <path class="sdc-bowl" d="{{ bowlPath }}" fill="url(#sdc-bowl-fill)"/>
-                <g clip-path="url(#sdc-bowl-clip)">
-                    <circle class="sdc-bowl-ring" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="118"/>
-                    <circle class="sdc-bowl-ring dashed" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="139"/>
-                    {{#each stars}}<circle class="sdc-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}" opacity="{{ o }}"/>{{/each}}
+                <path class="sdl-bowl" d="{{ bowlPath }}" fill="url(#sdl-bowl-fill)"/>
+                <g clip-path="url(#sdl-bowl-clip)">
+                    <circle class="sdl-bowl-ring" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="118"/>
+                    <circle class="sdl-bowl-ring dashed" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="139"/>
+                    {{#each stars}}<circle class="sdl-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}" opacity="{{ o }}"/>{{/each}}
                 </g>
 
                 {{!-- The day wheel, drawn about its own centre and turned through the day --}}
                 <g transform="translate({{ sky.cx }} {{ sky.cy }})">
-                    <g class="sdc-wheel">
-                        <circle r="{{ sky.wheel }}" fill="url(#sdc-night-fill)"/>
-                        {{#each nightStars}}<circle class="sdc-night-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}"/>{{/each}}
-                        <path class="sdc-wheel-day" d="{{ twilight.core }}" fill="url(#sdc-day-fill)"/>
-                        <g class="sdc-wheel-day-fade" fill="url(#sdc-day-fill)">{{#each twilight.day}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
-                        <g class="sdc-wheel-twilight" fill="url(#sdc-twilight-fill)">{{#each twilight.glow}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
-                        <circle class="sdc-wheel-ring" r="88"/>
-                        <circle class="sdc-wheel-ring" r="58"/>
-                        <g clip-path="url(#sdc-day-clip)">{{#each rays}}<polygon class="sdc-ray" points="{{ this }}"/>{{/each}}</g>
-                        <circle class="sdc-wheel-rim" r="{{ sky.wheel }}"/>
-                        {{#each ticks}}<polygon class="sdc-tick" points="{{ this }}"/>{{/each}}
+                    <g class="sdl-wheel">
+                        <circle r="{{ sky.wheel }}" fill="url(#sdl-night-fill)"/>
+                        {{#each nightStars}}<circle class="sdl-night-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}"/>{{/each}}
+                        <path class="sdl-wheel-day" d="{{ twilight.core }}" fill="url(#sdl-day-fill)"/>
+                        <g class="sdl-wheel-day-fade" fill="url(#sdl-day-fill)">{{#each twilight.day}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
+                        <g class="sdl-wheel-twilight" fill="url(#sdl-twilight-fill)">{{#each twilight.glow}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
+                        <circle class="sdl-wheel-ring" r="88"/>
+                        <circle class="sdl-wheel-ring" r="58"/>
+                        <g clip-path="url(#sdl-day-clip)">{{#each rays}}<polygon class="sdl-ray" points="{{ this }}"/>{{/each}}</g>
+                        <circle class="sdl-wheel-rim" r="{{ sky.wheel }}"/>
+                        {{#each ticks}}<polygon class="sdl-tick" points="{{ this }}"/>{{/each}}
                     </g>
                 </g>
 
-                <path class="sdc-rim" d="{{ rimPath }}"/>
-                <g class="sdc-trim-bowl"></g>
+                <path class="sdl-rim" d="{{ rimPath }}"/>
+                <g class="sdl-trim-bowl"></g>
             </svg>
-            <div class="sdc-moons"></div>
+            <div class="sdl-moons"></div>
         </div>
     </div>
 </div>

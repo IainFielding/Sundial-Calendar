@@ -12,10 +12,10 @@ npm run test:e2e   # end-to-end tests against a local Foundry install — see te
 ```
 
 To try the module in Foundry, symlink or copy the repository into your `Data/modules/`
-directory as `sogrom-simple-dnd-calendar`. On Windows a directory junction works without admin rights:
+directory as `sogrom-sundial-calendar`. On Windows a directory junction works without admin rights:
 
 ```powershell
-New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\FoundryVTT\Data\modules\sogrom-simple-dnd-calendar" -Target (Get-Location)
+New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\FoundryVTT\Data\modules\sogrom-sundial-calendar" -Target (Get-Location)
 ```
 
 ## Art

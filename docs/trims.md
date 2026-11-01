@@ -1,6 +1,6 @@
 # Trims and Styles
 
-Every way to dress the calendar, with a picture of each. The GM picks the trims, for everyone, and each player picks the style, for their own screen, in **Game Settings → Configure Settings → Simple D&D Calendar**. A bar trim and a sky trim can be used together.
+Every way to dress the calendar, with a picture of each. The GM picks the trims, for everyone, and each player picks the style, for their own screen, in **Game Settings → Configure Settings → Sundial Calendar**. A bar trim and a sky trim can be used together.
 
 - [Bar trims](#bar-trims): one for each adventure and setting
 - [Sky trims](#sky-trims): the seasons, festival days, and Exandria's holidays

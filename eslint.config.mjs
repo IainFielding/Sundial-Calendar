@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import globals from "globals";
 
 /**
- * Flat ESLint config for Simple D&D Calendar.
+ * Flat ESLint config for Sundial Calendar.
  *
  * The module is browser ESM running inside Foundry VTT, so on top of the standard browser
  * globals we declare the Foundry / dnd5e globals the code reaches for.

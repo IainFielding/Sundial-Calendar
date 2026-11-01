@@ -33,7 +33,7 @@ import { Session } from "./lib/session.mjs";
 import { enableModules, ensureWorld, resetFixtures, resetWorld, useCalendar } from "./lib/world.mjs";
 
 // The calendar hangs over the scene, so the canvas is drawn (see lib/session.mjs).
-process.env.SDC_CANVAS = "1";
+process.env.SDL_CANVAS = "1";
 
 const OUT = "docs/screenshots";
 fs.mkdirSync(OUT, { recursive: true });
@@ -119,9 +119,9 @@ try {
  */
 async function hideNotifications(session) {
   await session.page.evaluate(() => {
-    if ( document.getElementById("sdc-hide-notifications") ) return;
+    if ( document.getElementById("sdl-hide-notifications") ) return;
     const style = document.createElement("style");
-    style.id = "sdc-hide-notifications";
+    style.id = "sdl-hide-notifications";
     style.textContent = "#notifications { display: none !important; }";
     document.head.append(style);
   });
@@ -216,7 +216,7 @@ async function docShots(ctx, shoot) {
 
   // The GM's advance drop-down.
   await setTime(ctx, { year: 1525, day: 120, hour: 9, minute: 15 });
-  await gm.page.locator("#sdc-calendar [data-control=advance] > button").hover();
+  await gm.page.locator("#sdl-calendar [data-control=advance] > button").hover();
   await gm.page.waitForTimeout(300);
   // The button's tooltip sits off its right side, past the usual crop: widen the shot to take it in.
   const tip = await gm.page.locator("#tooltip").boundingBox();
@@ -225,10 +225,10 @@ async function docShots(ctx, shoot) {
   console.log(`  ${OUT}/advance.png`);
 
   // Collapsed to the bar alone.
-  await gm.page.locator("#sdc-calendar button[data-action=toggleCalendar]").click();
+  await gm.page.locator("#sdl-calendar button[data-action=toggleCalendar]").click();
   await gm.page.waitForTimeout(400);
   await shoot(gm, "collapsed", { ...CLIP, height: 70 });
-  await gm.page.locator("#sdc-calendar button[data-action=toggleCalendar]").click();
+  await gm.page.locator("#sdl-calendar button[data-action=toggleCalendar]").click();
 
   // The season's trim is off by default, and off for the rest of the shots, which show the calendar as it is set up.
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonTrim", "none"), MODULE_ID);
@@ -262,7 +262,7 @@ async function lunarShots(ctx, backdrop) {
 
   const shootTooltip = async (name, selector) => {
     await waitForCanvas(gm, backdrop);
-    const target = gm.page.locator(`#sdc-calendar ${selector}`);
+    const target = gm.page.locator(`#sdl-calendar ${selector}`);
     await target.waitFor({ state: "visible", timeout: 10_000 });
     await hideNotifications(gm);
     await gm.page.mouse.move(5, 900);
@@ -309,13 +309,13 @@ async function lunarShots(ctx, backdrop) {
   // Selûne full, and the band's forecast the same night.
   await switchCalendar("harptos");
   await eventNight({ year: 1501, day: 25, hour: 23 }, /is full/);
-  await shootTooltip("lunar-full", ".sdc-moon-event-icon");
-  await shootTooltip("lunar-forecast", ".sdc-season");
+  await shootTooltip("lunar-full", ".sdl-moon-event-icon");
+  await shootTooltip("lunar-forecast", ".sdl-season");
 
   // Luna and Celene full together on the fourth day of Needfest, late at night.
   await switchCalendar("greyhawk");
   await eventNight({ year: 591, day: 0, hour: 23 }, /full together/);
-  await shootTooltip("lunar-greyhawk", ".sdc-moon-event-icon");
+  await shootTooltip("lunar-greyhawk", ".sdl-moon-event-icon");
 
   // Eberron's twelve moons in the night sky, with nothing hovered: the hour, within two years, that has the most of
   // them in the bowl, and of those the one with the moons spread furthest apart.
@@ -427,12 +427,12 @@ async function trimShots(ctx, shoot, backdrop) {
     .filter(k => k !== "none"), MODULE_ID);
   for ( const kind of adventures.filter(k => !TRIM_NAMES.length || TRIM_NAMES.includes(k)) ) {
     await set("barTrim", kind);
-    await gm.page.waitForFunction(kind => document.getElementById("sdc-calendar")?.dataset.barTrim === kind, kind);
+    await gm.page.waitForFunction(kind => document.getElementById("sdl-calendar")?.dataset.barTrim === kind, kind);
     await shoot(gm, `trims/bar-${kind}`);
-    await gm.page.locator("#sdc-calendar button[data-action=toggleCalendar]").click();
+    await gm.page.locator("#sdl-calendar button[data-action=toggleCalendar]").click();
     await gm.page.waitForTimeout(400);
     await shoot(gm, `trims/bar-${kind}-collapsed`, { ...CLIP, height: 80 });
-    await gm.page.locator("#sdc-calendar button[data-action=toggleCalendar]").click();
+    await gm.page.locator("#sdl-calendar button[data-action=toggleCalendar]").click();
     await gm.page.waitForTimeout(400);
   }
   await set("barTrim", "none");
@@ -469,7 +469,7 @@ async function festivalDay(gm, from, festival) {
  * @param {string} kind
  */
 async function expectSkyTrim(gm, kind) {
-  await gm.page.waitForFunction(kind => document.getElementById("sdc-calendar")?.dataset.skyTrim === kind, kind,
+  await gm.page.waitForFunction(kind => document.getElementById("sdl-calendar")?.dataset.skyTrim === kind, kind,
     { timeout: 10_000 });
 }
 

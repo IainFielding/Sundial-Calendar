@@ -70,7 +70,7 @@ body:
   - type: input
     id: module-version
     attributes:
-      label: Simple D&D Calendar version
+      label: Sundial Calendar version
       description: Shown in the Manage Modules list next to the module name.
       placeholder: "1.0.0"
     validations:

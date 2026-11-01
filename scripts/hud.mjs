@@ -38,8 +38,8 @@ export function createCalendarHUD(CalendarHUD) {
 
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-      id: "sdc-calendar",
-      classes: ["sdc-calendar", "themed", "theme-dark"],
+      id: "sdl-calendar",
+      classes: ["sdl-calendar", "themed", "theme-dark"],
       tag: "aside",
       actions: {
         toggleCalendar: SimpleCalendarHUD.#onToggle
@@ -49,15 +49,15 @@ export function createCalendarHUD(CalendarHUD) {
     /** @override */
     static PARTS = {
       startButtons: {
-        classes: ["calendar-buttons", "sdc-controls", "sdc-start"],
+        classes: ["calendar-buttons", "sdl-controls", "sdl-start"],
         template: `modules/${MODULE_ID}/templates/calendar-buttons.hbs`
       },
       core: {
-        classes: ["sdc-core"],
+        classes: ["sdl-core"],
         template: `modules/${MODULE_ID}/templates/calendar-core.hbs`
       },
       endButtons: {
-        classes: ["calendar-buttons", "sdc-controls", "sdc-end"],
+        classes: ["calendar-buttons", "sdl-controls", "sdl-end"],
         template: `modules/${MODULE_ID}/templates/calendar-buttons.hbs`
       }
     };
@@ -162,7 +162,7 @@ export function createCalendarHUD(CalendarHUD) {
         action: "toggleCalendar",
         icon: "fa-solid fa-caret-down",
         position: "end",
-        tooltip: _loc(this.expanded ? "SDC.Action.Collapse" : "SDC.Action.Expand"),
+        tooltip: _loc(this.expanded ? "SDL.Action.Collapse" : "SDL.Action.Expand"),
         visible: true
       });
       return buttons;
@@ -242,19 +242,19 @@ export function createCalendarHUD(CalendarHUD) {
     #bindCore() {
       const find = selector => this.element.querySelector(selector);
       this.#el = {
-        time: find(".sdc-time"),
-        date: find(".sdc-date"),
-        season: find(".sdc-season"),
-        wheel: find(".sdc-wheel"),
-        wheelDay: find(".sdc-wheel-day"),
-        wheelDayClip: find(".sdc-wheel-day-clip"),
-        dayFade: find(".sdc-wheel-day-fade"),
-        twilight: find(".sdc-wheel-twilight"),
-        barTrim: find(".sdc-trim-bar"),
-        bowlTrim: find(".sdc-trim-bowl"),
-        festivalIcon: find(".sdc-festival-icon"),
-        moonEventIcon: find(".sdc-moon-event-icon"),
-        moons: find(".sdc-moons")
+        time: find(".sdl-time"),
+        date: find(".sdl-date"),
+        season: find(".sdl-season"),
+        wheel: find(".sdl-wheel"),
+        wheelDay: find(".sdl-wheel-day"),
+        wheelDayClip: find(".sdl-wheel-day-clip"),
+        dayFade: find(".sdl-wheel-day-fade"),
+        twilight: find(".sdl-wheel-twilight"),
+        barTrim: find(".sdl-trim-bar"),
+        bowlTrim: find(".sdl-trim-bowl"),
+        festivalIcon: find(".sdl-festival-icon"),
+        moonEventIcon: find(".sdl-moon-event-icon"),
+        moons: find(".sdl-moons")
       };
       this.#text = {};
       delete this.element.dataset.skyTrim;
@@ -265,7 +265,7 @@ export function createCalendarHUD(CalendarHUD) {
         const radius = Math.round(SUN_RADIUS * (config.size ?? 1));
         const size = radius * 2;
         const element = document.createElement("div");
-        element.className = "sdc-sun";
+        element.className = "sdl-sun";
         element.hidden = true;
         element.style.width = element.style.height = `${size}px`;
         element.dataset.tooltip = _loc(config.name);
@@ -278,7 +278,7 @@ export function createCalendarHUD(CalendarHUD) {
       this.#moons = worldMoons().map(config => {
         const size = MOON_RADIUS * 2;
         const element = document.createElement("div");
-        element.className = "sdc-moon";
+        element.className = "sdl-moon";
         element.style.setProperty("--moon-color", config.color);
         element.innerHTML = `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-hidden="true">`
           + `<circle class="dark" cx="${MOON_RADIUS}" cy="${MOON_RADIUS}" r="${MOON_RADIUS - 0.5}"/>`
@@ -288,7 +288,7 @@ export function createCalendarHUD(CalendarHUD) {
         if ( trail ) this.#el.moons.append(trail);
         this.#el.moons.append(element);
         return { config, epoch: sky.epochTime(calendar, config), element, path: element.querySelector(".lit"),
-          trail, glints: trail ? [...trail.querySelectorAll(".sdc-tear")] : [], phase: null, label: null };
+          trail, glints: trail ? [...trail.querySelectorAll(".sdl-tear")] : [], phase: null, label: null };
       });
     }
 
@@ -461,7 +461,7 @@ export function createCalendarHUD(CalendarHUD) {
         const events = moonEventLabels(time);
         el.moonEventIcon.hidden = !events.length;
         el.moonEventIcon.dataset.tooltip = events.map(escape).join("<br>");
-        const forecast = moonForecast(time).map(line => `<span class="sdc-forecast">${escape(line)}</span>`);
+        const forecast = moonForecast(time).map(line => `<span class="sdl-forecast">${escape(line)}</span>`);
         el.season.dataset.tooltip = [`<strong>${escape(el.season.dataset.seasonName)}</strong>`, ...forecast]
           .join("<br>");
       }
@@ -498,7 +498,7 @@ export function createCalendarHUD(CalendarHUD) {
           moon.phase = p;
           moon.path.setAttribute("d", sky.moonPath(p, MOON_RADIUS));
         }
-        const label = `${_loc(moon.config.name)}: ${_loc(`SDC.MoonPhase.${sky.phaseName(p)}`)}`;
+        const label = `${_loc(moon.config.name)}: ${_loc(`SDL.MoonPhase.${sky.phaseName(p)}`)}`;
         if ( moon.label !== label ) {
           moon.label = label;
           moon.element.dataset.tooltip = label;
@@ -515,9 +515,9 @@ export function createCalendarHUD(CalendarHUD) {
      */
     #tears(config) {
       const element = document.createElement("div");
-      element.className = "sdc-tears";
+      element.className = "sdl-tears";
       element.style.setProperty("--moon-color", config.color);
-      const glints = sky.TEARS.map((glint, i) => `<circle class="sdc-tear" r="${glint.r}" `
+      const glints = sky.TEARS.map((glint, i) => `<circle class="sdl-tear" r="${glint.r}" `
         + `style="animation-delay: ${(-0.7 * i).toFixed(1)}s"/>`).join("");
       element.innerHTML = `<svg viewBox="0 0 ${SKY.width} ${SKY.height}" width="${SKY.width}" height="${SKY.height}" `
         + `aria-hidden="true">${glints}</svg>`;
@@ -577,7 +577,7 @@ export function createCalendarHUD(CalendarHUD) {
       await game.settings.set(MODULE_ID, "expanded", expanded);
       this.element.classList.toggle("expanded", expanded);
       const button = this.element.querySelector("[data-action=toggleCalendar]");
-      if ( button ) button.ariaLabel = _loc(expanded ? "SDC.Action.Collapse" : "SDC.Action.Expand");
+      if ( button ) button.ariaLabel = _loc(expanded ? "SDL.Action.Collapse" : "SDL.Action.Expand");
       this.#text = {};
       this.#draw(this.#shown ?? game.time.worldTime);
     }

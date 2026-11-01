@@ -12,10 +12,10 @@ export class CalendarsMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    id: "sdc-calendars-menu",
+    id: "sdl-calendars-menu",
     tag: "form",
     window: {
-      title: "SDC.Calendars.Title",
+      title: "SDL.Calendars.Title",
       icon: "fa-solid fa-calendar-plus",
       contentClasses: ["standard-form"]
     },
