@@ -127,7 +127,7 @@ Foundry VTT 14 and D&D 5e 6.x.
 
 ## Credits
 
-The battlemap behind the calendar in the screenshots is Czepeku's Caravan Roadblock, and is not distributed with the module.
+The battlemap behind the calendar in the screenshots is Czepeku's Secret Cove, and is not distributed with the module.
 
 For more of Czepeku's work, visit https://www.czepeku.com.
 
