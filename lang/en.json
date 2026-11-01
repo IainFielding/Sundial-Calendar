@@ -1,5 +1,5 @@
 {
-  "SDC": {
+  "SDL": {
     "Action": {
       "Expand": "Show the Sky",
       "Collapse": "Hide the Sky"
@@ -157,7 +157,7 @@
     },
     "Enable": {
       "Title": "Turn On the Calendar?",
-      "Content": "Simple D&D Calendar shows D&D 5e's calendar, which is turned off in this world. Turn it on now? You can change this later under Game Settings → Configure Calendar.",
+      "Content": "Sundial Calendar shows D&D 5e's calendar, which is turned off in this world. Turn it on now? You can change this later under Game Settings → Configure Calendar.",
       "Recovery": "With the calendar on, D&D 5e recovers daily, dawn and dusk item uses as time passes rather than on a long rest, unless its Daily Recovery Mode says otherwise.",
       "Yes": "Turn It On",
       "No": "Not Now"

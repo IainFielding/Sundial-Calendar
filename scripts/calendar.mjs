@@ -76,7 +76,7 @@ export function moonPhases(time = game.time.worldTime) {
   const calendar = game.time.calendar;
   return worldMoons().map(moon => {
     const phase = sky.moonPhase(calendar, moon, time);
-    return { moon, name: _loc(moon.name), phase, phaseName: _loc(`SDC.MoonPhase.${sky.phaseName(phase)}`) };
+    return { moon, name: _loc(moon.name), phase, phaseName: _loc(`SDL.MoonPhase.${sky.phaseName(phase)}`) };
   });
 }
 
@@ -93,9 +93,9 @@ export function moonEventLabels(time = game.time.worldTime) {
   const names = moons => moons.map(m => _loc(m.name));
   const list = moons => game.i18n.getListFormatter().format(names(moons));
   const labels = [];
-  if ( events.full.length > 1 ) labels.push(_loc("SDC.MoonEvent.FullTogether", { moons: list(events.full) }));
-  else if ( events.full.length ) labels.push(_loc("SDC.MoonEvent.Full", { moon: list(events.full) }));
-  for ( const name of names(events.new) ) labels.push(_loc("SDC.MoonEvent.New", { moon: name }));
+  if ( events.full.length > 1 ) labels.push(_loc("SDL.MoonEvent.FullTogether", { moons: list(events.full) }));
+  else if ( events.full.length ) labels.push(_loc("SDL.MoonEvent.Full", { moon: list(events.full) }));
+  for ( const name of names(events.new) ) labels.push(_loc("SDL.MoonEvent.New", { moon: name }));
   return labels;
 }
 
@@ -112,9 +112,9 @@ export function moonForecast(time = game.time.worldTime) {
     const days = Math.floor(full / day) - Math.floor(time / day);
     const date = formatComponents(calendar, calendar.timeToComponents(full), "date");
     let when;
-    if ( days === 0 ) when = _loc("SDC.MoonForecast.FullToday");
-    else if ( days === 1 ) when = _loc("SDC.MoonForecast.FullTomorrow", { date });
-    else when = _loc("SDC.MoonForecast.FullIn", { days, date });
+    if ( days === 0 ) when = _loc("SDL.MoonForecast.FullToday");
+    else if ( days === 1 ) when = _loc("SDL.MoonForecast.FullTomorrow", { date });
+    else when = _loc("SDL.MoonForecast.FullIn", { days, date });
     return `${name}: ${phaseName}, ${when}`;
   });
 }

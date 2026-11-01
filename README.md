@@ -1,6 +1,6 @@
-# Simple D&D Calendar
+# Sundial Calendar
 
-Simple D&D Calendar turns the standard D&D 5e calendar into a living part of your game world. A decorative calendar bar sits across the top of the screen, showing the current day and time while an animated sky tracks the passage of the day, the changing seasons, festivals, and moon phases.
+Sundial Calendar turns the standard D&D 5e calendar into a living part of your game world. A decorative calendar bar sits across the top of the screen, showing the current day and time while an animated sky tracks the passage of the day, the changing seasons, festivals, and moon phases.
 
 Watch the sun rise and set, see moons wax and wane, and follow the progress of the year at a glance without opening a separate calendar window.
 
@@ -94,10 +94,16 @@ In Foundry's setup screen, go to **Add-on Modules → Install Module**, paste th
 and click **Install**:
 
 ```
-https://github.com/IainFielding/simple-dnd-calendar/releases/latest/download/module.json
+https://github.com/IainFielding/Sundial-Calendar/releases/latest/download/module.json
 ```
 
-Then turn on **Simple D&D Calendar** under **Manage Modules** in a D&D 5e world.
+Then turn on **Sundial Calendar** under **Manage Modules** in a D&D 5e world.
+
+### Upgrading from Simple D&D Calendar
+
+Sundial Calendar was called Simple D&D Calendar before 2.0.0. The new name comes with a new module id, so Foundry sees
+it as a different module and won't update the old one to it. Uninstall **Simple D&D Calendar**, install **Sundial
+Calendar** from the manifest URL above, and set its options again under **Configure Settings**.
 
 ## Compatibility
 

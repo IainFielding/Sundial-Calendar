@@ -1,53 +1,53 @@
 /* ---------------------------------------------------------------------------------------------- */
-/*  Simple D&D Calendar                                                                           */
+/*  Sundial Calendar                                                                           */
 /*                                                                                                */
 /*  A control bar hanging from the top of the screen, with the time between the buttons, and      */
 /*  beneath it a band of the year's seasons and a bowl of sky holding the turning day wheel and   */
 /*  the moons.                                                                                    */
 /* ---------------------------------------------------------------------------------------------- */
 
-#sdc-calendar {
-  --sdc-gold: #c8a45a;
-  --sdc-gold-light: #efd594;
-  --sdc-gold-dark: #7d6230;
-  --sdc-panel: rgb(14 13 24);
-  --sdc-text: #ece4cf;
-  --sdc-width: 600px;
-  --sdc-bar-height: 40px;
-  --sdc-visual-height: 162px;
-  --sdc-glow: transparent;
-  --sdc-text-shadow: rgb(0 0 0 / 80%);
-  --sdc-dropdown: rgb(18 17 30 / 92%);
-  --sdc-dropdown-border: #4b4865;
-  --sdc-bowl-inner: #2a2d6c;
-  --sdc-bowl-outer: #0a0b20;
-  --sdc-bowl-ring: rgb(165 172 255 / 16%);
-  --sdc-star: #e2e5ff;
-  --sdc-day-0: #fff6d6;
-  --sdc-day-1: #ffc874;
-  --sdc-day-2: #e9813f;
-  --sdc-night-0: #b9b5ff;
-  --sdc-night-1: #6c63e0;
-  --sdc-night-2: #2f2a8e;
-  --sdc-twilight-0: #ffe4b8;
-  --sdc-twilight-1: #ffa066;
-  --sdc-twilight-2: #e2676e;
-  --sdc-moon-dark: #1c1b33;
+#sdl-calendar {
+  --sdl-gold: #c8a45a;
+  --sdl-gold-light: #efd594;
+  --sdl-gold-dark: #7d6230;
+  --sdl-panel: rgb(14 13 24);
+  --sdl-text: #ece4cf;
+  --sdl-width: 600px;
+  --sdl-bar-height: 40px;
+  --sdl-visual-height: 162px;
+  --sdl-glow: transparent;
+  --sdl-text-shadow: rgb(0 0 0 / 80%);
+  --sdl-dropdown: rgb(18 17 30 / 92%);
+  --sdl-dropdown-border: #4b4865;
+  --sdl-bowl-inner: #2a2d6c;
+  --sdl-bowl-outer: #0a0b20;
+  --sdl-bowl-ring: rgb(165 172 255 / 16%);
+  --sdl-star: #e2e5ff;
+  --sdl-day-0: #fff6d6;
+  --sdl-day-1: #ffc874;
+  --sdl-day-2: #e9813f;
+  --sdl-night-0: #b9b5ff;
+  --sdl-night-1: #6c63e0;
+  --sdl-night-2: #2f2a8e;
+  --sdl-twilight-0: #ffe4b8;
+  --sdl-twilight-1: #ffa066;
+  --sdl-twilight-2: #e2676e;
+  --sdl-moon-dark: #1c1b33;
 
   position: relative;
   display: grid;
   grid-template-columns: 1fr 200px 1fr;
-  grid-template-rows: var(--sdc-bar-height) auto;
+  grid-template-rows: var(--sdl-bar-height) auto;
   flex: none;
   align-self: center;
-  width: var(--sdc-width);
+  width: var(--sdl-width);
   margin: 0 auto;
   pointer-events: none;
-  color: var(--sdc-text);
+  color: var(--sdl-text);
 }
 
 /* The core part's elements sit in the calendar's own grid. */
-#sdc-calendar .sdc-core {
+#sdl-calendar .sdl-core {
   display: contents;
 }
 
@@ -55,32 +55,32 @@
 /*  Control Bar                                                                                   */
 /* ---------------------------------------------------------------------------------------------- */
 
-#sdc-calendar .sdc-bar {
+#sdl-calendar .sdl-bar {
   grid-area: 1 / 1 / 2 / -1;
   position: relative;
-  background: var(--sdc-panel);
-  border: 2px solid var(--sdc-gold);
+  background: var(--sdl-panel);
+  border: 2px solid var(--sdl-gold);
   border-top: none;
   border-radius: 0 0 42px 42px;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 60%), 0 3px 14px var(--sdc-glow), inset 0 -1px 0 rgb(255 255 255 / 6%),
-    inset 0 -6px 12px -6px var(--sdc-glow);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 60%), 0 3px 14px var(--sdl-glow), inset 0 -1px 0 rgb(255 255 255 / 6%),
+    inset 0 -6px 12px -6px var(--sdl-glow);
   pointer-events: all;
   z-index: 1;
   transition: box-shadow 1s;
 }
 
 /* A finer second line inside the first, as on an engraved plate. */
-#sdc-calendar .sdc-bar::after {
+#sdl-calendar .sdl-bar::after {
   content: "";
   position: absolute;
   inset: 0 5px 4px;
-  border: 1px solid var(--sdc-gold-dark);
+  border: 1px solid var(--sdl-gold-dark);
   border-top: none;
   border-radius: 0 0 37px 37px;
   pointer-events: none;
 }
 
-#sdc-calendar .sdc-time {
+#sdl-calendar .sdl-time {
   grid-area: 1 / 2;
   place-self: center;
   max-width: 100%;
@@ -91,12 +91,12 @@
   font-family: "Modesto Condensed", var(--font-body), serif;
   font-size: 19px;
   letter-spacing: 0.08em;
-  color: var(--sdc-text);
-  text-shadow: 0 0 6px var(--sdc-text-shadow);
+  color: var(--sdl-text);
+  text-shadow: 0 0 6px var(--sdl-text-shadow);
   z-index: 2;
 }
 
-#sdc-calendar .sdc-controls {
+#sdl-calendar .sdl-controls {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -107,21 +107,21 @@
   z-index: 3;
 }
 
-#sdc-calendar .sdc-start {
+#sdl-calendar .sdl-start {
   grid-area: 1 / 1;
   justify-content: flex-start;
 }
 
-#sdc-calendar .sdc-end {
+#sdl-calendar .sdl-end {
   grid-area: 1 / 3;
   justify-content: flex-end;
 }
 
 /* Rewind and advance sit at the outer ends, whatever order the other buttons come in. */
-#sdc-calendar .sdc-start > [data-control="reverse"] { order: -1; }
-#sdc-calendar .sdc-end > [data-control="advance"] { order: 1; }
+#sdl-calendar .sdl-start > [data-control="reverse"] { order: -1; }
+#sdl-calendar .sdl-end > [data-control="advance"] { order: 1; }
 
-#sdc-calendar .calendar-button {
+#sdl-calendar .calendar-button {
   position: relative;
   display: flex;
   margin: 0;
@@ -129,7 +129,7 @@
   list-style: none;
 }
 
-#sdc-calendar .sdc-control {
+#sdl-calendar .sdl-control {
   display: grid;
   place-items: center;
   width: 26px;
@@ -140,36 +140,36 @@
   border: none;
   border-radius: 50%;
   box-shadow: none;
-  color: var(--sdc-text);
+  color: var(--sdl-text);
   font-size: 14px;
   line-height: 1;
   cursor: pointer;
   transition: color 0.15s, text-shadow 0.15s;
 }
 
-#sdc-calendar .sdc-control:hover,
-#sdc-calendar .sdc-control:focus-visible {
-  color: var(--sdc-gold-light);
-  text-shadow: 0 0 8px color-mix(in srgb, var(--sdc-gold-light) 70%, transparent);
+#sdl-calendar .sdl-control:hover,
+#sdl-calendar .sdl-control:focus-visible {
+  color: var(--sdl-gold-light);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--sdl-gold-light) 70%, transparent);
   outline: none;
 }
 
-#sdc-calendar .sdc-control dnd5e-icon {
+#sdl-calendar .sdl-control dnd5e-icon {
   --icon-fill: currentcolor;
   width: 14px;
   height: 14px;
 }
 
-#sdc-calendar [data-action="toggleCalendar"] i {
+#sdl-calendar [data-action="toggleCalendar"] i {
   transition: rotate 0.25s ease-in-out;
 }
 
-#sdc-calendar.expanded [data-action="toggleCalendar"] i {
+#sdl-calendar.expanded [data-action="toggleCalendar"] i {
   rotate: 180deg;
 }
 
 /* The time steps drop down beneath the rewind and advance buttons. */
-#sdc-calendar .sdc-dropdown {
+#sdl-calendar .sdl-dropdown {
   display: none;
   position: absolute;
   top: 100%;
@@ -182,16 +182,16 @@
   list-style: none;
 }
 
-#sdc-calendar .has-dropdown:hover > .sdc-dropdown,
-#sdc-calendar .has-dropdown:focus-within > .sdc-dropdown {
+#sdl-calendar .has-dropdown:hover > .sdl-dropdown,
+#sdl-calendar .has-dropdown:focus-within > .sdl-dropdown {
   display: flex;
 }
 
-#sdc-calendar .sdc-dropdown .sdc-control {
+#sdl-calendar .sdl-dropdown .sdl-control {
   width: 42px;
   height: 22px;
-  background: var(--sdc-dropdown);
-  border: 1px solid var(--sdc-dropdown-border);
+  background: var(--sdl-dropdown);
+  border: 1px solid var(--sdl-dropdown-border);
   border-radius: 4px;
   font-family: var(--font-body);
   font-size: 10px;
@@ -199,15 +199,15 @@
   letter-spacing: 0.04em;
 }
 
-#sdc-calendar .sdc-dropdown .sdc-control:hover {
-  border-color: var(--sdc-gold);
+#sdl-calendar .sdl-dropdown .sdl-control:hover {
+  border-color: var(--sdl-gold);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 /*  Visual                                                                                        */
 /* ---------------------------------------------------------------------------------------------- */
 
-#sdc-calendar .sdc-visual {
+#sdl-calendar .sdl-visual {
   grid-area: 2 / 1 / 3 / -1;
   position: relative;
   display: flex;
@@ -221,12 +221,12 @@
   transition: height 0.25s ease-in-out;
 }
 
-#sdc-calendar.expanded .sdc-visual {
-  height: var(--sdc-visual-height);
+#sdl-calendar.expanded .sdl-visual {
+  height: var(--sdl-visual-height);
 }
 
 /* The season band: a year of seasons sliding past, with the date written across it. */
-#sdc-calendar .sdc-season {
+#sdl-calendar .sdl-season {
   position: relative;
   display: flex;
   flex: none;
@@ -241,14 +241,14 @@
   z-index: 1;
 }
 
-#sdc-calendar .sdc-season::before {
+#sdl-calendar .sdl-season::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, rgb(255 255 255 / 30%), transparent 45%, rgb(0 0 0 / 22%));
 }
 
-#sdc-calendar .sdc-season-frame {
+#sdl-calendar .sdl-season-frame {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -256,20 +256,20 @@
   overflow: visible;
 }
 
-#sdc-calendar .sdc-season-frame polyline {
+#sdl-calendar .sdl-season-frame polyline {
   fill: none;
-  stroke: var(--sdc-gold);
+  stroke: var(--sdl-gold);
   stroke-width: 2.5;
   vector-effect: non-scaling-stroke;
 }
 
-#sdc-calendar .sdc-season-frame polyline.inner {
-  stroke: var(--sdc-gold-dark);
+#sdl-calendar .sdl-season-frame polyline.inner {
+  stroke: var(--sdl-gold-dark);
   stroke-width: 1;
   opacity: 0.7;
 }
 
-#sdc-calendar .sdc-date {
+#sdl-calendar .sdl-date {
   position: relative;
   padding-bottom: 2px;
   font-family: var(--font-body);
@@ -282,7 +282,7 @@
 }
 
 /* The bowl of sky beneath the band. */
-#sdc-calendar .sdc-sky {
+#sdl-calendar .sdl-sky {
   position: relative;
   flex: none;
   width: 320px;
@@ -290,39 +290,39 @@
   filter: drop-shadow(0 3px 6px rgb(0 0 0 / 55%));
 }
 
-#sdc-calendar .sdc-sky svg {
+#sdl-calendar .sdl-sky svg {
   display: block;
   overflow: visible;
 }
 
-#sdc-calendar .sdc-bowl-ring { fill: none; stroke: var(--sdc-bowl-ring); stroke-width: 1; }
-#sdc-calendar .sdc-bowl-ring.dashed { stroke-dasharray: 2 5; }
-#sdc-calendar .sdc-star { fill: var(--sdc-star); }
-#sdc-calendar .sdc-stop-bowl-inner { stop-color: var(--sdc-bowl-inner); }
-#sdc-calendar .sdc-stop-bowl-outer { stop-color: var(--sdc-bowl-outer); }
-#sdc-calendar .sdc-stop-day-0 { stop-color: var(--sdc-day-0); }
-#sdc-calendar .sdc-stop-day-1 { stop-color: var(--sdc-day-1); }
-#sdc-calendar .sdc-stop-day-2 { stop-color: var(--sdc-day-2); }
-#sdc-calendar .sdc-stop-night-0 { stop-color: var(--sdc-night-0); }
-#sdc-calendar .sdc-stop-night-1 { stop-color: var(--sdc-night-1); }
-#sdc-calendar .sdc-stop-night-2 { stop-color: var(--sdc-night-2); }
-#sdc-calendar .sdc-stop-twilight-0 { stop-color: var(--sdc-twilight-0); }
-#sdc-calendar .sdc-stop-twilight-1 { stop-color: var(--sdc-twilight-1); }
-#sdc-calendar .sdc-stop-twilight-2 { stop-color: var(--sdc-twilight-2); }
-#sdc-calendar .sdc-wheel-ring { fill: none; stroke: rgb(255 255 255 / 30%); stroke-width: 1; }
-#sdc-calendar .sdc-ray { fill: rgb(255 255 255 / 38%); }
-#sdc-calendar .sdc-night-star { fill: rgb(255 255 255 / 85%); }
-#sdc-calendar .sdc-wheel-rim { fill: none; stroke: var(--sdc-gold); stroke-width: 3; }
-#sdc-calendar .sdc-tick { fill: var(--sdc-gold-light); }
-#sdc-calendar .sdc-rim { fill: none; stroke: var(--sdc-gold); stroke-width: 2.5; }
+#sdl-calendar .sdl-bowl-ring { fill: none; stroke: var(--sdl-bowl-ring); stroke-width: 1; }
+#sdl-calendar .sdl-bowl-ring.dashed { stroke-dasharray: 2 5; }
+#sdl-calendar .sdl-star { fill: var(--sdl-star); }
+#sdl-calendar .sdl-stop-bowl-inner { stop-color: var(--sdl-bowl-inner); }
+#sdl-calendar .sdl-stop-bowl-outer { stop-color: var(--sdl-bowl-outer); }
+#sdl-calendar .sdl-stop-day-0 { stop-color: var(--sdl-day-0); }
+#sdl-calendar .sdl-stop-day-1 { stop-color: var(--sdl-day-1); }
+#sdl-calendar .sdl-stop-day-2 { stop-color: var(--sdl-day-2); }
+#sdl-calendar .sdl-stop-night-0 { stop-color: var(--sdl-night-0); }
+#sdl-calendar .sdl-stop-night-1 { stop-color: var(--sdl-night-1); }
+#sdl-calendar .sdl-stop-night-2 { stop-color: var(--sdl-night-2); }
+#sdl-calendar .sdl-stop-twilight-0 { stop-color: var(--sdl-twilight-0); }
+#sdl-calendar .sdl-stop-twilight-1 { stop-color: var(--sdl-twilight-1); }
+#sdl-calendar .sdl-stop-twilight-2 { stop-color: var(--sdl-twilight-2); }
+#sdl-calendar .sdl-wheel-ring { fill: none; stroke: rgb(255 255 255 / 30%); stroke-width: 1; }
+#sdl-calendar .sdl-ray { fill: rgb(255 255 255 / 38%); }
+#sdl-calendar .sdl-night-star { fill: rgb(255 255 255 / 85%); }
+#sdl-calendar .sdl-wheel-rim { fill: none; stroke: var(--sdl-gold); stroke-width: 3; }
+#sdl-calendar .sdl-tick { fill: var(--sdl-gold-light); }
+#sdl-calendar .sdl-rim { fill: none; stroke: var(--sdl-gold); stroke-width: 2.5; }
 
 /* Moons ride the bowl between the wheel and its rim. */
-#sdc-calendar .sdc-moons {
+#sdl-calendar .sdl-moons {
   position: absolute;
   inset: 0;
 }
 
-#sdc-calendar .sdc-moon {
+#sdl-calendar .sdl-moon {
   position: absolute;
   top: 0;
   left: 0;
@@ -332,13 +332,13 @@
   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--moon-color) 55%, transparent));
 }
 
-#sdc-calendar .sdc-moon svg { display: block; }
-#sdc-calendar .sdc-moon .dark { fill: var(--sdc-moon-dark); }
-#sdc-calendar .sdc-moon .lit { fill: var(--moon-color); }
-#sdc-calendar .sdc-moon .edge { fill: none; stroke: rgb(255 255 255 / 35%); stroke-width: 1; }
+#sdl-calendar .sdl-moon svg { display: block; }
+#sdl-calendar .sdl-moon .dark { fill: var(--sdl-moon-dark); }
+#sdl-calendar .sdl-moon .lit { fill: var(--moon-color); }
+#sdl-calendar .sdl-moon .edge { fill: none; stroke: rgb(255 255 255 / 35%); stroke-width: 1; }
 
 /* The sun, crossing the bowl beneath the moons, so a new moon passing over it hides it. It reddens near the horizon. */
-#sdc-calendar .sdc-sun {
+#sdl-calendar .sdl-sun {
   position: absolute;
   top: 0;
   left: 0;
@@ -346,12 +346,12 @@
   filter: drop-shadow(0 0 3px var(--sun-color)) drop-shadow(0 0 9px color-mix(in srgb, var(--sun-color) 70%, transparent));
 }
 
-#sdc-calendar .sdc-sun svg { display: block; overflow: visible; }
-#sdc-calendar .sdc-sun .face { fill: var(--sun-color); }
-#sdc-calendar .sdc-sun .core { fill: rgb(255 255 240 / 55%); }
+#sdl-calendar .sdl-sun svg { display: block; overflow: visible; }
+#sdl-calendar .sdl-sun .face { fill: var(--sun-color); }
+#sdl-calendar .sdl-sun .core { fill: rgb(255 255 240 / 55%); }
 
 /* The Tears of Selûne, glittering after her. They shine by themselves, whatever her phase, and fade by day. */
-#sdc-calendar .sdc-tears {
+#sdl-calendar .sdl-tears {
   position: absolute;
   top: 0;
   left: 0;
@@ -359,11 +359,11 @@
   filter: drop-shadow(0 0 1.5px var(--moon-color));
 }
 
-#sdc-calendar .sdc-tears svg { display: block; overflow: visible; }
-#sdc-calendar .sdc-tear { fill: var(--moon-color); animation: sdc-twinkle 3.5s ease-in-out infinite; }
+#sdl-calendar .sdl-tears svg { display: block; overflow: visible; }
+#sdl-calendar .sdl-tear { fill: var(--moon-color); animation: sdl-twinkle 3.5s ease-in-out infinite; }
 
 /* Any festival, out to the right of the bowl. */
-#sdc-calendar .sdc-corner {
+#sdl-calendar .sdl-corner {
   position: absolute;
   top: 34px;
   display: flex;
@@ -373,21 +373,21 @@
   height: 24px;
 }
 
-#sdc-calendar .sdc-right {
+#sdl-calendar .sdl-right {
   right: 0;
   justify-content: flex-start;
   padding-left: 14px;
 }
 
-#sdc-calendar .sdc-corner i {
+#sdl-calendar .sdl-corner i {
   font-size: 17px;
   pointer-events: all;
   filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000) drop-shadow(0 0 3px rgb(0 0 0 / 70%));
 }
 
-#sdc-calendar .sdc-corner i[hidden] { display: none; }
-#sdc-calendar .sdc-festival-icon { color: var(--sdc-gold-light); }
-#sdc-calendar .sdc-moon-event-icon { color: #dfe3ff; }
+#sdl-calendar .sdl-corner i[hidden] { display: none; }
+#sdl-calendar .sdl-festival-icon { color: var(--sdl-gold-light); }
+#sdl-calendar .sdl-moon-event-icon { color: #dfe3ff; }
 
 /* ---------------------------------------------------------------------------------------------- */
 /*  Themes                                                                                        */
@@ -396,52 +396,52 @@
 /*  paper under a painted sky; Underdark is cold steel on dark stone, under a cavern's glow.      */
 /* ---------------------------------------------------------------------------------------------- */
 
-#sdc-calendar[data-theme="parchment"] {
-  --sdc-gold: #8a5a2b;
-  --sdc-gold-light: #6b3f17;
-  --sdc-gold-dark: #b98a55;
-  --sdc-panel: rgb(234 220 188);
-  --sdc-text: #3b2a1a;
-  --sdc-text-shadow: rgb(255 248 230 / 70%);
-  --sdc-dropdown: rgb(240 228 200 / 97%);
-  --sdc-dropdown-border: #b98a55;
-  --sdc-bowl-inner: #8fb3d1;
-  --sdc-bowl-outer: #46688f;
-  --sdc-bowl-ring: rgb(255 250 235 / 30%);
-  --sdc-star: #fffaf0;
-  --sdc-day-0: #fff9e6;
-  --sdc-day-1: #f4d38c;
-  --sdc-day-2: #d99a52;
-  --sdc-night-0: #9ea3c9;
-  --sdc-night-1: #5d6496;
-  --sdc-night-2: #343a66;
-  --sdc-moon-dark: #3a4466;
+#sdl-calendar[data-theme="parchment"] {
+  --sdl-gold: #8a5a2b;
+  --sdl-gold-light: #6b3f17;
+  --sdl-gold-dark: #b98a55;
+  --sdl-panel: rgb(234 220 188);
+  --sdl-text: #3b2a1a;
+  --sdl-text-shadow: rgb(255 248 230 / 70%);
+  --sdl-dropdown: rgb(240 228 200 / 97%);
+  --sdl-dropdown-border: #b98a55;
+  --sdl-bowl-inner: #8fb3d1;
+  --sdl-bowl-outer: #46688f;
+  --sdl-bowl-ring: rgb(255 250 235 / 30%);
+  --sdl-star: #fffaf0;
+  --sdl-day-0: #fff9e6;
+  --sdl-day-1: #f4d38c;
+  --sdl-day-2: #d99a52;
+  --sdl-night-0: #9ea3c9;
+  --sdl-night-1: #5d6496;
+  --sdl-night-2: #343a66;
+  --sdl-moon-dark: #3a4466;
 }
 
-#sdc-calendar[data-theme="parchment"] .sdc-control:hover,
-#sdc-calendar[data-theme="parchment"] .sdc-control:focus-visible {
+#sdl-calendar[data-theme="parchment"] .sdl-control:hover,
+#sdl-calendar[data-theme="parchment"] .sdl-control:focus-visible {
   text-shadow: 0 0 6px rgb(255 240 200 / 90%);
 }
 
-#sdc-calendar[data-theme="stone"] {
-  --sdc-gold: #8e9ba3;
-  --sdc-gold-light: #d3e1e8;
-  --sdc-gold-dark: #4c565c;
-  --sdc-panel: rgb(34 36 40);
-  --sdc-text: #d7e0e4;
-  --sdc-dropdown: rgb(30 32 36 / 95%);
-  --sdc-dropdown-border: #59646b;
-  --sdc-bowl-inner: #17403f;
-  --sdc-bowl-outer: #050d10;
-  --sdc-bowl-ring: rgb(120 230 210 / 16%);
-  --sdc-star: #a5f3e4;
-  --sdc-day-0: #f6f1dc;
-  --sdc-day-1: #d9c99a;
-  --sdc-day-2: #a38c5a;
-  --sdc-night-0: #8fd6cf;
-  --sdc-night-1: #3b8580;
-  --sdc-night-2: #1a3f45;
-  --sdc-moon-dark: #142326;
+#sdl-calendar[data-theme="stone"] {
+  --sdl-gold: #8e9ba3;
+  --sdl-gold-light: #d3e1e8;
+  --sdl-gold-dark: #4c565c;
+  --sdl-panel: rgb(34 36 40);
+  --sdl-text: #d7e0e4;
+  --sdl-dropdown: rgb(30 32 36 / 95%);
+  --sdl-dropdown-border: #59646b;
+  --sdl-bowl-inner: #17403f;
+  --sdl-bowl-outer: #050d10;
+  --sdl-bowl-ring: rgb(120 230 210 / 16%);
+  --sdl-star: #a5f3e4;
+  --sdl-day-0: #f6f1dc;
+  --sdl-day-1: #d9c99a;
+  --sdl-day-2: #a38c5a;
+  --sdl-night-0: #8fd6cf;
+  --sdl-night-1: #3b8580;
+  --sdl-night-2: #1a3f45;
+  --sdl-moon-dark: #142326;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -451,28 +451,28 @@
 /*  edge dressed for an adventure.                                                                */
 /* ---------------------------------------------------------------------------------------------- */
 
-#sdc-calendar[data-sky-trim="winter"] { --sdc-glow: rgb(170 220 255 / 38%); }
-#sdc-calendar[data-sky-trim="spring"] { --sdc-glow: rgb(160 225 140 / 26%); }
-#sdc-calendar[data-sky-trim="summer"] { --sdc-glow: rgb(255 205 90 / 34%); }
-#sdc-calendar[data-sky-trim="fall"] { --sdc-glow: rgb(235 125 55 / 32%); }
-#sdc-calendar[data-sky-trim="midwinter"] { --sdc-glow: rgb(220 60 60 / 30%); }
-#sdc-calendar[data-sky-trim="greengrass"] { --sdc-glow: rgb(150 230 120 / 30%); }
-#sdc-calendar[data-sky-trim="midsummer"] { --sdc-glow: rgb(255 180 70 / 40%); }
-#sdc-calendar[data-sky-trim="shieldmeet"] { --sdc-glow: rgb(110 150 240 / 30%); }
-#sdc-calendar[data-sky-trim="harvest"] { --sdc-glow: rgb(230 175 70 / 34%); }
-#sdc-calendar[data-sky-trim="moonfeast"] { --sdc-glow: rgb(200 215 255 / 34%); }
-#sdc-calendar[data-bar-trim="ravenloft"] { --sdc-glow: rgb(150 20 30 / 34%); }
-#sdc-calendar[data-bar-trim="feywild"] { --sdc-glow: rgb(240 140 220 / 32%); }
-#sdc-calendar[data-bar-trim="avernus"] { --sdc-glow: rgb(255 80 20 / 44%); }
-#sdc-calendar[data-bar-trim="icewind"] { --sdc-glow: rgb(170 225 255 / 46%); }
-#sdc-calendar[data-bar-trim="arcana"] { --sdc-glow: rgb(110 190 255 / 40%); }
-#sdc-calendar[data-bar-trim="thay"] { --sdc-glow: rgb(200 20 40 / 40%); }
-#sdc-calendar[data-bar-trim="warcraft"] { --sdc-glow: rgb(240 190 80 / 36%); }
-#sdc-calendar[data-bar-trim="vecna"] { --sdc-glow: rgb(150 60 220 / 40%); }
-#sdc-calendar[data-bar-trim="chult"] { --sdc-glow: rgb(80 200 110 / 32%); }
-#sdc-calendar[data-bar-trim="obelisk"] { --sdc-glow: rgb(120 230 140 / 34%); }
+#sdl-calendar[data-sky-trim="winter"] { --sdl-glow: rgb(170 220 255 / 38%); }
+#sdl-calendar[data-sky-trim="spring"] { --sdl-glow: rgb(160 225 140 / 26%); }
+#sdl-calendar[data-sky-trim="summer"] { --sdl-glow: rgb(255 205 90 / 34%); }
+#sdl-calendar[data-sky-trim="fall"] { --sdl-glow: rgb(235 125 55 / 32%); }
+#sdl-calendar[data-sky-trim="midwinter"] { --sdl-glow: rgb(220 60 60 / 30%); }
+#sdl-calendar[data-sky-trim="greengrass"] { --sdl-glow: rgb(150 230 120 / 30%); }
+#sdl-calendar[data-sky-trim="midsummer"] { --sdl-glow: rgb(255 180 70 / 40%); }
+#sdl-calendar[data-sky-trim="shieldmeet"] { --sdl-glow: rgb(110 150 240 / 30%); }
+#sdl-calendar[data-sky-trim="harvest"] { --sdl-glow: rgb(230 175 70 / 34%); }
+#sdl-calendar[data-sky-trim="moonfeast"] { --sdl-glow: rgb(200 215 255 / 34%); }
+#sdl-calendar[data-bar-trim="ravenloft"] { --sdl-glow: rgb(150 20 30 / 34%); }
+#sdl-calendar[data-bar-trim="feywild"] { --sdl-glow: rgb(240 140 220 / 32%); }
+#sdl-calendar[data-bar-trim="avernus"] { --sdl-glow: rgb(255 80 20 / 44%); }
+#sdl-calendar[data-bar-trim="icewind"] { --sdl-glow: rgb(170 225 255 / 46%); }
+#sdl-calendar[data-bar-trim="arcana"] { --sdl-glow: rgb(110 190 255 / 40%); }
+#sdl-calendar[data-bar-trim="thay"] { --sdl-glow: rgb(200 20 40 / 40%); }
+#sdl-calendar[data-bar-trim="warcraft"] { --sdl-glow: rgb(240 190 80 / 36%); }
+#sdl-calendar[data-bar-trim="vecna"] { --sdl-glow: rgb(150 60 220 / 40%); }
+#sdl-calendar[data-bar-trim="chult"] { --sdl-glow: rgb(80 200 110 / 32%); }
+#sdl-calendar[data-bar-trim="obelisk"] { --sdl-glow: rgb(120 230 140 / 34%); }
 
-#sdc-calendar .sdc-trim {
+#sdl-calendar .sdl-trim {
   position: absolute;
   top: 0;
   left: 0;
@@ -481,17 +481,17 @@
   z-index: 2;
 }
 
-#sdc-calendar .sdc-trim-bar,
-#sdc-calendar .sdc-trim-bowl {
+#sdl-calendar .sdl-trim-bar,
+#sdl-calendar .sdl-trim-bowl {
   filter: drop-shadow(0 1px 1px rgb(0 0 0 / 55%));
 }
 
 /* The stretch of the bar over the date is left bare while the sky shows. */
-#sdc-calendar .sdc-trim .middle { transition: opacity 0.25s, visibility 0.25s; }
-#sdc-calendar.expanded .sdc-trim .middle { opacity: 0; visibility: hidden; }
+#sdl-calendar .sdl-trim .middle { transition: opacity 0.25s, visibility 0.25s; }
+#sdl-calendar.expanded .sdl-trim .middle { opacity: 0; visibility: hidden; }
 
 /* Winter */
-#sdc-calendar .sdc-frost {
+#sdl-calendar .sdl-frost {
   fill: none;
   stroke: #e6f6ff;
   stroke-width: 1.6;
@@ -499,573 +499,573 @@
   opacity: 0.75;
 }
 
-#sdc-calendar .sdc-rime { fill: #f4fbff; opacity: 0.85; }
-#sdc-calendar .sdc-icicle { fill: rgb(205 235 255 / 85%); stroke: #f4fbff; stroke-width: 0.5; }
+#sdl-calendar .sdl-rime { fill: #f4fbff; opacity: 0.85; }
+#sdl-calendar .sdl-icicle { fill: rgb(205 235 255 / 85%); stroke: #f4fbff; stroke-width: 0.5; }
 
-#sdc-calendar .sdc-glint {
+#sdl-calendar .sdl-glint {
   fill: none;
   stroke: #fff;
   stroke-width: 0.8;
   stroke-linecap: round;
-  animation: sdc-twinkle 4s ease-in-out infinite;
+  animation: sdl-twinkle 4s ease-in-out infinite;
 }
 
 /* Spring and summer */
-#sdc-calendar .sdc-vine { fill: none; stroke: #5e9a46; stroke-width: 1.1; }
-#sdc-calendar .sdc-vine.summer { stroke: #3f7a2c; stroke-width: 1.5; }
-#sdc-calendar .sdc-leaf { fill: #6fb64f; }
-#sdc-calendar .sdc-leaf.light { fill: #a5d97c; }
-#sdc-calendar .sdc-leaf.summer { fill: #3e8a2f; }
-#sdc-calendar .sdc-blossom.pink { fill: #f6a8c6; }
-#sdc-calendar .sdc-blossom.white { fill: #fbf6ee; }
-#sdc-calendar .sdc-blossom.lilac { fill: #c9b1f0; }
-#sdc-calendar .sdc-blossom .heart { fill: #f6d55a; }
-#sdc-calendar .sdc-sunflower { fill: #ffcb2f; }
-#sdc-calendar .sdc-sunflower .heart { fill: #6b3f1d; }
+#sdl-calendar .sdl-vine { fill: none; stroke: #5e9a46; stroke-width: 1.1; }
+#sdl-calendar .sdl-vine.summer { stroke: #3f7a2c; stroke-width: 1.5; }
+#sdl-calendar .sdl-leaf { fill: #6fb64f; }
+#sdl-calendar .sdl-leaf.light { fill: #a5d97c; }
+#sdl-calendar .sdl-leaf.summer { fill: #3e8a2f; }
+#sdl-calendar .sdl-blossom.pink { fill: #f6a8c6; }
+#sdl-calendar .sdl-blossom.white { fill: #fbf6ee; }
+#sdl-calendar .sdl-blossom.lilac { fill: #c9b1f0; }
+#sdl-calendar .sdl-blossom .heart { fill: #f6d55a; }
+#sdl-calendar .sdl-sunflower { fill: #ffcb2f; }
+#sdl-calendar .sdl-sunflower .heart { fill: #6b3f1d; }
 
-#sdc-calendar .sdc-mote {
+#sdl-calendar .sdl-mote {
   fill: var(--c, #fff0a8);
-  animation: sdc-twinkle 4s ease-in-out infinite;
+  animation: sdl-twinkle 4s ease-in-out infinite;
 }
 
 /* Autumn */
-#sdc-calendar .sdc-twig { fill: none; stroke: #6b4325; stroke-width: 1.2; }
-#sdc-calendar .sdc-fallen.red { fill: #c0392b; }
-#sdc-calendar .sdc-fallen.orange { fill: #e3702d; }
-#sdc-calendar .sdc-fallen.amber { fill: #eaa83a; }
-#sdc-calendar .sdc-fallen.brown { fill: #8a5228; }
-#sdc-calendar .sdc-fallen.rust { fill: #b4562a; }
-#sdc-calendar .sdc-fallen.loose { opacity: 0.85; }
+#sdl-calendar .sdl-twig { fill: none; stroke: #6b4325; stroke-width: 1.2; }
+#sdl-calendar .sdl-fallen.red { fill: #c0392b; }
+#sdl-calendar .sdl-fallen.orange { fill: #e3702d; }
+#sdl-calendar .sdl-fallen.amber { fill: #eaa83a; }
+#sdl-calendar .sdl-fallen.brown { fill: #8a5228; }
+#sdl-calendar .sdl-fallen.rust { fill: #b4562a; }
+#sdl-calendar .sdl-fallen.loose { opacity: 0.85; }
 
 /* Festivals */
-#sdc-calendar .sdc-garland { fill: none; stroke: #2f5a2a; stroke-width: 1.2; }
-#sdc-calendar .sdc-holly { fill: #2c6b34; }
-#sdc-calendar .sdc-holly.light { fill: #3f8a45; }
-#sdc-calendar .sdc-berries { fill: #d62a2a; }
-#sdc-calendar .sdc-bell { fill: #e9bf4a; stroke: #8a6418; stroke-width: 0.4; }
-#sdc-calendar .sdc-bell .clapper { fill: #8a6418; }
-#sdc-calendar .sdc-ribbon { fill: none; stroke: #c22a2a; stroke-width: 0.7; }
-#sdc-calendar .sdc-grass { fill: #6cbf4a; }
-#sdc-calendar .sdc-grass.light { fill: #9ad86a; }
-#sdc-calendar .sdc-grass.dark { fill: #3f8a2f; }
-#sdc-calendar .sdc-daisy { fill: #fdfbf3; }
-#sdc-calendar .sdc-daisy .heart { fill: #f2c230; }
-#sdc-calendar .sdc-cord { fill: none; stroke: #c4a46a; stroke-width: 0.6; }
-#sdc-calendar .sdc-lantern .string { stroke: #4a3a28; stroke-width: 0.5; }
-#sdc-calendar .sdc-lantern .cap { fill: #3b2d1d; }
-#sdc-calendar .sdc-lantern .glow { filter: drop-shadow(0 0 1.5px #ffb347); animation: sdc-flicker 3s ease-in-out infinite; }
-#sdc-calendar .sdc-lantern.gold .glow { fill: #ffd25a; }
-#sdc-calendar .sdc-lantern.red .glow { fill: #f0503a; }
-#sdc-calendar .sdc-lantern.orange .glow { fill: #ff9a3a; }
-#sdc-calendar .sdc-lantern.rose .glow { fill: #f77fa8; }
-#sdc-calendar .sdc-pennant.red,
-#sdc-calendar .sdc-shield.red path:first-child { fill: #c0392b; }
-#sdc-calendar .sdc-pennant.blue,
-#sdc-calendar .sdc-shield.blue path:first-child { fill: #2f5fb3; }
-#sdc-calendar .sdc-pennant.gold,
-#sdc-calendar .sdc-shield.gold path:first-child { fill: #e3b23c; }
-#sdc-calendar .sdc-pennant.white,
-#sdc-calendar .sdc-shield.white path:first-child { fill: #f2efe6; }
-#sdc-calendar .sdc-shield path:first-child { stroke: #5a4630; stroke-width: 0.6; }
-#sdc-calendar .sdc-shield .boss { fill: none; stroke: #5a4630; stroke-width: 0.7; }
-#sdc-calendar .sdc-twine { fill: none; stroke: #b08a4a; stroke-width: 0.9; }
-#sdc-calendar .sdc-wheat { fill: #e2b450; }
-#sdc-calendar .sdc-wheat .stalk { fill: none; stroke: #c99a3a; stroke-width: 0.5; }
-#sdc-calendar .sdc-apple { fill: #c8322a; }
-#sdc-calendar .sdc-apple .stem { stroke: #5a3a1e; stroke-width: 0.5; }
-#sdc-calendar .sdc-apple .leaf { stroke: #4f8a2f; stroke-width: 0.9; stroke-linecap: round; }
-#sdc-calendar .sdc-vine.night { stroke: #3a4a5e; }
-#sdc-calendar .sdc-leaf.night { fill: #4a5f6e; }
-#sdc-calendar .sdc-moonflower { fill: #eef3ff; animation: sdc-glow 4s ease-in-out infinite; }
-#sdc-calendar .sdc-moonflower .heart { fill: #b9c8ea; }
-#sdc-calendar .sdc-crescent { fill: #dfe6f2; stroke: #8b97ab; stroke-width: 0.3; }
-#sdc-calendar .sdc-crescent .sdc-ribbon { stroke: #b9c4d6; }
+#sdl-calendar .sdl-garland { fill: none; stroke: #2f5a2a; stroke-width: 1.2; }
+#sdl-calendar .sdl-holly { fill: #2c6b34; }
+#sdl-calendar .sdl-holly.light { fill: #3f8a45; }
+#sdl-calendar .sdl-berries { fill: #d62a2a; }
+#sdl-calendar .sdl-bell { fill: #e9bf4a; stroke: #8a6418; stroke-width: 0.4; }
+#sdl-calendar .sdl-bell .clapper { fill: #8a6418; }
+#sdl-calendar .sdl-ribbon { fill: none; stroke: #c22a2a; stroke-width: 0.7; }
+#sdl-calendar .sdl-grass { fill: #6cbf4a; }
+#sdl-calendar .sdl-grass.light { fill: #9ad86a; }
+#sdl-calendar .sdl-grass.dark { fill: #3f8a2f; }
+#sdl-calendar .sdl-daisy { fill: #fdfbf3; }
+#sdl-calendar .sdl-daisy .heart { fill: #f2c230; }
+#sdl-calendar .sdl-cord { fill: none; stroke: #c4a46a; stroke-width: 0.6; }
+#sdl-calendar .sdl-lantern .string { stroke: #4a3a28; stroke-width: 0.5; }
+#sdl-calendar .sdl-lantern .cap { fill: #3b2d1d; }
+#sdl-calendar .sdl-lantern .glow { filter: drop-shadow(0 0 1.5px #ffb347); animation: sdl-flicker 3s ease-in-out infinite; }
+#sdl-calendar .sdl-lantern.gold .glow { fill: #ffd25a; }
+#sdl-calendar .sdl-lantern.red .glow { fill: #f0503a; }
+#sdl-calendar .sdl-lantern.orange .glow { fill: #ff9a3a; }
+#sdl-calendar .sdl-lantern.rose .glow { fill: #f77fa8; }
+#sdl-calendar .sdl-pennant.red,
+#sdl-calendar .sdl-shield.red path:first-child { fill: #c0392b; }
+#sdl-calendar .sdl-pennant.blue,
+#sdl-calendar .sdl-shield.blue path:first-child { fill: #2f5fb3; }
+#sdl-calendar .sdl-pennant.gold,
+#sdl-calendar .sdl-shield.gold path:first-child { fill: #e3b23c; }
+#sdl-calendar .sdl-pennant.white,
+#sdl-calendar .sdl-shield.white path:first-child { fill: #f2efe6; }
+#sdl-calendar .sdl-shield path:first-child { stroke: #5a4630; stroke-width: 0.6; }
+#sdl-calendar .sdl-shield .boss { fill: none; stroke: #5a4630; stroke-width: 0.7; }
+#sdl-calendar .sdl-twine { fill: none; stroke: #b08a4a; stroke-width: 0.9; }
+#sdl-calendar .sdl-wheat { fill: #e2b450; }
+#sdl-calendar .sdl-wheat .stalk { fill: none; stroke: #c99a3a; stroke-width: 0.5; }
+#sdl-calendar .sdl-apple { fill: #c8322a; }
+#sdl-calendar .sdl-apple .stem { stroke: #5a3a1e; stroke-width: 0.5; }
+#sdl-calendar .sdl-apple .leaf { stroke: #4f8a2f; stroke-width: 0.9; stroke-linecap: round; }
+#sdl-calendar .sdl-vine.night { stroke: #3a4a5e; }
+#sdl-calendar .sdl-leaf.night { fill: #4a5f6e; }
+#sdl-calendar .sdl-moonflower { fill: #eef3ff; animation: sdl-glow 4s ease-in-out infinite; }
+#sdl-calendar .sdl-moonflower .heart { fill: #b9c8ea; }
+#sdl-calendar .sdl-crescent { fill: #dfe6f2; stroke: #8b97ab; stroke-width: 0.3; }
+#sdl-calendar .sdl-crescent .sdl-ribbon { stroke: #b9c4d6; }
 
 /* The Exandrian calendar's holidays */
-#sdc-calendar[data-sky-trim="newdawn"] { --sdc-glow: rgb(255 200 90 / 40%); }
-#sdc-calendar[data-sky-trim="hillsgold"] { --sdc-glow: rgb(240 200 90 / 34%); }
-#sdc-calendar[data-sky-trim="challenging"] { --sdc-glow: rgb(140 190 255 / 36%); }
-#sdc-calendar[data-sky-trim="merryfrond"] { --sdc-glow: rgb(140 230 120 / 32%); }
-#sdc-calendar[data-sky-trim="deepsolace"] { --sdc-glow: rgb(255 170 60 / 32%); }
-#sdc-calendar[data-sky-trim="artisansfaire"] { --sdc-glow: rgb(255 160 200 / 30%); }
-#sdc-calendar[data-sky-trim="elvendawn"] { --sdc-glow: rgb(200 230 255 / 36%); }
-#sdc-calendar[data-sky-trim="largesse"] { --sdc-glow: rgb(240 200 80 / 34%); }
-#sdc-calendar[data-sky-trim="hazel"] { --sdc-glow: rgb(210 160 80 / 30%); }
-#sdc-calendar[data-sky-trim="civilization"] { --sdc-glow: rgb(230 210 140 / 32%); }
-#sdc-calendar[data-sky-trim="ascension"] { --sdc-glow: rgb(150 90 220 / 36%); }
-#sdc-calendar[data-sky-trim="zanscup"] { --sdc-glow: rgb(200 60 110 / 32%); }
-#sdc-calendar[data-sky-trim="barreneve"] { --sdc-glow: rgb(255 200 120 / 30%); }
-#sdc-calendar[data-sky-trim="embertide"] { --sdc-glow: rgb(255 110 40 / 42%); }
+#sdl-calendar[data-sky-trim="newdawn"] { --sdl-glow: rgb(255 200 90 / 40%); }
+#sdl-calendar[data-sky-trim="hillsgold"] { --sdl-glow: rgb(240 200 90 / 34%); }
+#sdl-calendar[data-sky-trim="challenging"] { --sdl-glow: rgb(140 190 255 / 36%); }
+#sdl-calendar[data-sky-trim="merryfrond"] { --sdl-glow: rgb(140 230 120 / 32%); }
+#sdl-calendar[data-sky-trim="deepsolace"] { --sdl-glow: rgb(255 170 60 / 32%); }
+#sdl-calendar[data-sky-trim="artisansfaire"] { --sdl-glow: rgb(255 160 200 / 30%); }
+#sdl-calendar[data-sky-trim="elvendawn"] { --sdl-glow: rgb(200 230 255 / 36%); }
+#sdl-calendar[data-sky-trim="largesse"] { --sdl-glow: rgb(240 200 80 / 34%); }
+#sdl-calendar[data-sky-trim="hazel"] { --sdl-glow: rgb(210 160 80 / 30%); }
+#sdl-calendar[data-sky-trim="civilization"] { --sdl-glow: rgb(230 210 140 / 32%); }
+#sdl-calendar[data-sky-trim="ascension"] { --sdl-glow: rgb(150 90 220 / 36%); }
+#sdl-calendar[data-sky-trim="zanscup"] { --sdl-glow: rgb(200 60 110 / 32%); }
+#sdl-calendar[data-sky-trim="barreneve"] { --sdl-glow: rgb(255 200 120 / 30%); }
+#sdl-calendar[data-sky-trim="embertide"] { --sdl-glow: rgb(255 110 40 / 42%); }
 
-#sdc-calendar .sdc-dawn-ray { fill: #ffd36a; opacity: 0.85; }
-#sdc-calendar .sdc-dawn-sun { fill: #ffe08a; filter: drop-shadow(0 0 1.5px #ffb030); }
-#sdc-calendar .sdc-gold-hills { fill: #c99a32; }
-#sdc-calendar .sdc-gold-hills-crest { fill: none; stroke: #f2d070; stroke-width: 0.6; }
-#sdc-calendar .sdc-sparkle.gold { fill: #ffe7a0; }
-#sdc-calendar .sdc-frond { fill: none; stroke: #4fa83f; stroke-width: 0.5; stroke-linecap: round; }
-#sdc-calendar .sdc-confetti { fill: var(--c); }
-#sdc-calendar .sdc-solace-stone { fill: #6a625a; stroke: #3a3530; stroke-width: 0.3; }
-#sdc-calendar .sdc-solace-joint { fill: none; stroke: #3a3530; stroke-width: 0.35; }
-#sdc-calendar .sdc-amber { fill: #ffae3a; stroke: #fff0c0; stroke-width: 0.2; filter: drop-shadow(0 0 1.2px #ff8a1a);
-  animation: sdc-glow 5s ease-in-out infinite; }
-#sdc-calendar .sdc-flag { fill: var(--c); }
-#sdc-calendar .sdc-jug { fill: var(--c); stroke: rgb(0 0 0 / 40%); stroke-width: 0.25; }
-#sdc-calendar .sdc-jug-band { stroke: #f6ecd0; stroke-width: 0.35; }
-#sdc-calendar .sdc-vine.elven { stroke: #b8c8d0; stroke-width: 0.9; }
-#sdc-calendar .sdc-leaf.elven { fill: #d8e4ec; }
-#sdc-calendar .sdc-blossom-white ellipse { fill: #ffffff; }
-#sdc-calendar .sdc-blossom-white .heart { fill: #f6e08a; }
-#sdc-calendar .sdc-sparkle.elven { fill: #e8f4ff; }
-#sdc-calendar .sdc-gift-ribbon { fill: none; stroke: #c02a4a; stroke-width: 0.8; }
-#sdc-calendar .sdc-purse { fill: #8a5a2a; stroke: #4a2e14; stroke-width: 0.3; }
-#sdc-calendar .sdc-purse-tie { stroke: #e8bd4a; stroke-width: 0.5; }
-#sdc-calendar .sdc-leaf.hazel { fill: #6a9a3a; }
-#sdc-calendar .sdc-catkin { fill: #d8c06a; }
-#sdc-calendar .sdc-hazelnut circle { fill: #9a6a32; stroke: #5a3a18; stroke-width: 0.25; }
-#sdc-calendar .sdc-hazelnut .husk { fill: #7aa84a; }
-#sdc-calendar .sdc-garland.laurel { stroke: #5a7a2a; stroke-width: 0.8; }
-#sdc-calendar .sdc-seal.gold { fill: #d9a93a; }
-#sdc-calendar .sdc-mist.raven { fill: rgb(130 90 190 / 28%); }
-#sdc-calendar .sdc-feather { fill: #2a2236; stroke: #a890d0; stroke-width: 0.3; }
-#sdc-calendar .sdc-goblet { fill: #c9a24a; stroke: #6a4a18; stroke-width: 0.25; }
-#sdc-calendar .sdc-wine { fill: #8a1438; }
-#sdc-calendar .sdc-grapes circle { fill: #6a2a7a; stroke: #3a1440; stroke-width: 0.2; }
-#sdc-calendar .sdc-mourning { fill: none; stroke: #3a3440; stroke-width: 1.2; }
-#sdc-calendar .sdc-votive .wax { fill: #f2ead6; }
-#sdc-calendar .sdc-votive { animation: sdc-flicker 5s ease-in-out infinite; }
-#sdc-calendar .sdc-ember-bed { fill: #8a2a10; filter: drop-shadow(0 0 1.5px #ff6a1a); }
+#sdl-calendar .sdl-dawn-ray { fill: #ffd36a; opacity: 0.85; }
+#sdl-calendar .sdl-dawn-sun { fill: #ffe08a; filter: drop-shadow(0 0 1.5px #ffb030); }
+#sdl-calendar .sdl-gold-hills { fill: #c99a32; }
+#sdl-calendar .sdl-gold-hills-crest { fill: none; stroke: #f2d070; stroke-width: 0.6; }
+#sdl-calendar .sdl-sparkle.gold { fill: #ffe7a0; }
+#sdl-calendar .sdl-frond { fill: none; stroke: #4fa83f; stroke-width: 0.5; stroke-linecap: round; }
+#sdl-calendar .sdl-confetti { fill: var(--c); }
+#sdl-calendar .sdl-solace-stone { fill: #6a625a; stroke: #3a3530; stroke-width: 0.3; }
+#sdl-calendar .sdl-solace-joint { fill: none; stroke: #3a3530; stroke-width: 0.35; }
+#sdl-calendar .sdl-amber { fill: #ffae3a; stroke: #fff0c0; stroke-width: 0.2; filter: drop-shadow(0 0 1.2px #ff8a1a);
+  animation: sdl-glow 5s ease-in-out infinite; }
+#sdl-calendar .sdl-flag { fill: var(--c); }
+#sdl-calendar .sdl-jug { fill: var(--c); stroke: rgb(0 0 0 / 40%); stroke-width: 0.25; }
+#sdl-calendar .sdl-jug-band { stroke: #f6ecd0; stroke-width: 0.35; }
+#sdl-calendar .sdl-vine.elven { stroke: #b8c8d0; stroke-width: 0.9; }
+#sdl-calendar .sdl-leaf.elven { fill: #d8e4ec; }
+#sdl-calendar .sdl-blossom-white ellipse { fill: #ffffff; }
+#sdl-calendar .sdl-blossom-white .heart { fill: #f6e08a; }
+#sdl-calendar .sdl-sparkle.elven { fill: #e8f4ff; }
+#sdl-calendar .sdl-gift-ribbon { fill: none; stroke: #c02a4a; stroke-width: 0.8; }
+#sdl-calendar .sdl-purse { fill: #8a5a2a; stroke: #4a2e14; stroke-width: 0.3; }
+#sdl-calendar .sdl-purse-tie { stroke: #e8bd4a; stroke-width: 0.5; }
+#sdl-calendar .sdl-leaf.hazel { fill: #6a9a3a; }
+#sdl-calendar .sdl-catkin { fill: #d8c06a; }
+#sdl-calendar .sdl-hazelnut circle { fill: #9a6a32; stroke: #5a3a18; stroke-width: 0.25; }
+#sdl-calendar .sdl-hazelnut .husk { fill: #7aa84a; }
+#sdl-calendar .sdl-garland.laurel { stroke: #5a7a2a; stroke-width: 0.8; }
+#sdl-calendar .sdl-seal.gold { fill: #d9a93a; }
+#sdl-calendar .sdl-mist.raven { fill: rgb(130 90 190 / 28%); }
+#sdl-calendar .sdl-feather { fill: #2a2236; stroke: #a890d0; stroke-width: 0.3; }
+#sdl-calendar .sdl-goblet { fill: #c9a24a; stroke: #6a4a18; stroke-width: 0.25; }
+#sdl-calendar .sdl-wine { fill: #8a1438; }
+#sdl-calendar .sdl-grapes circle { fill: #6a2a7a; stroke: #3a1440; stroke-width: 0.2; }
+#sdl-calendar .sdl-mourning { fill: none; stroke: #3a3440; stroke-width: 1.2; }
+#sdl-calendar .sdl-votive .wax { fill: #f2ead6; }
+#sdl-calendar .sdl-votive { animation: sdl-flicker 5s ease-in-out infinite; }
+#sdl-calendar .sdl-ember-bed { fill: #8a2a10; filter: drop-shadow(0 0 1.5px #ff6a1a); }
 
 /* Adventures: Curse of Strahd */
-#sdc-calendar .sdc-mist { fill: rgb(215 220 230 / 22%); filter: blur(1.5px); animation: sdc-drift 12s ease-in-out infinite; }
-#sdc-calendar .sdc-deadvine { fill: none; stroke: #74655a; stroke-width: 1.4; }
-#sdc-calendar .sdc-thorn { fill: #74655a; }
-#sdc-calendar .sdc-web { fill: none; stroke: rgb(235 235 240 / 70%); stroke-width: 0.4; }
-#sdc-calendar .sdc-spider { fill: #1c1a1a; }
-#sdc-calendar .sdc-spider .thread { stroke: rgb(230 230 235 / 55%); stroke-width: 0.3; }
-#sdc-calendar .sdc-spider .legs { fill: none; stroke: #1c1a1a; stroke-width: 0.5; }
-#sdc-calendar .sdc-bat { fill: #15121a; }
+#sdl-calendar .sdl-mist { fill: rgb(215 220 230 / 22%); filter: blur(1.5px); animation: sdl-drift 12s ease-in-out infinite; }
+#sdl-calendar .sdl-deadvine { fill: none; stroke: #74655a; stroke-width: 1.4; }
+#sdl-calendar .sdl-thorn { fill: #74655a; }
+#sdl-calendar .sdl-web { fill: none; stroke: rgb(235 235 240 / 70%); stroke-width: 0.4; }
+#sdl-calendar .sdl-spider { fill: #1c1a1a; }
+#sdl-calendar .sdl-spider .thread { stroke: rgb(230 230 235 / 55%); stroke-width: 0.3; }
+#sdl-calendar .sdl-spider .legs { fill: none; stroke: #1c1a1a; stroke-width: 0.5; }
+#sdl-calendar .sdl-bat { fill: #15121a; }
 
 /* The Wild Beyond the Witchlight */
-#sdc-calendar .sdc-ribbon-fey { fill: none; stroke-width: 1.3; stroke-linecap: round; }
-#sdc-calendar .sdc-ribbon-fey.pink { stroke: #f08ac8; }
-#sdc-calendar .sdc-ribbon-fey.teal { stroke: #5fd3c8; }
-#sdc-calendar .sdc-toadstool .stem { fill: #f3ead6; }
-#sdc-calendar .sdc-toadstool .cap { fill: #d8322d; }
-#sdc-calendar .sdc-toadstool .spot { fill: #fff8ec; }
-#sdc-calendar .sdc-sparkle { fill: #ffd6f2; animation: sdc-twinkle 4s ease-in-out infinite; }
-#sdc-calendar .sdc-firefly {
+#sdl-calendar .sdl-ribbon-fey { fill: none; stroke-width: 1.3; stroke-linecap: round; }
+#sdl-calendar .sdl-ribbon-fey.pink { stroke: #f08ac8; }
+#sdl-calendar .sdl-ribbon-fey.teal { stroke: #5fd3c8; }
+#sdl-calendar .sdl-toadstool .stem { fill: #f3ead6; }
+#sdl-calendar .sdl-toadstool .cap { fill: #d8322d; }
+#sdl-calendar .sdl-toadstool .spot { fill: #fff8ec; }
+#sdl-calendar .sdl-sparkle { fill: #ffd6f2; animation: sdl-twinkle 4s ease-in-out infinite; }
+#sdl-calendar .sdl-firefly {
   fill: #e4ff8a;
   filter: drop-shadow(0 0 1.5px #e4ff8a);
-  animation: sdc-twinkle 4s ease-in-out infinite;
+  animation: sdl-twinkle 4s ease-in-out infinite;
 }
 
 /* Descent into Avernus */
-#sdc-calendar .sdc-hellglow { fill: none; stroke: #ff5a1a; stroke-width: 2; opacity: 0.6; filter: blur(1px); }
-#sdc-calendar .sdc-spike { fill: #2a2420; stroke: #6a4a3a; stroke-width: 0.3; }
-#sdc-calendar .sdc-link { fill: none; stroke: #5c5650; stroke-width: 0.7; }
-#sdc-calendar .sdc-link.side { stroke: #8a827a; }
-#sdc-calendar .sdc-ember {
+#sdl-calendar .sdl-hellglow { fill: none; stroke: #ff5a1a; stroke-width: 2; opacity: 0.6; filter: blur(1px); }
+#sdl-calendar .sdl-spike { fill: #2a2420; stroke: #6a4a3a; stroke-width: 0.3; }
+#sdl-calendar .sdl-link { fill: none; stroke: #5c5650; stroke-width: 0.7; }
+#sdl-calendar .sdl-link.side { stroke: #8a827a; }
+#sdl-calendar .sdl-ember {
   fill: #ffb347;
   filter: drop-shadow(0 0 1px #ff6a1a);
-  animation: sdc-rise 3s ease-out infinite;
+  animation: sdl-rise 3s ease-out infinite;
 }
 
 /* Rime of the Frostmaiden */
-#sdc-calendar .sdc-snowcrust { fill: #f2f9ff; stroke: #cfe6f6; stroke-width: 0.4; }
-#sdc-calendar .sdc-flake {
+#sdl-calendar .sdl-snowcrust { fill: #f2f9ff; stroke: #cfe6f6; stroke-width: 0.4; }
+#sdl-calendar .sdl-flake {
   fill: none;
   stroke: #fff;
   stroke-width: 0.5;
   stroke-linecap: round;
-  animation: sdc-fall 6s linear infinite;
+  animation: sdl-fall 6s linear infinite;
 }
 
 /* Arcana Unleashed */
-#sdc-calendar .sdc-ley { fill: none; stroke: #7cc8ff; stroke-width: 0.6; stroke-dasharray: 10 3 2 3; opacity: 0.8; }
-#sdc-calendar .sdc-rune {
+#sdl-calendar .sdl-ley { fill: none; stroke: #7cc8ff; stroke-width: 0.6; stroke-dasharray: 10 3 2 3; opacity: 0.8; }
+#sdl-calendar .sdl-rune {
   fill: none;
   stroke: #9fd8ff;
   stroke-width: 0.6;
   stroke-linecap: round;
   filter: drop-shadow(0 0 1.2px #4aa8ff);
-  animation: sdc-glow 5s ease-in-out infinite;
+  animation: sdl-glow 5s ease-in-out infinite;
 }
-#sdc-calendar .sdc-sigil { fill: none; stroke: #b7a6ff; stroke-width: 0.45; filter: drop-shadow(0 0 1px #7a5cff); }
-#sdc-calendar .sdc-spin { animation: sdc-spin 20s linear infinite; }
-#sdc-calendar .sdc-sparkle.arcane { fill: #cfe9ff; }
+#sdl-calendar .sdl-sigil { fill: none; stroke: #b7a6ff; stroke-width: 0.45; filter: drop-shadow(0 0 1px #7a5cff); }
+#sdl-calendar .sdl-spin { animation: sdl-spin 20s linear infinite; }
+#sdl-calendar .sdl-sparkle.arcane { fill: #cfe9ff; }
 
 /* Arcana Unleashed: Deadfall */
-#sdc-calendar .sdc-silk { fill: none; stroke: #9e1b24; stroke-width: 1.2; }
-#sdc-calendar .sdc-tassel .knot { fill: #d9a93a; }
-#sdc-calendar .sdc-tassel .fringe { fill: #b0202a; }
-#sdc-calendar .sdc-dagger .blade { fill: #c9ced6; }
-#sdc-calendar .sdc-dagger .guard,
-#sdc-calendar .sdc-dagger .grip { fill: none; stroke: #2a1a1a; stroke-width: 0.9; }
-#sdc-calendar .sdc-dagger .pommel { fill: #b0202a; }
-#sdc-calendar .sdc-rune.thay { stroke: #ff4a4a; filter: drop-shadow(0 0 1.2px #c0101a); }
+#sdl-calendar .sdl-silk { fill: none; stroke: #9e1b24; stroke-width: 1.2; }
+#sdl-calendar .sdl-tassel .knot { fill: #d9a93a; }
+#sdl-calendar .sdl-tassel .fringe { fill: #b0202a; }
+#sdl-calendar .sdl-dagger .blade { fill: #c9ced6; }
+#sdl-calendar .sdl-dagger .guard,
+#sdl-calendar .sdl-dagger .grip { fill: none; stroke: #2a1a1a; stroke-width: 0.9; }
+#sdl-calendar .sdl-dagger .pommel { fill: #b0202a; }
+#sdl-calendar .sdl-rune.thay { stroke: #ff4a4a; filter: drop-shadow(0 0 1.2px #c0101a); }
 
 /* World of Warcraft */
-#sdc-calendar .sdc-plate { fill: #7a5a24; stroke: #e4bc5a; stroke-width: 0.5; }
-#sdc-calendar .sdc-plate-edge { fill: none; stroke: #f2d488; stroke-width: 0.4; opacity: 0.7; }
-#sdc-calendar .sdc-rivet { fill: #f6dc8c; stroke: #5a4018; stroke-width: 0.3; }
-#sdc-calendar .sdc-gem .setting { fill: #8a6628; stroke: #f0cc6a; stroke-width: 0.4; }
-#sdc-calendar .sdc-gem .shine { stroke: #fff; stroke-width: 0.5; stroke-linecap: round; opacity: 0.8; }
-#sdc-calendar .sdc-gem.green .stone { fill: #3fd16a; }
-#sdc-calendar .sdc-gem.blue .stone { fill: #3f8cff; }
-#sdc-calendar .sdc-gem.purple .stone { fill: #a35cff; }
-#sdc-calendar .sdc-gem.red .stone { fill: #e83a3a; }
-#sdc-calendar .sdc-claw { fill: #d9c9a0; stroke: #6a5530; stroke-width: 0.3; }
+#sdl-calendar .sdl-plate { fill: #7a5a24; stroke: #e4bc5a; stroke-width: 0.5; }
+#sdl-calendar .sdl-plate-edge { fill: none; stroke: #f2d488; stroke-width: 0.4; opacity: 0.7; }
+#sdl-calendar .sdl-rivet { fill: #f6dc8c; stroke: #5a4018; stroke-width: 0.3; }
+#sdl-calendar .sdl-gem .setting { fill: #8a6628; stroke: #f0cc6a; stroke-width: 0.4; }
+#sdl-calendar .sdl-gem .shine { stroke: #fff; stroke-width: 0.5; stroke-linecap: round; opacity: 0.8; }
+#sdl-calendar .sdl-gem.green .stone { fill: #3fd16a; }
+#sdl-calendar .sdl-gem.blue .stone { fill: #3f8cff; }
+#sdl-calendar .sdl-gem.purple .stone { fill: #a35cff; }
+#sdl-calendar .sdl-gem.red .stone { fill: #e83a3a; }
+#sdl-calendar .sdl-claw { fill: #d9c9a0; stroke: #6a5530; stroke-width: 0.3; }
 
 /* Vecna: Eve of Ruin */
-#sdc-calendar .sdc-gloom { fill: none; stroke: #3a1450; stroke-width: 3; opacity: 0.7; filter: blur(1.2px); }
-#sdc-calendar .sdc-tendril { fill: none; stroke: #7a3aa8; stroke-width: 0.8; stroke-linecap: round; }
-#sdc-calendar .sdc-eye .lid { fill: #1a0f22; stroke: #8a4ac0; stroke-width: 0.5; }
-#sdc-calendar .sdc-eye .iris { fill: #c070ff; animation: sdc-glow 5s ease-in-out infinite; }
-#sdc-calendar .sdc-eye .pupil { fill: #0b0610; }
-#sdc-calendar .sdc-mote.necrotic { fill: #c79aff; }
+#sdl-calendar .sdl-gloom { fill: none; stroke: #3a1450; stroke-width: 3; opacity: 0.7; filter: blur(1.2px); }
+#sdl-calendar .sdl-tendril { fill: none; stroke: #7a3aa8; stroke-width: 0.8; stroke-linecap: round; }
+#sdl-calendar .sdl-eye .lid { fill: #1a0f22; stroke: #8a4ac0; stroke-width: 0.5; }
+#sdl-calendar .sdl-eye .iris { fill: #c070ff; animation: sdl-glow 5s ease-in-out infinite; }
+#sdl-calendar .sdl-eye .pupil { fill: #0b0610; }
+#sdl-calendar .sdl-mote.necrotic { fill: #c79aff; }
 
 /* Tomb of Annihilation */
-#sdc-calendar .sdc-vine.jungle { stroke: #2f6a2a; stroke-width: 1.6; }
-#sdc-calendar .sdc-leaf.jungle { fill: #2f8a3a; }
-#sdc-calendar .sdc-leaf.jungle.light { fill: #4fb04a; }
-#sdc-calendar .sdc-liana > path:first-child { fill: none; stroke: #3a6a2a; stroke-width: 0.7; }
-#sdc-calendar .sdc-hibiscus.red { fill: #e5322d; }
-#sdc-calendar .sdc-hibiscus.orange { fill: #ff8a2a; }
-#sdc-calendar .sdc-hibiscus.magenta { fill: #d8338a; }
-#sdc-calendar .sdc-hibiscus .stamen { stroke: #ffd84a; stroke-width: 0.5; stroke-linecap: round; }
-#sdc-calendar .sdc-skull .bone { fill: #e8e0c8; }
-#sdc-calendar .sdc-skull .socket { fill: #2a2420; }
+#sdl-calendar .sdl-vine.jungle { stroke: #2f6a2a; stroke-width: 1.6; }
+#sdl-calendar .sdl-leaf.jungle { fill: #2f8a3a; }
+#sdl-calendar .sdl-leaf.jungle.light { fill: #4fb04a; }
+#sdl-calendar .sdl-liana > path:first-child { fill: none; stroke: #3a6a2a; stroke-width: 0.7; }
+#sdl-calendar .sdl-hibiscus.red { fill: #e5322d; }
+#sdl-calendar .sdl-hibiscus.orange { fill: #ff8a2a; }
+#sdl-calendar .sdl-hibiscus.magenta { fill: #d8338a; }
+#sdl-calendar .sdl-hibiscus .stamen { stroke: #ffd84a; stroke-width: 0.5; stroke-linecap: round; }
+#sdl-calendar .sdl-skull .bone { fill: #e8e0c8; }
+#sdl-calendar .sdl-skull .socket { fill: #2a2420; }
 
 /* Phandelver and Below: The Shattered Obelisk */
-#sdc-calendar .sdc-shard { fill: #23202c; stroke: #6aff8a; stroke-width: 0.35; filter: drop-shadow(0 0 1px #3ad86a); }
-#sdc-calendar .sdc-shard .facet { fill: none; stroke: #4a8a5a; stroke-width: 0.3; }
-#sdc-calendar .sdc-tentacle { fill: none; stroke: #a8619a; stroke-width: 1.5; stroke-linecap: round; }
-#sdc-calendar .sdc-mote.aberrant { fill: #8aff9a; }
+#sdl-calendar .sdl-shard { fill: #23202c; stroke: #6aff8a; stroke-width: 0.35; filter: drop-shadow(0 0 1px #3ad86a); }
+#sdl-calendar .sdl-shard .facet { fill: none; stroke: #4a8a5a; stroke-width: 0.3; }
+#sdl-calendar .sdl-tentacle { fill: none; stroke: #a8619a; stroke-width: 1.5; stroke-linecap: round; }
+#sdl-calendar .sdl-mote.aberrant { fill: #8aff9a; }
 
 /* Shared pieces, coloured by a c-<name> class */
-#sdc-calendar .c-white { --c: #f2efe6; }
-#sdc-calendar .c-black { --c: #26222e; }
-#sdc-calendar .c-red { --c: #d2342e; }
-#sdc-calendar .c-orange { --c: #f08a2c; }
-#sdc-calendar .c-gold { --c: #e8bd4a; }
-#sdc-calendar .c-sun { --c: #ffd25a; }
-#sdc-calendar .c-sand { --c: #d8b77a; }
-#sdc-calendar .c-green { --c: #3fa04a; }
-#sdc-calendar .c-teal { --c: #3cc3b4; }
-#sdc-calendar .c-blue { --c: #3f7fe0; }
-#sdc-calendar .c-violet { --c: #9a62e8; }
-#sdc-calendar .c-pink { --c: #f08ac8; }
-#sdc-calendar .c-silver { --c: #c9d0da; }
-#sdc-calendar .c-bronze { --c: #c07a3a; }
-#sdc-calendar .c-fire { --c: #ff9a2a; }
-#sdc-calendar .c-catha { --c: #eef0f6; }
-#sdc-calendar .c-ruidus { --c: #c4472c; }
-#sdc-calendar .c-solinari { --c: #f4f6fb; }
-#sdc-calendar .c-lunitari { --c: #d8433a; }
-#sdc-calendar .c-nuitari { --c: #2e2840; }
-#sdc-calendar .c-siberys { --c: #f2c94c; }
-#sdc-calendar .c-eberron { --c: #d8402e; }
-#sdc-calendar .c-khyber { --c: #3a4fa8; }
-#sdc-calendar .c-dunamis { --c: #a88aff; }
+#sdl-calendar .c-white { --c: #f2efe6; }
+#sdl-calendar .c-black { --c: #26222e; }
+#sdl-calendar .c-red { --c: #d2342e; }
+#sdl-calendar .c-orange { --c: #f08a2c; }
+#sdl-calendar .c-gold { --c: #e8bd4a; }
+#sdl-calendar .c-sun { --c: #ffd25a; }
+#sdl-calendar .c-sand { --c: #d8b77a; }
+#sdl-calendar .c-green { --c: #3fa04a; }
+#sdl-calendar .c-teal { --c: #3cc3b4; }
+#sdl-calendar .c-blue { --c: #3f7fe0; }
+#sdl-calendar .c-violet { --c: #9a62e8; }
+#sdl-calendar .c-pink { --c: #f08ac8; }
+#sdl-calendar .c-silver { --c: #c9d0da; }
+#sdl-calendar .c-bronze { --c: #c07a3a; }
+#sdl-calendar .c-fire { --c: #ff9a2a; }
+#sdl-calendar .c-catha { --c: #eef0f6; }
+#sdl-calendar .c-ruidus { --c: #c4472c; }
+#sdl-calendar .c-solinari { --c: #f4f6fb; }
+#sdl-calendar .c-lunitari { --c: #d8433a; }
+#sdl-calendar .c-nuitari { --c: #2e2840; }
+#sdl-calendar .c-siberys { --c: #f2c94c; }
+#sdl-calendar .c-eberron { --c: #d8402e; }
+#sdl-calendar .c-khyber { --c: #3a4fa8; }
+#sdl-calendar .c-dunamis { --c: #a88aff; }
 
-#sdc-calendar .sdc-coin circle { fill: var(--c); stroke: #7a5a18; stroke-width: 0.35; }
-#sdc-calendar .sdc-coin .rim { fill: none; stroke: rgb(255 245 200 / 70%); }
-#sdc-calendar .sdc-jewel { fill: var(--c); stroke: rgb(255 255 255 / 45%); stroke-width: 0.3; }
-#sdc-calendar .sdc-jewel-shine { stroke: #fff; stroke-width: 0.4; stroke-linecap: round; opacity: 0.8; }
-#sdc-calendar .sdc-flame { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
-#sdc-calendar .sdc-book rect { fill: var(--c); stroke: rgb(0 0 0 / 35%); stroke-width: 0.25; }
-#sdc-calendar .sdc-book .band { stroke: #e8c46a; stroke-width: 0.35; }
-#sdc-calendar .sdc-candle .wax { fill: #efe6cf; }
-#sdc-calendar .sdc-key { fill: none; stroke: #e8bd4a; stroke-width: 0.7; stroke-linecap: round; }
-#sdc-calendar .sdc-lamp .chain { stroke: #6c625a; stroke-width: 0.4; }
-#sdc-calendar .sdc-lamp .cage { fill: #3a302a; stroke: #8a6a3a; stroke-width: 0.35; }
-#sdc-calendar .sdc-lamp .light { fill: #ffcc6a; filter: drop-shadow(0 0 1.5px #ffae3a); }
-#sdc-calendar .sdc-orb circle:first-child { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
-#sdc-calendar .sdc-orb .shade { fill: rgb(0 0 0 / 22%); }
-#sdc-calendar .sdc-cloud { fill: #6a7890; stroke: #a0aec0; stroke-width: 0.35; }
-#sdc-calendar .sdc-planet circle { fill: var(--c); }
-#sdc-calendar .sdc-planet .ring { fill: none; stroke: #f2e6c8; stroke-width: 0.5; opacity: 0.85; }
-#sdc-calendar .sdc-card rect { fill: #f4ecd8; stroke: #8a6a3a; stroke-width: 0.3; }
-#sdc-calendar .sdc-card .mark { fill: #7a2a8a; }
-#sdc-calendar .sdc-stone { fill: #7a7068; stroke: #4a4440; stroke-width: 0.3; }
-#sdc-calendar .sdc-pennant path { fill: var(--c); stroke: rgb(0 0 0 / 30%); stroke-width: 0.2; }
-#sdc-calendar .sdc-shell path:first-child { fill: #f2c8b0; stroke: #b07a64; stroke-width: 0.3; }
-#sdc-calendar .sdc-shell .ribs { fill: none; stroke: #c48a72; stroke-width: 0.3; }
-#sdc-calendar .sdc-crystal path:first-child { fill: var(--c); stroke: rgb(255 255 255 / 40%); stroke-width: 0.25;
+#sdl-calendar .sdl-coin circle { fill: var(--c); stroke: #7a5a18; stroke-width: 0.35; }
+#sdl-calendar .sdl-coin .rim { fill: none; stroke: rgb(255 245 200 / 70%); }
+#sdl-calendar .sdl-jewel { fill: var(--c); stroke: rgb(255 255 255 / 45%); stroke-width: 0.3; }
+#sdl-calendar .sdl-jewel-shine { stroke: #fff; stroke-width: 0.4; stroke-linecap: round; opacity: 0.8; }
+#sdl-calendar .sdl-flame { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
+#sdl-calendar .sdl-book rect { fill: var(--c); stroke: rgb(0 0 0 / 35%); stroke-width: 0.25; }
+#sdl-calendar .sdl-book .band { stroke: #e8c46a; stroke-width: 0.35; }
+#sdl-calendar .sdl-candle .wax { fill: #efe6cf; }
+#sdl-calendar .sdl-key { fill: none; stroke: #e8bd4a; stroke-width: 0.7; stroke-linecap: round; }
+#sdl-calendar .sdl-lamp .chain { stroke: #6c625a; stroke-width: 0.4; }
+#sdl-calendar .sdl-lamp .cage { fill: #3a302a; stroke: #8a6a3a; stroke-width: 0.35; }
+#sdl-calendar .sdl-lamp .light { fill: #ffcc6a; filter: drop-shadow(0 0 1.5px #ffae3a); }
+#sdl-calendar .sdl-orb circle:first-child { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
+#sdl-calendar .sdl-orb .shade { fill: rgb(0 0 0 / 22%); }
+#sdl-calendar .sdl-cloud { fill: #6a7890; stroke: #a0aec0; stroke-width: 0.35; }
+#sdl-calendar .sdl-planet circle { fill: var(--c); }
+#sdl-calendar .sdl-planet .ring { fill: none; stroke: #f2e6c8; stroke-width: 0.5; opacity: 0.85; }
+#sdl-calendar .sdl-card rect { fill: #f4ecd8; stroke: #8a6a3a; stroke-width: 0.3; }
+#sdl-calendar .sdl-card .mark { fill: #7a2a8a; }
+#sdl-calendar .sdl-stone { fill: #7a7068; stroke: #4a4440; stroke-width: 0.3; }
+#sdl-calendar .sdl-pennant path { fill: var(--c); stroke: rgb(0 0 0 / 30%); stroke-width: 0.2; }
+#sdl-calendar .sdl-shell path:first-child { fill: #f2c8b0; stroke: #b07a64; stroke-width: 0.3; }
+#sdl-calendar .sdl-shell .ribs { fill: none; stroke: #c48a72; stroke-width: 0.3; }
+#sdl-calendar .sdl-crystal path:first-child { fill: var(--c); stroke: rgb(255 255 255 / 40%); stroke-width: 0.25;
   filter: drop-shadow(0 0 1px var(--c)); }
-#sdc-calendar .sdc-crystal .facet { fill: none; stroke: rgb(255 255 255 / 45%); stroke-width: 0.25; }
-#sdc-calendar .sdc-drip { fill: var(--c); }
-#sdc-calendar .sdc-bubble { fill: rgb(200 235 255 / 20%); stroke: rgb(220 245 255 / 75%); stroke-width: 0.35; }
-#sdc-calendar .sdc-bloom circle { fill: var(--c); }
-#sdc-calendar .sdc-bloom .heart { fill: #f6d36a; }
-#sdc-calendar .sdc-gold-cord { fill: none; stroke: #d9a93a; stroke-width: 0.7; }
-#sdc-calendar .sdc-silver-cord { fill: none; stroke: #b8c0cc; stroke-width: 0.5; }
+#sdl-calendar .sdl-crystal .facet { fill: none; stroke: rgb(255 255 255 / 45%); stroke-width: 0.25; }
+#sdl-calendar .sdl-drip { fill: var(--c); }
+#sdl-calendar .sdl-bubble { fill: rgb(200 235 255 / 20%); stroke: rgb(220 245 255 / 75%); stroke-width: 0.35; }
+#sdl-calendar .sdl-bloom circle { fill: var(--c); }
+#sdl-calendar .sdl-bloom .heart { fill: #f6d36a; }
+#sdl-calendar .sdl-gold-cord { fill: none; stroke: #d9a93a; stroke-width: 0.7; }
+#sdl-calendar .sdl-silver-cord { fill: none; stroke: #b8c0cc; stroke-width: 0.5; }
 
 /* Settings: the Forgotten Realms */
-#sdc-calendar[data-bar-trim="realms"] { --sdc-glow: rgb(90 150 255 / 36%); }
-#sdc-calendar .sdc-weave { fill: none; stroke: #5aa0ff; stroke-width: 1; filter: drop-shadow(0 0 1px #3a7aff); }
-#sdc-calendar .sdc-weave.faint { stroke: #a8c8ff; stroke-width: 0.5; opacity: 0.7; }
-#sdc-calendar .sdc-mystra { fill: #eef4ff; stroke: #5aa0ff; stroke-width: 0.35; filter: drop-shadow(0 0 1.2px #7ab0ff); }
-#sdc-calendar .sdc-crescent-moon { fill: #e6ecf8; }
-#sdc-calendar .sdc-sparkle.weave { fill: #cfe2ff; }
+#sdl-calendar[data-bar-trim="realms"] { --sdl-glow: rgb(90 150 255 / 36%); }
+#sdl-calendar .sdl-weave { fill: none; stroke: #5aa0ff; stroke-width: 1; filter: drop-shadow(0 0 1px #3a7aff); }
+#sdl-calendar .sdl-weave.faint { stroke: #a8c8ff; stroke-width: 0.5; opacity: 0.7; }
+#sdl-calendar .sdl-mystra { fill: #eef4ff; stroke: #5aa0ff; stroke-width: 0.35; filter: drop-shadow(0 0 1.2px #7ab0ff); }
+#sdl-calendar .sdl-crescent-moon { fill: #e6ecf8; }
+#sdl-calendar .sdl-sparkle.weave { fill: #cfe2ff; }
 
 /* Ravnica */
-#sdc-calendar[data-bar-trim="ravnica"] { --sdc-glow: rgb(220 200 140 / 30%); }
-#sdc-calendar .sdc-lead { fill: #1c1a20; stroke: #b89a5a; stroke-width: 0.4; }
-#sdc-calendar .sdc-pane { fill: var(--c); opacity: 0.85; }
-#sdc-calendar .sdc-spire { fill: #2a2630; stroke: #b89a5a; stroke-width: 0.35; }
+#sdl-calendar[data-bar-trim="ravnica"] { --sdl-glow: rgb(220 200 140 / 30%); }
+#sdl-calendar .sdl-lead { fill: #1c1a20; stroke: #b89a5a; stroke-width: 0.4; }
+#sdl-calendar .sdl-pane { fill: var(--c); opacity: 0.85; }
+#sdl-calendar .sdl-spire { fill: #2a2630; stroke: #b89a5a; stroke-width: 0.35; }
 
 /* Acquisitions Incorporated */
-#sdc-calendar[data-bar-trim="acqinc"] { --sdc-glow: rgb(230 190 80 / 32%); }
-#sdc-calendar .sdc-brass-chain { fill: none; stroke: #c99a3a; stroke-width: 0.9; stroke-dasharray: 1.4 0.6; }
-#sdc-calendar .sdc-scroll { fill: #f2e6c4; stroke: #a08050; stroke-width: 0.3; }
-#sdc-calendar .sdc-scroll-line { stroke: #8a7650; stroke-width: 0.3; }
-#sdc-calendar .sdc-seal { fill: #b0202a; }
+#sdl-calendar[data-bar-trim="acqinc"] { --sdl-glow: rgb(230 190 80 / 32%); }
+#sdl-calendar .sdl-brass-chain { fill: none; stroke: #c99a3a; stroke-width: 0.9; stroke-dasharray: 1.4 0.6; }
+#sdl-calendar .sdl-scroll { fill: #f2e6c4; stroke: #a08050; stroke-width: 0.3; }
+#sdl-calendar .sdl-scroll-line { stroke: #8a7650; stroke-width: 0.3; }
+#sdl-calendar .sdl-seal { fill: #b0202a; }
 
 /* Eberron */
-#sdc-calendar[data-bar-trim="eberron"] { --sdc-glow: rgb(240 200 80 / 34%); }
-#sdc-calendar .sdc-rail { fill: none; stroke: #6a7280; stroke-width: 1.2; }
-#sdc-calendar .sdc-rail.spark { stroke: #8ad8ff; stroke-width: 0.5; stroke-dasharray: 3 9; filter: drop-shadow(0 0 1px #4ab8ff);
-  animation: sdc-rail 2s linear infinite; }
+#sdl-calendar[data-bar-trim="eberron"] { --sdl-glow: rgb(240 200 80 / 34%); }
+#sdl-calendar .sdl-rail { fill: none; stroke: #6a7280; stroke-width: 1.2; }
+#sdl-calendar .sdl-rail.spark { stroke: #8ad8ff; stroke-width: 0.5; stroke-dasharray: 3 9; filter: drop-shadow(0 0 1px #4ab8ff);
+  animation: sdl-rail 2s linear infinite; }
 
 /* Exandria */
-#sdc-calendar[data-bar-trim="exandria"] { --sdc-glow: rgb(160 130 255 / 34%); }
-#sdc-calendar .sdc-dunamis { fill: none; stroke: #b49cff; stroke-width: 0.45; filter: drop-shadow(0 0 1px #8a6aff); }
+#sdl-calendar[data-bar-trim="exandria"] { --sdl-glow: rgb(160 130 255 / 34%); }
+#sdl-calendar .sdl-dunamis { fill: none; stroke: #b49cff; stroke-width: 0.45; filter: drop-shadow(0 0 1px #8a6aff); }
 
 /* Theros */
-#sdc-calendar[data-bar-trim="theros"] { --sdc-glow: rgb(240 200 90 / 32%); }
-#sdc-calendar .sdc-meander-ground { fill: #1e1a2e; stroke: #d9b04a; stroke-width: 0.4; }
-#sdc-calendar .sdc-meander { fill: none; stroke: #e8c25a; stroke-width: 0.55; }
-#sdc-calendar .sdc-leaf.laurel { fill: #7a9a3a; }
-#sdc-calendar .sdc-sparkle.nyx { fill: #b9a8ff; }
+#sdl-calendar[data-bar-trim="theros"] { --sdl-glow: rgb(240 200 90 / 32%); }
+#sdl-calendar .sdl-meander-ground { fill: #1e1a2e; stroke: #d9b04a; stroke-width: 0.4; }
+#sdl-calendar .sdl-meander { fill: none; stroke: #e8c25a; stroke-width: 0.55; }
+#sdl-calendar .sdl-leaf.laurel { fill: #7a9a3a; }
+#sdl-calendar .sdl-sparkle.nyx { fill: #b9a8ff; }
 
 /* Strixhaven */
-#sdc-calendar[data-bar-trim="strixhaven"] { --sdc-glow: rgb(150 180 255 / 30%); }
+#sdl-calendar[data-bar-trim="strixhaven"] { --sdl-glow: rgb(150 180 255 / 30%); }
 
 /* Spelljammer */
-#sdc-calendar[data-bar-trim="spelljammer"] { --sdc-glow: rgb(120 110 255 / 36%); }
-#sdc-calendar .sdc-wildspace { fill: #120f30; stroke: #6a5ae0; stroke-width: 0.4; }
-#sdc-calendar .sdc-orbit { fill: none; stroke: rgb(200 190 255 / 60%); stroke-width: 0.45; stroke-dasharray: 2 2; }
-#sdc-calendar .sdc-star-dot { fill: #f2f0ff; animation: sdc-twinkle 4s ease-in-out infinite; }
+#sdl-calendar[data-bar-trim="spelljammer"] { --sdl-glow: rgb(120 110 255 / 36%); }
+#sdl-calendar .sdl-wildspace { fill: #120f30; stroke: #6a5ae0; stroke-width: 0.4; }
+#sdl-calendar .sdl-orbit { fill: none; stroke: rgb(200 190 255 / 60%); stroke-width: 0.45; stroke-dasharray: 2 2; }
+#sdl-calendar .sdl-star-dot { fill: #f2f0ff; animation: sdl-twinkle 4s ease-in-out infinite; }
 
 /* Dragonlance */
-#sdc-calendar[data-bar-trim="dragonlance"] { --sdc-glow: rgb(200 200 230 / 30%); }
-#sdc-calendar .sdc-scale-line { fill: none; stroke: #b8c0cc; stroke-width: 0.8; }
-#sdc-calendar .sdc-lance { stroke: #c9d0da; stroke-width: 0.7; stroke-linecap: round; }
-#sdc-calendar .sdc-lance-head { fill: #eef2f8; }
-#sdc-calendar .sdc-pennon { fill: #3a6ad0; }
+#sdl-calendar[data-bar-trim="dragonlance"] { --sdl-glow: rgb(200 200 230 / 30%); }
+#sdl-calendar .sdl-scale-line { fill: none; stroke: #b8c0cc; stroke-width: 0.8; }
+#sdl-calendar .sdl-lance { stroke: #c9d0da; stroke-width: 0.7; stroke-linecap: round; }
+#sdl-calendar .sdl-lance-head { fill: #eef2f8; }
+#sdl-calendar .sdl-pennon { fill: #3a6ad0; }
 
 /* Planescape */
-#sdc-calendar[data-bar-trim="planescape"] { --sdc-glow: rgb(255 170 90 / 30%); }
-#sdc-calendar .sdc-razorvine { fill: none; stroke: #3a5a3a; stroke-width: 1.1; }
-#sdc-calendar .sdc-blade { fill: #a8b4a8; stroke: #3a4a3a; stroke-width: 0.2; }
-#sdc-calendar .sdc-portal .arch { fill: var(--c); animation: sdc-glow 5s ease-in-out infinite; }
-#sdc-calendar .sdc-portal .frame { fill: none; stroke: #b8a890; stroke-width: 0.9; stroke-linejoin: round; }
+#sdl-calendar[data-bar-trim="planescape"] { --sdl-glow: rgb(255 170 90 / 30%); }
+#sdl-calendar .sdl-razorvine { fill: none; stroke: #3a5a3a; stroke-width: 1.1; }
+#sdl-calendar .sdl-blade { fill: #a8b4a8; stroke: #3a4a3a; stroke-width: 0.2; }
+#sdl-calendar .sdl-portal .arch { fill: var(--c); animation: sdl-glow 5s ease-in-out infinite; }
+#sdl-calendar .sdl-portal .frame { fill: none; stroke: #b8a890; stroke-width: 0.9; stroke-linejoin: round; }
 
 /* Greyhawk */
-#sdc-calendar[data-bar-trim="greyhawk"] { --sdc-glow: rgb(255 190 100 / 30%); }
-#sdc-calendar .sdc-wall { fill: #6a625c; stroke: #3e3833; stroke-width: 0.3; }
-#sdc-calendar .sdc-merlon { fill: #7a726a; stroke: #3e3833; stroke-width: 0.3; }
+#sdl-calendar[data-bar-trim="greyhawk"] { --sdl-glow: rgb(255 190 100 / 30%); }
+#sdl-calendar .sdl-wall { fill: #6a625c; stroke: #3e3833; stroke-width: 0.3; }
+#sdl-calendar .sdl-merlon { fill: #7a726a; stroke: #3e3833; stroke-width: 0.3; }
 
 /* Lorwyn-Shadowmoor */
-#sdc-calendar[data-bar-trim="lorwyn"] { --sdc-glow: rgb(255 210 120 / 30%); }
-#sdc-calendar .sdc-vine.lorwyn { stroke: #5a9a3a; }
-#sdc-calendar .sdc-vine.shadowmoor { stroke: #7a5a8a; }
-#sdc-calendar .sdc-thorn.shadowmoor { fill: #8a6a9a; }
-#sdc-calendar .sdc-bloom.c-gloom path { fill: #5a3a7a; stroke: #b49ad0; stroke-width: 0.25; }
-#sdc-calendar .sdc-bloom.c-gloom .heart { fill: #c8e0ff; filter: drop-shadow(0 0 1px #8ab0ff); }
-#sdc-calendar .sdc-mist.shadow { fill: rgb(150 120 190 / 30%); }
+#sdl-calendar[data-bar-trim="lorwyn"] { --sdl-glow: rgb(255 210 120 / 30%); }
+#sdl-calendar .sdl-vine.lorwyn { stroke: #5a9a3a; }
+#sdl-calendar .sdl-vine.shadowmoor { stroke: #7a5a8a; }
+#sdl-calendar .sdl-thorn.shadowmoor { fill: #8a6a9a; }
+#sdl-calendar .sdl-bloom.c-gloom path { fill: #5a3a7a; stroke: #b49ad0; stroke-width: 0.25; }
+#sdl-calendar .sdl-bloom.c-gloom .heart { fill: #c8e0ff; filter: drop-shadow(0 0 1px #8ab0ff); }
+#sdl-calendar .sdl-mist.shadow { fill: rgb(150 120 190 / 30%); }
 
 /* Netheril */
-#sdc-calendar[data-bar-trim="netheril"] { --sdc-glow: rgb(240 200 110 / 32%); }
-#sdc-calendar .sdc-ley.gold { stroke: #f2c94c; }
-#sdc-calendar .sdc-isle { fill: #6a5a4a; stroke: #3a3028; stroke-width: 0.3; }
-#sdc-calendar .sdc-isle-top { fill: #5a8a3a; }
-#sdc-calendar .sdc-tower { fill: #d8d0c0; stroke: #8a8070; stroke-width: 0.3; }
-#sdc-calendar .sdc-mythallar { fill: none; stroke: #f2c94c; stroke-width: 0.5; filter: drop-shadow(0 0 1px #e8a82a); }
-#sdc-calendar .sdc-mythallar.inner { stroke-dasharray: 1 1; }
+#sdl-calendar[data-bar-trim="netheril"] { --sdl-glow: rgb(240 200 110 / 32%); }
+#sdl-calendar .sdl-ley.gold { stroke: #f2c94c; }
+#sdl-calendar .sdl-isle { fill: #6a5a4a; stroke: #3a3028; stroke-width: 0.3; }
+#sdl-calendar .sdl-isle-top { fill: #5a8a3a; }
+#sdl-calendar .sdl-tower { fill: #d8d0c0; stroke: #8a8070; stroke-width: 0.3; }
+#sdl-calendar .sdl-mythallar { fill: none; stroke: #f2c94c; stroke-width: 0.5; filter: drop-shadow(0 0 1px #e8a82a); }
+#sdl-calendar .sdl-mythallar.inner { stroke-dasharray: 1 1; }
 
 /* More adventures */
-#sdc-calendar .c-wave { --c: #6aff9a; }
-#sdc-calendar .c-faerzress { --c: #c08aff; }
-#sdc-calendar .c-grave { --c: #a8e07a; }
-#sdc-calendar .c-water { --c: #4aa8ff; }
-#sdc-calendar .c-air { --c: #d8ecff; }
-#sdc-calendar .c-earth { --c: #a8803a; }
-#sdc-calendar .c-frost { --c: #8ad8ff; }
-#sdc-calendar .c-blood { --c: #9a0f1a; }
-#sdc-calendar .c-spark { --c: #8ae0ff; }
+#sdl-calendar .c-wave { --c: #6aff9a; }
+#sdl-calendar .c-faerzress { --c: #c08aff; }
+#sdl-calendar .c-grave { --c: #a8e07a; }
+#sdl-calendar .c-water { --c: #4aa8ff; }
+#sdl-calendar .c-air { --c: #d8ecff; }
+#sdl-calendar .c-earth { --c: #a8803a; }
+#sdl-calendar .c-frost { --c: #8ad8ff; }
+#sdl-calendar .c-blood { --c: #9a0f1a; }
+#sdl-calendar .c-spark { --c: #8ae0ff; }
 
 /* Lost Mine of Phandelver */
-#sdc-calendar[data-bar-trim="phandelver"] { --sdc-glow: rgb(100 230 140 / 30%); }
-#sdc-calendar .sdc-rail-track { fill: none; stroke: #b8bcc4; stroke-width: 0.8; }
-#sdc-calendar .sdc-sleeper { fill: #7a5434; }
-#sdc-calendar .sdc-pick-handle { stroke: #7a5634; stroke-width: 0.7; stroke-linecap: round; }
-#sdc-calendar .sdc-pick-head { fill: #b8c0c8; stroke: #5a6068; stroke-width: 0.25; }
+#sdl-calendar[data-bar-trim="phandelver"] { --sdl-glow: rgb(100 230 140 / 30%); }
+#sdl-calendar .sdl-rail-track { fill: none; stroke: #b8bcc4; stroke-width: 0.8; }
+#sdl-calendar .sdl-sleeper { fill: #7a5434; }
+#sdl-calendar .sdl-pick-handle { stroke: #7a5634; stroke-width: 0.7; stroke-linecap: round; }
+#sdl-calendar .sdl-pick-head { fill: #b8c0c8; stroke: #5a6068; stroke-width: 0.25; }
 
 /* Hoard of the Dragon Queen */
-#sdc-calendar[data-bar-trim="dragonqueen"] { --sdc-glow: rgb(150 70 200 / 36%); }
-#sdc-calendar .sdc-cult-cloth { fill: none; stroke: #6a2a8a; stroke-width: 1.6; }
-#sdc-calendar .sdc-egg ellipse { fill: var(--c); stroke: rgb(0 0 0 / 35%); stroke-width: 0.3; }
-#sdc-calendar .sdc-egg .speck { fill: rgb(255 255 255 / 45%); }
+#sdl-calendar[data-bar-trim="dragonqueen"] { --sdl-glow: rgb(150 70 200 / 36%); }
+#sdl-calendar .sdl-cult-cloth { fill: none; stroke: #6a2a8a; stroke-width: 1.6; }
+#sdl-calendar .sdl-egg ellipse { fill: var(--c); stroke: rgb(0 0 0 / 35%); stroke-width: 0.3; }
+#sdl-calendar .sdl-egg .speck { fill: rgb(255 255 255 / 45%); }
 
 /* The Rise of Tiamat */
-#sdc-calendar[data-bar-trim="tiamat"] { --sdc-glow: rgb(220 70 70 / 32%); }
-#sdc-calendar .sdc-scale { fill: var(--c); stroke: rgb(0 0 0 / 45%); stroke-width: 0.25; }
-#sdc-calendar .sdc-talon { fill: #e8dcc0; stroke: #6a5a40; stroke-width: 0.25; }
-#sdc-calendar .sdc-talon.dark { fill: #2a2420; stroke: #8a6a3a; }
+#sdl-calendar[data-bar-trim="tiamat"] { --sdl-glow: rgb(220 70 70 / 32%); }
+#sdl-calendar .sdl-scale { fill: var(--c); stroke: rgb(0 0 0 / 45%); stroke-width: 0.25; }
+#sdl-calendar .sdl-talon { fill: #e8dcc0; stroke: #6a5a40; stroke-width: 0.25; }
+#sdl-calendar .sdl-talon.dark { fill: #2a2420; stroke: #8a6a3a; }
 
 /* Princes of the Apocalypse */
-#sdc-calendar[data-bar-trim="elemental"] { --sdc-glow: rgb(255 160 80 / 30%); }
-#sdc-calendar .sdc-element-line { fill: none; stroke: #6a6058; stroke-width: 0.8; }
-#sdc-calendar .sdc-air { fill: none; stroke: #d8ecff; stroke-width: 0.6; stroke-linecap: round; }
-#sdc-calendar .sdc-water { fill: #4aa8ff; }
+#sdl-calendar[data-bar-trim="elemental"] { --sdl-glow: rgb(255 160 80 / 30%); }
+#sdl-calendar .sdl-element-line { fill: none; stroke: #6a6058; stroke-width: 0.8; }
+#sdl-calendar .sdl-air { fill: none; stroke: #d8ecff; stroke-width: 0.6; stroke-linecap: round; }
+#sdl-calendar .sdl-water { fill: #4aa8ff; }
 
 /* Out of the Abyss */
-#sdc-calendar[data-bar-trim="underdark"] { --sdc-glow: rgb(170 100 255 / 34%); }
-#sdc-calendar .sdc-cave-rock { fill: #3a3440; }
-#sdc-calendar .sdc-stalactite { fill: #5a5260; stroke: #2a2430; stroke-width: 0.25; }
-#sdc-calendar .sdc-fungus .cap { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
-#sdc-calendar .sdc-fungus .dot { fill: rgb(255 255 255 / 70%); }
+#sdl-calendar[data-bar-trim="underdark"] { --sdl-glow: rgb(170 100 255 / 34%); }
+#sdl-calendar .sdl-cave-rock { fill: #3a3440; }
+#sdl-calendar .sdl-stalactite { fill: #5a5260; stroke: #2a2430; stroke-width: 0.25; }
+#sdl-calendar .sdl-fungus .cap { fill: var(--c); filter: drop-shadow(0 0 1.2px var(--c)); }
+#sdl-calendar .sdl-fungus .dot { fill: rgb(255 255 255 / 70%); }
 
 /* Storm King's Thunder */
-#sdc-calendar[data-bar-trim="giants"] { --sdc-glow: rgb(140 190 255 / 34%); }
-#sdc-calendar .sdc-bolt { fill: #fff6a8; filter: drop-shadow(0 0 1.5px #a8d8ff); animation: sdc-flicker 6s infinite; }
-#sdc-calendar .sdc-rain { stroke: rgb(190 215 255 / 70%); stroke-width: 0.35; animation: sdc-fall 1.2s linear infinite; }
+#sdl-calendar[data-bar-trim="giants"] { --sdl-glow: rgb(140 190 255 / 34%); }
+#sdl-calendar .sdl-bolt { fill: #fff6a8; filter: drop-shadow(0 0 1.5px #a8d8ff); animation: sdl-flicker 6s infinite; }
+#sdl-calendar .sdl-rain { stroke: rgb(190 215 255 / 70%); stroke-width: 0.35; animation: sdl-fall 1.2s linear infinite; }
 
 /* Tales from the Yawning Portal */
-#sdc-calendar[data-bar-trim="yawningportal"] { --sdc-glow: rgb(255 170 80 / 34%); }
-#sdc-calendar .sdc-beam { fill: #6b4a2c; stroke: #2e1e12; stroke-width: 0.35; }
-#sdc-calendar .sdc-beam-grain { fill: none; stroke: #4a3220; stroke-width: 0.3; stroke-dasharray: 9 2 4 3; }
-#sdc-calendar .sdc-strap { fill: #3a3634; stroke: #1e1c1a; stroke-width: 0.25; }
-#sdc-calendar .sdc-bolt-head { fill: #8a8480; }
-#sdc-calendar .sdc-rope { fill: none; stroke: #d4b47a; stroke-width: 1.2; stroke-dasharray: 1.2 0.45; }
-#sdc-calendar .sdc-rope.line { stroke-width: 0.45; stroke-dasharray: 0.6 0.3; }
-#sdc-calendar .sdc-hook { stroke: #6c625a; stroke-width: 0.4; }
-#sdc-calendar .sdc-tankard .body { fill: #9a7240; stroke: #4a3418; stroke-width: 0.3; }
-#sdc-calendar .sdc-tankard .hoop { stroke: #4a4440; stroke-width: 0.4; }
-#sdc-calendar .sdc-tankard .handle { fill: none; stroke: #4a3418; stroke-width: 0.55; }
-#sdc-calendar .sdc-tankard .foam { fill: #f6f0e0; }
-#sdc-calendar .sdc-winch .bracket { fill: none; stroke: #3a3634; stroke-width: 0.6; }
-#sdc-calendar .sdc-winch .wheel { fill: #7a5634; stroke: #2e1e12; stroke-width: 0.4; }
-#sdc-calendar .sdc-winch .spokes { stroke: #2e1e12; stroke-width: 0.35; }
-#sdc-calendar .sdc-sway { animation: sdc-sway 6s ease-in-out infinite; }
-#sdc-calendar .sdc-bucket { fill: #7a5634; stroke: #2e1e12; stroke-width: 0.3; }
-#sdc-calendar .sdc-bucket-band { stroke: #3a3634; stroke-width: 0.35; }
-#sdc-calendar .sdc-bucket-handle { fill: none; stroke: #3a3634; stroke-width: 0.35; }
-#sdc-calendar .sdc-lurker { fill: #ffd84a; filter: drop-shadow(0 0 1px #ffb020); animation: sdc-blink 7s ease-in-out infinite; }
+#sdl-calendar[data-bar-trim="yawningportal"] { --sdl-glow: rgb(255 170 80 / 34%); }
+#sdl-calendar .sdl-beam { fill: #6b4a2c; stroke: #2e1e12; stroke-width: 0.35; }
+#sdl-calendar .sdl-beam-grain { fill: none; stroke: #4a3220; stroke-width: 0.3; stroke-dasharray: 9 2 4 3; }
+#sdl-calendar .sdl-strap { fill: #3a3634; stroke: #1e1c1a; stroke-width: 0.25; }
+#sdl-calendar .sdl-bolt-head { fill: #8a8480; }
+#sdl-calendar .sdl-rope { fill: none; stroke: #d4b47a; stroke-width: 1.2; stroke-dasharray: 1.2 0.45; }
+#sdl-calendar .sdl-rope.line { stroke-width: 0.45; stroke-dasharray: 0.6 0.3; }
+#sdl-calendar .sdl-hook { stroke: #6c625a; stroke-width: 0.4; }
+#sdl-calendar .sdl-tankard .body { fill: #9a7240; stroke: #4a3418; stroke-width: 0.3; }
+#sdl-calendar .sdl-tankard .hoop { stroke: #4a4440; stroke-width: 0.4; }
+#sdl-calendar .sdl-tankard .handle { fill: none; stroke: #4a3418; stroke-width: 0.55; }
+#sdl-calendar .sdl-tankard .foam { fill: #f6f0e0; }
+#sdl-calendar .sdl-winch .bracket { fill: none; stroke: #3a3634; stroke-width: 0.6; }
+#sdl-calendar .sdl-winch .wheel { fill: #7a5634; stroke: #2e1e12; stroke-width: 0.4; }
+#sdl-calendar .sdl-winch .spokes { stroke: #2e1e12; stroke-width: 0.35; }
+#sdl-calendar .sdl-sway { animation: sdl-sway 6s ease-in-out infinite; }
+#sdl-calendar .sdl-bucket { fill: #7a5634; stroke: #2e1e12; stroke-width: 0.3; }
+#sdl-calendar .sdl-bucket-band { stroke: #3a3634; stroke-width: 0.35; }
+#sdl-calendar .sdl-bucket-handle { fill: none; stroke: #3a3634; stroke-width: 0.35; }
+#sdl-calendar .sdl-lurker { fill: #ffd84a; filter: drop-shadow(0 0 1px #ffb020); animation: sdl-blink 7s ease-in-out infinite; }
 
 /* Waterdeep: Dragon Heist */
-#sdc-calendar[data-bar-trim="dragonheist"] { --sdc-glow: rgb(80 130 255 / 32%); }
-#sdc-calendar .sdc-velvet { fill: none; stroke: #2a3a8a; stroke-width: 1.6; }
-#sdc-calendar .sdc-mask { fill: #f2ecd8; stroke: #c9a24a; stroke-width: 0.35; }
-#sdc-calendar .sdc-mask-eye { fill: #1a1622; }
+#sdl-calendar[data-bar-trim="dragonheist"] { --sdl-glow: rgb(80 130 255 / 32%); }
+#sdl-calendar .sdl-velvet { fill: none; stroke: #2a3a8a; stroke-width: 1.6; }
+#sdl-calendar .sdl-mask { fill: #f2ecd8; stroke: #c9a24a; stroke-width: 0.35; }
+#sdl-calendar .sdl-mask-eye { fill: #1a1622; }
 
 /* Dungeon of the Mad Mage */
-#sdc-calendar[data-bar-trim="madmage"] { --sdc-glow: rgb(170 90 255 / 36%); }
-#sdc-calendar .sdc-brick { fill: #8a7266; }
-#sdc-calendar .sdc-mortar { fill: none; stroke: #2a2220; stroke-width: 0.35; }
-#sdc-calendar .sdc-gate { fill: rgb(150 80 255 / 25%); stroke: #c08aff; stroke-width: 0.5; filter: drop-shadow(0 0 1.5px #9a5aff); }
-#sdc-calendar .sdc-gate-rune { fill: none; stroke: #e0c8ff; stroke-width: 1.4; }
+#sdl-calendar[data-bar-trim="madmage"] { --sdl-glow: rgb(170 90 255 / 36%); }
+#sdl-calendar .sdl-brick { fill: #8a7266; }
+#sdl-calendar .sdl-mortar { fill: none; stroke: #2a2220; stroke-width: 0.35; }
+#sdl-calendar .sdl-gate { fill: rgb(150 80 255 / 25%); stroke: #c08aff; stroke-width: 0.5; filter: drop-shadow(0 0 1.5px #9a5aff); }
+#sdl-calendar .sdl-gate-rune { fill: none; stroke: #e0c8ff; stroke-width: 1.4; }
 
 /* Ghosts of Saltmarsh */
-#sdc-calendar[data-bar-trim="saltmarsh"] { --sdc-glow: rgb(80 180 220 / 32%); }
-#sdc-calendar .sdc-waves { fill: #1e5a7a; }
-#sdc-calendar .sdc-wave-crest { fill: none; stroke: #bfe8f6; stroke-width: 0.5; }
-#sdc-calendar .sdc-net { fill: none; stroke: #c8b48a; stroke-width: 0.35; }
+#sdl-calendar[data-bar-trim="saltmarsh"] { --sdl-glow: rgb(80 180 220 / 32%); }
+#sdl-calendar .sdl-waves { fill: #1e5a7a; }
+#sdl-calendar .sdl-wave-crest { fill: none; stroke: #bfe8f6; stroke-width: 0.5; }
+#sdl-calendar .sdl-net { fill: none; stroke: #c8b48a; stroke-width: 0.35; }
 
 /* Dragon of Icespire Peak */
-#sdc-calendar[data-bar-trim="icespire"] { --sdc-glow: rgb(180 220 255 / 34%); }
-#sdc-calendar .sdc-peak { fill: #5a6a7a; stroke: #3a4652; stroke-width: 0.3; }
-#sdc-calendar .sdc-peak-snow { fill: #f2f8ff; }
-#sdc-calendar .sdc-wyrm { fill: #eaf4ff; stroke: #7a9ab8; stroke-width: 0.3; }
+#sdl-calendar[data-bar-trim="icespire"] { --sdl-glow: rgb(180 220 255 / 34%); }
+#sdl-calendar .sdl-peak { fill: #5a6a7a; stroke: #3a4652; stroke-width: 0.3; }
+#sdl-calendar .sdl-peak-snow { fill: #f2f8ff; }
+#sdl-calendar .sdl-wyrm { fill: #eaf4ff; stroke: #7a9ab8; stroke-width: 0.3; }
 
 /* Candlekeep Mysteries */
-#sdc-calendar[data-bar-trim="candlekeep"] { --sdc-glow: rgb(255 200 110 / 32%); }
-#sdc-calendar .sdc-shelf { fill: #5a3e26; stroke: #2e1e12; stroke-width: 0.3; }
+#sdl-calendar[data-bar-trim="candlekeep"] { --sdl-glow: rgb(255 200 110 / 32%); }
+#sdl-calendar .sdl-shelf { fill: #5a3e26; stroke: #2e1e12; stroke-width: 0.3; }
 
 /* Journeys through the Radiant Citadel */
-#sdc-calendar[data-bar-trim="radiantcitadel"] { --sdc-glow: rgb(255 220 120 / 38%); }
-#sdc-calendar .sdc-gem-ray { stroke: #ffe8a0; stroke-width: 0.35; stroke-linecap: round; opacity: 0.8; }
-#sdc-calendar .sdc-sparkle.radiant { fill: #fff2c0; }
+#sdl-calendar[data-bar-trim="radiantcitadel"] { --sdl-glow: rgb(255 220 120 / 38%); }
+#sdl-calendar .sdl-gem-ray { stroke: #ffe8a0; stroke-width: 0.35; stroke-linecap: round; opacity: 0.8; }
+#sdl-calendar .sdl-sparkle.radiant { fill: #fff2c0; }
 
 /* Dragons of Stormwreck Isle */
-#sdc-calendar[data-bar-trim="stormwreck"] { --sdc-glow: rgb(120 180 220 / 32%); }
-#sdc-calendar .sdc-plank { fill: #6a4a2e; stroke: #3a2614; stroke-width: 0.3; }
+#sdl-calendar[data-bar-trim="stormwreck"] { --sdl-glow: rgb(120 180 220 / 32%); }
+#sdl-calendar .sdl-plank { fill: #6a4a2e; stroke: #3a2614; stroke-width: 0.3; }
 
 /* Keys from the Golden Vault */
-#sdc-calendar[data-bar-trim="goldenvault"] { --sdc-glow: rgb(240 200 80 / 36%); }
-#sdc-calendar .sdc-ingot { fill: #e8bd4a; stroke: #8a6418; stroke-width: 0.3; }
+#sdl-calendar[data-bar-trim="goldenvault"] { --sdl-glow: rgb(240 200 80 / 36%); }
+#sdl-calendar .sdl-ingot { fill: #e8bd4a; stroke: #8a6418; stroke-width: 0.3; }
 
 /* Quests from the Infinite Staircase */
-#sdc-calendar[data-bar-trim="staircase"] { --sdc-glow: rgb(160 200 255 / 32%); }
-#sdc-calendar .sdc-stair { fill: #8a8090; stroke: #4a4450; stroke-width: 0.3; }
-#sdc-calendar .sdc-door .frame { fill: #6a5a4a; }
-#sdc-calendar .sdc-door .leaf { fill: var(--c); filter: drop-shadow(0 0 1px var(--c)); }
-#sdc-calendar .sdc-door .knob { fill: #f2d488; }
+#sdl-calendar[data-bar-trim="staircase"] { --sdl-glow: rgb(160 200 255 / 32%); }
+#sdl-calendar .sdl-stair { fill: #8a8090; stroke: #4a4450; stroke-width: 0.3; }
+#sdl-calendar .sdl-door .frame { fill: #6a5a4a; }
+#sdl-calendar .sdl-door .leaf { fill: var(--c); filter: drop-shadow(0 0 1px var(--c)); }
+#sdl-calendar .sdl-door .knob { fill: #f2d488; }
 
 /* Heroes of the Borderlands */
-#sdc-calendar[data-bar-trim="borderlands"] { --sdc-glow: rgb(230 170 90 / 30%); }
-#sdc-calendar .sdc-palisade-rail { fill: none; stroke: #3e2a18; stroke-width: 0.8; }
-#sdc-calendar .sdc-stake { fill: #8a6438; stroke: #4a3418; stroke-width: 0.3; }
-#sdc-calendar .sdc-buckler circle { fill: var(--c); stroke: #4a3418; stroke-width: 0.5; }
-#sdc-calendar .sdc-buckler .boss { fill: #c9d0da; }
+#sdl-calendar[data-bar-trim="borderlands"] { --sdl-glow: rgb(230 170 90 / 30%); }
+#sdl-calendar .sdl-palisade-rail { fill: none; stroke: #3e2a18; stroke-width: 0.8; }
+#sdl-calendar .sdl-stake { fill: #8a6438; stroke: #4a3418; stroke-width: 0.3; }
+#sdl-calendar .sdl-buckler circle { fill: var(--c); stroke: #4a3418; stroke-width: 0.5; }
+#sdl-calendar .sdl-buckler .boss { fill: #c9d0da; }
 
 /* Hold Back the Dead */
-#sdc-calendar[data-bar-trim="holdbackdead"] { --sdc-glow: rgb(140 220 110 / 32%); }
-#sdc-calendar .sdc-mist.grave { fill: rgb(160 220 140 / 22%); }
-#sdc-calendar .sdc-hand { fill: #8a9a72; stroke: #4a5a3a; stroke-width: 0.25; }
+#sdl-calendar[data-bar-trim="holdbackdead"] { --sdl-glow: rgb(140 220 110 / 32%); }
+#sdl-calendar .sdl-mist.grave { fill: rgb(160 220 140 / 22%); }
+#sdl-calendar .sdl-hand { fill: #8a9a72; stroke: #4a5a3a; stroke-width: 0.25; }
 
 /* Scions of Elemental Evil */
-#sdc-calendar[data-bar-trim="scions"] { --sdc-glow: rgb(255 120 60 / 30%); }
-#sdc-calendar .sdc-temple-stone { fill: #5e5850; stroke: #3a3530; stroke-width: 0.3; }
-#sdc-calendar .sdc-crack { fill: none; stroke: #2a2622; stroke-width: 0.35; }
-#sdc-calendar .sdc-sign { fill: none; stroke: var(--c); stroke-width: 0.7; stroke-linejoin: round;
-  filter: drop-shadow(0 0 1.2px var(--c)); animation: sdc-glow 5s ease-in-out infinite; }
+#sdl-calendar[data-bar-trim="scions"] { --sdl-glow: rgb(255 120 60 / 30%); }
+#sdl-calendar .sdl-temple-stone { fill: #5e5850; stroke: #3a3530; stroke-width: 0.3; }
+#sdl-calendar .sdl-crack { fill: none; stroke: #2a2622; stroke-width: 0.35; }
+#sdl-calendar .sdl-sign { fill: none; stroke: var(--c); stroke-width: 0.7; stroke-linejoin: round;
+  filter: drop-shadow(0 0 1.2px var(--c)); animation: sdl-glow 5s ease-in-out infinite; }
 
 /* Uni and the Hunt for the Lost Horn */
-#sdc-calendar[data-bar-trim="unicorn"] { --sdc-glow: rgb(255 170 230 / 34%); }
-#sdc-calendar .sdc-rainbow { fill: none; stroke: var(--c); stroke-width: 0.95; }
-#sdc-calendar .sdc-heart { fill: #ff7ab8; }
+#sdl-calendar[data-bar-trim="unicorn"] { --sdl-glow: rgb(255 170 230 / 34%); }
+#sdl-calendar .sdl-rainbow { fill: none; stroke: var(--c); stroke-width: 0.95; }
+#sdl-calendar .sdl-heart { fill: #ff7ab8; }
 
 /* The Book of Many Things */
-#sdc-calendar[data-bar-trim="manythings"] { --sdc-glow: rgb(170 110 255 / 34%); }
-#sdc-calendar .sdc-deck-cord { fill: none; stroke: #7a3aa8; stroke-width: 0.6; }
+#sdl-calendar[data-bar-trim="manythings"] { --sdl-glow: rgb(170 110 255 / 34%); }
+#sdl-calendar .sdl-deck-cord { fill: none; stroke: #7a3aa8; stroke-width: 0.6; }
 
 /* Bigby Presents: Glory of the Giants */
-#sdc-calendar[data-bar-trim="glory"] { --sdc-glow: rgb(150 200 255 / 32%); }
-#sdc-calendar .sdc-tablet { fill: #6e6a64; stroke: #3a3632; stroke-width: 0.35; }
-#sdc-calendar .sdc-rune.frost { stroke: #a8e4ff; filter: drop-shadow(0 0 1.2px #4ab8ff); }
-#sdc-calendar .sdc-rune.fire { stroke: #ffb46a; filter: drop-shadow(0 0 1.2px #ff6a1a); }
+#sdl-calendar[data-bar-trim="glory"] { --sdl-glow: rgb(150 200 255 / 32%); }
+#sdl-calendar .sdl-tablet { fill: #6e6a64; stroke: #3a3632; stroke-width: 0.35; }
+#sdl-calendar .sdl-rune.frost { stroke: #a8e4ff; filter: drop-shadow(0 0 1.2px #4ab8ff); }
+#sdl-calendar .sdl-rune.fire { stroke: #ffb46a; filter: drop-shadow(0 0 1.2px #ff6a1a); }
 
 /* Astarion's Book of Hungers */
-#sdc-calendar[data-bar-trim="astarion"] { --sdc-glow: rgb(170 20 40 / 38%); }
-#sdc-calendar .sdc-rose circle { fill: #6a0a1a; }
-#sdc-calendar .sdc-rose .curl { fill: none; stroke: #c02a3a; stroke-width: 0.4; }
+#sdl-calendar[data-bar-trim="astarion"] { --sdl-glow: rgb(170 20 40 / 38%); }
+#sdl-calendar .sdl-rose circle { fill: #6a0a1a; }
+#sdl-calendar .sdl-rose .curl { fill: none; stroke: #c02a3a; stroke-width: 0.4; }
 
 /* Locathah Rising */
-#sdc-calendar[data-bar-trim="locathah"] { --sdc-glow: rgb(60 200 200 / 32%); }
-#sdc-calendar .sdc-kelp { fill: none; stroke: #3a8a4a; stroke-width: 1.1; stroke-linecap: round; }
-#sdc-calendar .sdc-coral { fill: none; stroke: var(--c); stroke-width: 0.8; stroke-linecap: round; }
-#sdc-calendar .sdc-bubble { animation: sdc-rise 4s ease-out infinite; }
+#sdl-calendar[data-bar-trim="locathah"] { --sdl-glow: rgb(60 200 200 / 32%); }
+#sdl-calendar .sdl-kelp { fill: none; stroke: #3a8a4a; stroke-width: 1.1; stroke-linecap: round; }
+#sdl-calendar .sdl-coral { fill: none; stroke: var(--c); stroke-width: 0.8; stroke-linecap: round; }
+#sdl-calendar .sdl-bubble { animation: sdl-rise 4s ease-out infinite; }
 
 /* The Lost Laboratory of Kwalish */
-#sdc-calendar[data-bar-trim="kwalish"] { --sdc-glow: rgb(120 210 255 / 32%); }
-#sdc-calendar .sdc-pipe { fill: none; stroke: #b0683a; stroke-width: 1.4; }
-#sdc-calendar .sdc-pipe.thin { stroke: #8a5230; stroke-width: 0.7; }
-#sdc-calendar .sdc-pipe-joint { fill: #d8a050; }
-#sdc-calendar .sdc-gear { fill: #c9a050; stroke: #6a4a20; stroke-width: 0.25; fill-rule: evenodd; }
-#sdc-calendar .sdc-vial { fill: rgb(200 235 255 / 25%); stroke: #c8e8f8; stroke-width: 0.3; }
-#sdc-calendar .sdc-vial-liquid { fill: #6aff9a; filter: drop-shadow(0 0 1px #3ad86a); }
+#sdl-calendar[data-bar-trim="kwalish"] { --sdl-glow: rgb(120 210 255 / 32%); }
+#sdl-calendar .sdl-pipe { fill: none; stroke: #b0683a; stroke-width: 1.4; }
+#sdl-calendar .sdl-pipe.thin { stroke: #8a5230; stroke-width: 0.7; }
+#sdl-calendar .sdl-pipe-joint { fill: #d8a050; }
+#sdl-calendar .sdl-gear { fill: #c9a050; stroke: #6a4a20; stroke-width: 0.25; fill-rule: evenodd; }
+#sdl-calendar .sdl-vial { fill: rgb(200 235 255 / 25%); stroke: #c8e8f8; stroke-width: 0.3; }
+#sdl-calendar .sdl-vial-liquid { fill: #6aff9a; filter: drop-shadow(0 0 1px #3ad86a); }
 
 /* Dragon Delves */
-#sdc-calendar[data-bar-trim="delves"] { --sdc-glow: rgb(240 190 70 / 36%); }
+#sdl-calendar[data-bar-trim="delves"] { --sdl-glow: rgb(240 190 70 / 36%); }
 
 /* ---------------------------------------------------------------------------------------------- */
 /*  Chat                                                                                          */
 /* ---------------------------------------------------------------------------------------------- */
 
-.chat-message .sdc-chat h3 {
+.chat-message .sdl-chat h3 {
   margin: 0 0 4px;
   font-family: "Modesto Condensed", var(--font-body), serif;
   font-size: 18px;
@@ -1073,23 +1073,23 @@
   border: none;
 }
 
-.chat-message .sdc-chat p {
+.chat-message .sdl-chat p {
   margin: 2px 0;
 }
 
-.chat-message .sdc-chat i {
+.chat-message .sdl-chat i {
   width: 16px;
   text-align: center;
   opacity: 0.75;
 }
 
-.chat-message .sdc-chat h3 i {
+.chat-message .sdl-chat h3 i {
   width: auto;
   color: #e9813f;
   opacity: 1;
 }
 
-.chat-message .sdc-chat .sdc-chat-when {
+.chat-message .sdl-chat .sdl-chat-when {
   font-style: italic;
 }
 
@@ -1097,104 +1097,104 @@
 /*  Tooltips                                                                                      */
 /* ---------------------------------------------------------------------------------------------- */
 
-.sdc-forecast {
+.sdl-forecast {
   font-size: var(--font-size-12, 12px);
   white-space: nowrap;
 }
 
-@keyframes sdc-twinkle {
+@keyframes sdl-twinkle {
   0%, 100% { opacity: 0.2; }
   50% { opacity: 1; }
 }
 
-@keyframes sdc-glow {
+@keyframes sdl-glow {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
 }
 
-@keyframes sdc-flicker {
+@keyframes sdl-flicker {
   0%, 100% { opacity: 0.85; }
   40% { opacity: 1; }
   45% { opacity: 0.7; }
   55% { opacity: 0.95; }
 }
 
-@keyframes sdc-sway {
+@keyframes sdl-sway {
   0%, 100% { rotate: -2deg; }
   50% { rotate: 2deg; }
 }
 
-@keyframes sdc-blink {
+@keyframes sdl-blink {
   0%, 40%, 100% { opacity: 0; }
   48%, 88% { opacity: 1; }
   91% { opacity: 0; }
   94% { opacity: 1; }
 }
 
-@keyframes sdc-rail {
+@keyframes sdl-rail {
   to { stroke-dashoffset: -12; }
 }
 
-@keyframes sdc-drift {
+@keyframes sdl-drift {
   0%, 100% { translate: -4px 0; opacity: 0.5; }
   50% { translate: 4px 1px; opacity: 1; }
 }
 
-@keyframes sdc-rise {
+@keyframes sdl-rise {
   0% { translate: 0 3px; opacity: 0; }
   20% { opacity: 1; }
   100% { translate: 1px -12px; opacity: 0; }
 }
 
-@keyframes sdc-fall {
+@keyframes sdl-fall {
   0% { translate: 0 -3px; opacity: 0; }
   20% { opacity: 1; }
   100% { translate: 2px 10px; opacity: 0; }
 }
 
-@keyframes sdc-spin {
+@keyframes sdl-spin {
   to { rotate: 360deg; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #sdc-calendar .sdc-visual,
-  #sdc-calendar .sdc-bar,
-  #sdc-calendar .sdc-trim .middle,
-  #sdc-calendar [data-action="toggleCalendar"] i {
+  #sdl-calendar .sdl-visual,
+  #sdl-calendar .sdl-bar,
+  #sdl-calendar .sdl-trim .middle,
+  #sdl-calendar [data-action="toggleCalendar"] i {
     transition: none;
   }
 
-  #sdc-calendar .sdc-glint,
-  #sdc-calendar .sdc-tear,
-  #sdc-calendar .sdc-mote,
-  #sdc-calendar .sdc-sparkle,
-  #sdc-calendar .sdc-firefly,
-  #sdc-calendar .sdc-ember,
-  #sdc-calendar .sdc-flake,
-  #sdc-calendar .sdc-star-dot,
-  #sdc-calendar .sdc-rain,
-  #sdc-calendar .sdc-bubble {
+  #sdl-calendar .sdl-glint,
+  #sdl-calendar .sdl-tear,
+  #sdl-calendar .sdl-mote,
+  #sdl-calendar .sdl-sparkle,
+  #sdl-calendar .sdl-firefly,
+  #sdl-calendar .sdl-ember,
+  #sdl-calendar .sdl-flake,
+  #sdl-calendar .sdl-star-dot,
+  #sdl-calendar .sdl-rain,
+  #sdl-calendar .sdl-bubble {
     animation: none;
     opacity: 0.8;
   }
 
-  #sdc-calendar .sdc-lantern .glow,
-  #sdc-calendar .sdc-moonflower,
-  #sdc-calendar .sdc-mist,
-  #sdc-calendar .sdc-rune,
-  #sdc-calendar .sdc-spin,
-  #sdc-calendar .sdc-eye .iris,
-  #sdc-calendar .sdc-rail.spark,
-  #sdc-calendar .sdc-portal .arch,
-  #sdc-calendar .sdc-bolt,
-  #sdc-calendar .sdc-sign,
-  #sdc-calendar .sdc-sway,
-  #sdc-calendar .sdc-amber,
-  #sdc-calendar .sdc-votive {
+  #sdl-calendar .sdl-lantern .glow,
+  #sdl-calendar .sdl-moonflower,
+  #sdl-calendar .sdl-mist,
+  #sdl-calendar .sdl-rune,
+  #sdl-calendar .sdl-spin,
+  #sdl-calendar .sdl-eye .iris,
+  #sdl-calendar .sdl-rail.spark,
+  #sdl-calendar .sdl-portal .arch,
+  #sdl-calendar .sdl-bolt,
+  #sdl-calendar .sdl-sign,
+  #sdl-calendar .sdl-sway,
+  #sdl-calendar .sdl-amber,
+  #sdl-calendar .sdl-votive {
     animation: none;
   }
 
-  #sdc-calendar .sdc-lurker {
+  #sdl-calendar .sdl-lurker {
     animation: none;
     opacity: 0.8;
   }

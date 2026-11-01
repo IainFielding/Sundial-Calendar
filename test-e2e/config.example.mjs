@@ -35,13 +35,13 @@ export const SSL = (() => {
 export const BASE_URL = `${SSL ? "https" : "http"}://127.0.0.1:${PORT}`;
 
 /** The module under test. It must be linked into `Data/modules`: see `README.md`. */
-export const MODULE_ID = "sogrom-simple-dnd-calendar";
+export const MODULE_ID = "sogrom-sundial-calendar";
 
 /** The disposable test world. Its id is also its directory name under `Data/worlds`. */
 export const WORLD = {
-  id: "sdc-e2e",
-  title: "Simple D&D Calendar E2E",
-  description: "<p>Automated tests for Simple D&D Calendar. Its contents are created and deleted on every run.</p>",
+  id: "sdl-e2e",
+  title: "Sundial Calendar E2E",
+  description: "<p>Automated tests for Sundial Calendar. Its contents are created and deleted on every run.</p>",
   modules: [MODULE_ID]
 };
 

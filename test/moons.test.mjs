@@ -28,8 +28,8 @@ describe("the moon catalogue", () => {
   });
 
   it("names every phase and moon event in the language file", () => {
-    for ( const phase of sky.PHASES ) expect(typeof lookup(`SDC.MoonPhase.${phase}`), phase).toBe("string");
-    for ( const event of ["Full", "FullTogether", "New"] ) expect(typeof lookup(`SDC.MoonEvent.${event}`)).toBe("string");
+    for ( const phase of sky.PHASES ) expect(typeof lookup(`SDL.MoonPhase.${phase}`), phase).toBe("string");
+    for ( const event of ["Full", "FullTogether", "New"] ) expect(typeof lookup(`SDL.MoonEvent.${event}`)).toBe("string");
   });
 
   it("puts Selûne's 1372 DR full moon three-quarters of a day before 1501 DR", () => {

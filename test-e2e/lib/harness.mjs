@@ -162,28 +162,28 @@ export function setClientSettings(session, values) {
  */
 export function readCalendar(session) {
   return session.eval(() => {
-    const root = document.getElementById("sdc-calendar");
+    const root = document.getElementById("sdl-calendar");
     if ( !root ) return null;
     const text = selector => root.querySelector(selector)?.innerText.trim() ?? null;
-    const visibleMoons = [...root.querySelectorAll(".sdc-moon")].filter(m => !m.hidden);
+    const visibleMoons = [...root.querySelectorAll(".sdl-moon")].filter(m => !m.hidden);
     return {
       inUiTop: root.parentElement?.id === "ui-top",
       expanded: root.classList.contains("expanded"),
-      visualHeight: root.querySelector(".sdc-visual").getBoundingClientRect().height,
-      time: text(".sdc-time"),
-      date: text(".sdc-date"),
-      wheel: root.querySelector(".sdc-wheel")?.getAttribute("transform"),
+      visualHeight: root.querySelector(".sdl-visual").getBoundingClientRect().height,
+      time: text(".sdl-time"),
+      date: text(".sdl-date"),
+      wheel: root.querySelector(".sdl-wheel")?.getAttribute("transform"),
       phase: root.dataset.dayPhase,
-      season: root.querySelector(".sdc-season")?.dataset.seasonName || null,
-      seasonTooltip: root.querySelector(".sdc-season")?.dataset.tooltip || null,
+      season: root.querySelector(".sdl-season")?.dataset.seasonName || null,
+      seasonTooltip: root.querySelector(".sdl-season")?.dataset.tooltip || null,
       skyTrim: root.dataset.skyTrim || null,
       barTrim: root.dataset.barTrim || null,
-      festival: root.querySelector(".sdc-festival-icon")?.hidden ? null
-        : root.querySelector(".sdc-festival-icon")?.dataset.tooltip,
+      festival: root.querySelector(".sdl-festival-icon")?.hidden ? null
+        : root.querySelector(".sdl-festival-icon")?.dataset.tooltip,
       moons: visibleMoons.map(m => m.dataset.tooltip),
-      moonEvents: root.querySelector(".sdc-moon-event-icon")?.hidden ? null
-        : root.querySelector(".sdc-moon-event-icon")?.dataset.tooltip,
-      controls: [...root.querySelectorAll(".sdc-controls > .calendar-button > button")].map(b => b.dataset.action)
+      moonEvents: root.querySelector(".sdl-moon-event-icon")?.hidden ? null
+        : root.querySelector(".sdl-moon-event-icon")?.dataset.tooltip,
+      controls: [...root.querySelectorAll(".sdl-controls > .calendar-button > button")].map(b => b.dataset.action)
     };
   });
 }

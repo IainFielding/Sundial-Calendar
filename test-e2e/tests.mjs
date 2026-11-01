@@ -39,7 +39,7 @@ test("the GM is offered to turn the calendar on, once", async ({ gm }) => {
   await dialog.waitFor({ timeout: 10_000 });
   await dialog.locator("button[data-action=yes]").click();
   await waitFor(gm, () => game.settings.get("dnd5e", "calendarConfig").enabled, null, "the calendar to be turned on");
-  await waitFor(gm, () => !!document.getElementById("sdc-calendar"), null, "the calendar to appear");
+  await waitFor(gm, () => !!document.getElementById("sdl-calendar"), null, "the calendar to appear");
 
   // Loading the world again doesn't ask again.
   await gm.reload();
@@ -55,7 +55,7 @@ test("the GM adds Exandria and Krynn from the Additional Calendars menu, with th
         const { type } = game.settings.menus.get(`${moduleId}.calendarsMenu`);
         await new type().render({ force: true });
       }, MODULE_ID);
-      const menu = gm.page.locator("#sdc-calendars-menu");
+      const menu = gm.page.locator("#sdl-calendars-menu");
       await menu.waitFor({ timeout: 10_000 });
       return menu;
     };
@@ -85,7 +85,7 @@ test("the GM adds Exandria and Krynn from the Additional Calendars menu, with th
       // The world's calendar can't be unticked.
       menu = await openMenu();
       assertEqual(await menu.locator("input[name=exandria]").isDisabled(), true, "the box for the world's calendar");
-      await gm.eval(() => foundry.applications.instances.get("sdc-calendars-menu")?.close());
+      await gm.eval(() => foundry.applications.instances.get("sdl-calendars-menu")?.close());
 
       // Krynn: the three moons are full together, the Night of the Eye, as 351 AC begins.
       await useCalendar(gm, "krynn");
@@ -111,14 +111,14 @@ test("the GM adds Exandria and Krynn from the Additional Calendars menu, with th
 test("the calendar replaces D&D 5e's and hangs from the top of the screen", async ({ gm, player }) => {
   for ( const session of [gm, player] ) {
     const shown = await session.eval(() => ({
-      ours: !!document.getElementById("sdc-calendar"),
+      ours: !!document.getElementById("sdl-calendar"),
       theirs: !!document.getElementById("calendar-hud"),
       app: dnd5e.ui.calendar?.id
     }));
-    assertEqual(shown, { ours: true, theirs: false, app: "sdc-calendar" }, `${session.user}'s calendar`);
+    assertEqual(shown, { ours: true, theirs: false, app: "sdl-calendar" }, `${session.user}'s calendar`);
     const calendar = await readCalendar(session);
     assert(calendar.inUiTop, `${session.user}'s calendar is not in #ui-top`);
-    const box = await session.page.locator("#sdc-calendar").boundingBox();
+    const box = await session.page.locator("#sdl-calendar").boundingBox();
     assert(Math.abs((box.x + (box.width / 2)) - 800) < 220, `the calendar is not near the middle: ${JSON.stringify(box)}`);
     assert(box.y < 5, `the calendar does not hang from the top: ${JSON.stringify(box)}`);
   }
@@ -148,7 +148,7 @@ test("the date and time follow D&D 5e's calendar preferences", async ctx => {
   }));
   await setTime(ctx, { year: 1525, day: 79, hour: 12 });
   const calendar = await waitFor(ctx.player, () => {
-    const time = document.querySelector("#sdc-calendar .sdc-time")?.innerText ?? "";
+    const time = document.querySelector("#sdl-calendar .sdl-time")?.innerText ?? "";
     return time.endsWith("Noon") ? time : null;
   }, null, "the approximate time");
   assert(calendar.endsWith("Noon"), `player's time: ${calendar}`);
@@ -194,14 +194,14 @@ test("an adventure dresses the bar, beside the season's sky", async ctx => {
     await game.settings.set(moduleId, "seasonTrim", "follow");
   }, MODULE_ID);
   await setTime(ctx, { year: 1525, day: 100, hour: 12 });
-  await waitFor(ctx.player, () => document.getElementById("sdc-calendar")?.dataset.barTrim === "ravenloft", undefined,
+  await waitFor(ctx.player, () => document.getElementById("sdl-calendar")?.dataset.barTrim === "ravenloft", undefined,
     "the adventure's trim");
   const trim = await ctx.player.eval(() => {
-    const root = document.getElementById("sdc-calendar");
+    const root = document.getElementById("sdl-calendar");
     const pieces = selector => [...root.querySelectorAll(`${selector} > *`)].map(e => e.getAttribute("class") ?? "");
     return { bar: root.dataset.barTrim, sky: root.dataset.skyTrim,
-      barHasWeb: pieces(".sdc-trim-bar").some(c => c.includes("sdc-web")),
-      bowlHasBlossom: pieces(".sdc-trim-bowl").some(c => c.includes("sdc-blossom")) };
+      barHasWeb: pieces(".sdl-trim-bar").some(c => c.includes("sdl-web")),
+      bowlHasBlossom: pieces(".sdl-trim-bowl").some(c => c.includes("sdl-blossom")) };
   });
   assertEqual(trim, { bar: "ravenloft", sky: "spring", barHasWeb: true, bowlHasBlossom: true },
     "Curse of Strahd on the bar, spring in the sky");
@@ -211,25 +211,25 @@ test("the season's trim is off until the GM turns it on, for everyone", async ct
   const { gm, player } = ctx;
   await setTime(ctx, { year: 1525, day: 20, hour: 12 });
   const trim = session => session.eval(() => {
-    const root = document.getElementById("sdc-calendar");
-    return { kind: root.dataset.skyTrim || null, pieces: root.querySelectorAll(".sdc-trim-bar > *, .sdc-trim-bowl > *").length > 0 };
+    const root = document.getElementById("sdl-calendar");
+    return { kind: root.dataset.skyTrim || null, pieces: root.querySelectorAll(".sdl-trim-bar > *, .sdl-trim-bowl > *").length > 0 };
   });
   for ( const session of [gm, player] ) assertEqual(await trim(session), { kind: null, pieces: false }, "by default");
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonTrim", "follow"), MODULE_ID);
   for ( const session of [gm, player] ) {
-    await waitFor(session, () => document.getElementById("sdc-calendar")?.dataset.skyTrim === "winter", undefined,
+    await waitFor(session, () => document.getElementById("sdl-calendar")?.dataset.skyTrim === "winter", undefined,
       "the trim to come");
     assertEqual(await trim(session), { kind: "winter", pieces: true }, "with the trim on");
   }
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonTrim", "summer"), MODULE_ID);
   for ( const session of [gm, player] ) {
-    await waitFor(session, () => document.getElementById("sdc-calendar")?.dataset.skyTrim === "summer", undefined,
+    await waitFor(session, () => document.getElementById("sdl-calendar")?.dataset.skyTrim === "summer", undefined,
       "summer's trim in winter");
     assertEqual(await trim(session), { kind: "summer", pieces: true }, "with just summer");
   }
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonTrim", "none"), MODULE_ID);
   for ( const session of [gm, player] ) {
-    await waitFor(session, () => !document.getElementById("sdc-calendar")?.dataset.skyTrim, undefined, "the trim to go");
+    await waitFor(session, () => !document.getElementById("sdl-calendar")?.dataset.skyTrim, undefined, "the trim to go");
     assertEqual(await trim(session), { kind: null, pieces: false }, "with the trim off again");
   }
 });
@@ -238,7 +238,7 @@ test("the season band slides through the year", async ctx => {
   const positions = [];
   for ( const day of [0, 90, 180] ) {
     await setTime(ctx, { year: 1525, day, hour: 0 });
-    positions.push(await ctx.gm.eval(() => document.querySelector("#sdc-calendar .sdc-season").style.backgroundPositionX));
+    positions.push(await ctx.gm.eval(() => document.querySelector("#sdl-calendar .sdl-season").style.backgroundPositionX));
   }
   const px = positions.map(p => parseFloat(p));
   assert(px[0] > px[1] && px[1] > px[2], `the band does not move left as the year passes: ${positions}`);
@@ -251,8 +251,8 @@ test("Selûne rides the bowl when she is up, with her phase", async ctx => {
   let calendar = await readCalendar(ctx.player);
   assertEqual(calendar.moons, ["Selûne: Full Moon"], "moons at midnight");
   const place = await ctx.player.eval(() => {
-    const moon = document.querySelector("#sdc-calendar .sdc-moon:not([hidden])").getBoundingClientRect();
-    const bowl = document.querySelector("#sdc-calendar .sdc-sky").getBoundingClientRect();
+    const moon = document.querySelector("#sdl-calendar .sdl-moon:not([hidden])").getBoundingClientRect();
+    const bowl = document.querySelector("#sdl-calendar .sdl-sky").getBoundingClientRect();
     return { dx: (moon.x + (moon.width / 2)) - (bowl.x + (bowl.width / 2)), y: moon.y - bowl.y };
   });
   assert(Math.abs(place.dx) < 30 && place.y > 50, `a midnight full moon is not near the bottom of the bowl: ${JSON.stringify(place)}`);
@@ -274,10 +274,10 @@ test("Selûne rides the bowl when she is up, with her phase", async ctx => {
 test("the sun crosses the bowl by day, rising and setting with the season", async ctx => {
   const { gm, player } = ctx;
   const read = session => session.eval(() => {
-    const sun = document.querySelector("#sdc-calendar .sdc-sun");
+    const sun = document.querySelector("#sdl-calendar .sdl-sun");
     if ( !sun || sun.hidden ) return { shown: false, name: sun?.dataset.tooltip ?? null };
     const box = sun.getBoundingClientRect();
-    const bowl = document.querySelector("#sdc-calendar .sdc-sky").getBoundingClientRect();
+    const bowl = document.querySelector("#sdl-calendar .sdl-sky").getBoundingClientRect();
     return { shown: true, name: sun.dataset.tooltip, dx: Math.round((box.x + (box.width / 2)) - (bowl.x + (bowl.width / 2))),
       y: Math.round(box.y - bowl.y) };
   });
@@ -300,7 +300,7 @@ test("the sun crosses the bowl by day, rising and setting with the season", asyn
   await setTime(ctx, { year: 1525, day: 170, hour: 6 });
   assertEqual((await read(player)).shown, false, "the sun at six before long summer days");
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonalDaylight", true), MODULE_ID);
-  await waitFor(player, () => !document.querySelector("#sdc-calendar .sdc-sun").hidden, null,
+  await waitFor(player, () => !document.querySelector("#sdl-calendar .sdl-sun").hidden, null,
     "the sun to be up at six on midsummer's morning");
 });
 
@@ -308,11 +308,11 @@ test("summer days are long and winter days short, once the GM turns it on", asyn
   const { gm, player } = ctx;
   const read = session => session.eval(() => {
     const calendar = game.time.calendar;
-    const root = document.getElementById("sdc-calendar");
+    const root = document.getElementById("sdl-calendar");
     return {
       sunrise: calendar.sunrise(game.time.components),
       phase: root.dataset.dayPhase,
-      face: root.querySelector(".sdc-wheel-day").getAttribute("d")
+      face: root.querySelector(".sdl-wheel-day").getAttribute("d")
     };
   });
 
@@ -323,7 +323,7 @@ test("summer days are long and winter days short, once the GM turns it on", asyn
 
   await gm.eval(moduleId => game.settings.set(moduleId, "seasonalDaylight", true), MODULE_ID);
   for ( const session of [gm, player] ) {
-    await waitFor(session, () => document.getElementById("sdc-calendar").dataset.dayPhase === "day", null,
+    await waitFor(session, () => document.getElementById("sdl-calendar").dataset.dayPhase === "day", null,
       "five in the morning to be daytime at midsummer");
   }
   const summer = await read(player);
@@ -385,9 +385,9 @@ test("the active scene darkens at night, once the GM turns it on", async ctx => 
 
 test("each player picks the calendar's style for themselves", async ({ gm, player }) => {
   const look = session => session.eval(() => {
-    const root = document.getElementById("sdc-calendar");
-    const panel = getComputedStyle(root.querySelector(".sdc-bar")).backgroundColor;
-    const bowl = getComputedStyle(root.querySelector(".sdc-stop-bowl-inner")).stopColor;
+    const root = document.getElementById("sdl-calendar");
+    const panel = getComputedStyle(root.querySelector(".sdl-bar")).backgroundColor;
+    const bowl = getComputedStyle(root.querySelector(".sdl-stop-bowl-inner")).stopColor;
     return { theme: root.dataset.theme, panel, bowl };
   });
   const gilded = await look(player);
@@ -426,7 +426,7 @@ test("the GM has the time controls and players don't", async ({ gm, player }) =>
 test("rewind and advance sit at the outer ends of the bar", async ({ gm }) => {
   const order = await gm.eval(() => {
     const centre = el => { const b = el.getBoundingClientRect(); return b.x + (b.width / 2); };
-    const buttons = [...document.querySelectorAll("#sdc-calendar .sdc-controls > .calendar-button > button")];
+    const buttons = [...document.querySelectorAll("#sdl-calendar .sdl-controls > .calendar-button > button")];
     return buttons.sort((a, b) => centre(a) - centre(b)).map(b => b.dataset.action);
   });
   assertEqual(order[0], "reverse", "leftmost button");
@@ -436,17 +436,17 @@ test("rewind and advance sit at the outer ends of the bar", async ({ gm }) => {
 test("the advance and rewind buttons and their drop-downs change the time", async ctx => {
   const start = await setTime(ctx, { year: 1525, day: 100, hour: 8 });
   const { gm } = ctx;
-  await gm.page.locator("#sdc-calendar [data-control=advance] > button").click();
+  await gm.page.locator("#sdl-calendar [data-control=advance] > button").click();
   await waitFor(gm, t => game.time.worldTime === t, start + 3600, "an hour to pass");
 
-  await gm.page.locator("#sdc-calendar [data-control=advance] > button").hover();
-  const plusDay = gm.page.locator("#sdc-calendar [data-control=advance] .sdc-dropdown button[data-unit=day][data-value='1']");
+  await gm.page.locator("#sdl-calendar [data-control=advance] > button").hover();
+  const plusDay = gm.page.locator("#sdl-calendar [data-control=advance] .sdl-dropdown button[data-unit=day][data-value='1']");
   await plusDay.waitFor({ state: "visible", timeout: 5000 });
   await plusDay.click();
   await waitFor(gm, t => game.time.worldTime === t, start + 3600 + 86400, "a day to pass");
 
-  await gm.page.locator("#sdc-calendar [data-control=reverse] > button").hover();
-  const minus8 = gm.page.locator("#sdc-calendar [data-control=reverse] .sdc-dropdown button[data-unit=hour][data-value='8']");
+  await gm.page.locator("#sdl-calendar [data-control=reverse] > button").hover();
+  const minus8 = gm.page.locator("#sdl-calendar [data-control=reverse] .sdl-dropdown button[data-unit=hour][data-value='8']");
   await minus8.waitFor({ state: "visible", timeout: 5000 });
   await minus8.click();
   const end = start + 3600 + 86400 - (8 * 3600);
@@ -455,7 +455,7 @@ test("the advance and rewind buttons and their drop-downs change the time", asyn
 });
 
 test("the Set Date button opens D&D 5e's Set Date dialog", async ({ gm }) => {
-  await gm.page.locator("#sdc-calendar button[data-action=setDate]").click();
+  await gm.page.locator("#sdl-calendar button[data-action=setDate]").click();
   await waitFor(gm, () => [...foundry.applications.instances.values()]
     .some(a => a.rendered && (a.constructor.name === "SetDateDialog")), null, "the Set Date dialog");
 });
@@ -477,30 +477,30 @@ test("the season band's tooltip gives the season and when each moon is next full
 test("buttons other modules add with D&D 5e's hook appear and work", async ({ gm, player }) => {
   // Shaped like Tomb of Annihilation's Travel Tracker button: GM-only, on the left, with a click handler.
   const add = async () => {
-    globalThis.__sdcHook = Hooks.on("dnd5e.prepareCalendarButtons", (app, buttons) => buttons.push({
-      action: "sdcTest", icon: "fa-solid fa-route", position: "start", tooltip: "Test", visible: game.user.isGM,
-      onClick: () => { globalThis.__sdcClicked = true; }
+    globalThis.__sdlHook = Hooks.on("dnd5e.prepareCalendarButtons", (app, buttons) => buttons.push({
+      action: "sdlTest", icon: "fa-solid fa-route", position: "start", tooltip: "Test", visible: game.user.isGM,
+      onClick: () => { globalThis.__sdlClicked = true; }
     }));
     await dnd5e.ui.calendar.render();
   };
   const remove = async () => {
-    Hooks.off("dnd5e.prepareCalendarButtons", globalThis.__sdcHook);
+    Hooks.off("dnd5e.prepareCalendarButtons", globalThis.__sdlHook);
     await dnd5e.ui.calendar.render();
   };
   try {
     await gm.eval(add);
     await player.eval(add);
     const shown = await gm.eval(() => {
-      const bar = document.querySelector("#sdc-calendar .sdc-start").getBoundingClientRect();
-      const button = document.querySelector("#sdc-calendar .sdc-start button[data-action=sdcTest]");
+      const bar = document.querySelector("#sdl-calendar .sdl-start").getBoundingClientRect();
+      const button = document.querySelector("#sdl-calendar .sdl-start button[data-action=sdlTest]");
       const r = button?.getBoundingClientRect();
       return { start: !!button, fits: !!r && (r.width > 0) && (r.left >= bar.left) && (r.right <= bar.right) };
     });
     assertEqual(shown, { start: true, fits: true }, "the GM's added button on the left of the bar");
-    assertEqual(await player.eval(() => !!document.querySelector("#sdc-calendar button[data-action=sdcTest]")),
+    assertEqual(await player.eval(() => !!document.querySelector("#sdl-calendar button[data-action=sdlTest]")),
       false, "the GM-only button for a player");
-    await gm.page.locator("#sdc-calendar button[data-action=sdcTest]").click();
-    await waitFor(gm, () => globalThis.__sdcClicked === true, null, "the added button's click handler");
+    await gm.page.locator("#sdl-calendar button[data-action=sdlTest]").click();
+    await waitFor(gm, () => globalThis.__sdlClicked === true, null, "the added button's click handler");
   } finally {
     await gm.eval(remove);
     await player.eval(remove);
@@ -508,7 +508,7 @@ test("buttons other modules add with D&D 5e's hook appear and work", async ({ gm
 });
 
 test("the toggle hides and shows the sky, and is remembered", async ({ player }) => {
-  const toggle = player.page.locator("#sdc-calendar button[data-action=toggleCalendar]");
+  const toggle = player.page.locator("#sdl-calendar button[data-action=toggleCalendar]");
   await toggle.click();
   await player.page.waitForTimeout(400);
   let calendar = await readCalendar(player);
@@ -519,7 +519,7 @@ test("the toggle hides and shows the sky, and is remembered", async ({ player })
   calendar = await readCalendar(player);
   assertEqual(calendar.expanded, false, "collapsed after a reload");
 
-  await player.page.locator("#sdc-calendar button[data-action=toggleCalendar]").click();
+  await player.page.locator("#sdl-calendar button[data-action=toggleCalendar]").click();
   await player.page.waitForTimeout(400);
   calendar = await readCalendar(player);
   assert(calendar.expanded && (calendar.visualHeight > 100), `not expanded again: ${JSON.stringify(calendar)}`);
@@ -541,7 +541,7 @@ test("the calendar follows the user's choice to hide it", async ({ player }) => 
   await player.eval(() => game.settings.set("dnd5e", "calendarPreferences", {
     visible: false, formatters: { date: "monthDay", time: "hoursMinutes" }
   }));
-  await waitFor(player, () => !document.getElementById("sdc-calendar"), null, "the calendar to close");
+  await waitFor(player, () => !document.getElementById("sdl-calendar"), null, "the calendar to close");
 });
 
 test("/date whispers the date and the sky, and /advance and /rewind move the time for the GM", async ctx => {
@@ -554,7 +554,7 @@ test("/date whispers the date and the sky, and /advance and /rewind move the tim
   await say(player, "/date");
   const card = await waitFor(player, n => {
     const message = game.messages.contents.at(-1);
-    return (game.messages.size > n) && message.content.includes("sdc-chat")
+    return (game.messages.size > n) && message.content.includes("sdl-chat")
       ? { content: message.content, whisper: message.whisper } : null;
   }, messages, "the date to be whispered");
   const playerId = await player.eval(() => game.user.id);
@@ -580,7 +580,7 @@ test("/date whispers the date and the sky, and /advance and /rewind move the tim
 
 test("each dawn is announced in the chat, once the GM turns it on", async ctx => {
   const { gm, player } = ctx;
-  const cards = () => player.eval(() => game.messages.contents.filter(m => m.content.includes("sdc-daybreak"))
+  const cards = () => player.eval(() => game.messages.contents.filter(m => m.content.includes("sdl-daybreak"))
     .map(m => m.content));
   const before = (await cards()).length;
 
@@ -597,7 +597,7 @@ test("each dawn is announced in the chat, once the GM turns it on", async ctx =>
 
   // A jump over three dawns posts only the last.
   await gm.eval(() => game.time.advance(3 * 86400));
-  await waitFor(player, n => game.messages.contents.filter(m => m.content.includes("sdc-daybreak")).length === n,
+  await waitFor(player, n => game.messages.contents.filter(m => m.content.includes("sdl-daybreak")).length === n,
     before + 1, "the dawn to be announced");
   const card = (await cards()).at(-1);
   const expected = await gm.eval(() => game.time.calendar.format(game.time.components, "formatMonthDayYear"));
@@ -612,13 +612,13 @@ test("each dawn is announced in the chat, once the GM turns it on", async ctx =>
 test("the dawn that starts a season or a festival says so", async ctx => {
   const { gm, player } = ctx;
   await gm.eval(moduleId => game.settings.set(moduleId, "announceDays", true), MODULE_ID);
-  const count = () => player.eval(() => game.messages.contents.filter(m => m.content.includes("sdc-daybreak")).length);
+  const count = () => player.eval(() => game.messages.contents.filter(m => m.content.includes("sdl-daybreak")).length);
   const announce = async day => {
     await setTime(ctx, { year: 1525, day: day - 1, hour: 12 });
     const before = await count();
     await gm.eval(() => game.time.advance(86400));
     return waitFor(player, n => {
-      const cards = game.messages.contents.filter(m => m.content.includes("sdc-daybreak"));
+      const cards = game.messages.contents.filter(m => m.content.includes("sdl-daybreak"));
       return (cards.length > n) ? cards.at(-1).content : null;
     }, before, "the dawn to be announced");
   };
@@ -643,7 +643,7 @@ test("the Calendar of Greyhawk has Luna and Celene, and Liga for its sun", async
     assertEqual(calendar.moonEvents, "Luna and Celene are full together", "the moons' event");
     assertEqual(calendar.festival, "Needfest", "festival");
     await setTime(ctx, { year: 576, day: 3, hour: 12 });
-    const sun = await player.eval(() => document.querySelector("#sdc-calendar .sdc-sun:not([hidden])")?.dataset.tooltip);
+    const sun = await player.eval(() => document.querySelector("#sdl-calendar .sdl-sun:not([hidden])")?.dataset.tooltip);
     assertEqual(sun, "Liga", "the sun's name on Oerth");
   } finally {
     if ( await useCalendar(gm, "harptos") ) await player.reload();

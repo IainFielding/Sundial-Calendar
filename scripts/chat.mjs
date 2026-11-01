@@ -96,17 +96,17 @@ export function postDate() {
   const festival = festivalName(calendar, components);
   const when = [weekday ? _loc(weekday.name).capitalize() : "", formatComponents(calendar, components, "time")];
   const rows = [
-    `<p class="sdc-chat-when">${escape(when.filter(Boolean).join(" – "))}</p>`,
+    `<p class="sdl-chat-when">${escape(when.filter(Boolean).join(" – "))}</p>`,
     season ? `<p><i class="fa-solid fa-leaf"></i> ${escape(_loc(season.name))}</p>` : "",
     festival ? `<p><i class="fa-solid fa-star-christmas"></i> ${escape(festival)}</p>` : "",
     ...moonEventLabels().map(label => `<p><i class="fa-solid fa-circle"></i> ${escape(label)}</p>`),
     ...moonForecast().map(line => `<p><i class="fa-solid fa-moon"></i> ${escape(line)}</p>`)
   ];
-  const content = `<div class="sdc-chat"><h3>${escape(formatComponents(calendar, components, "date", "monthDayYear"))}</h3>`
+  const content = `<div class="sdl-chat"><h3>${escape(formatComponents(calendar, components, "date", "monthDayYear"))}</h3>`
     + `${rows.join("")}</div>`;
   return ChatMessage.implementation.create({
     content,
-    speaker: { alias: _loc("SDC.Chat.Speaker") },
+    speaker: { alias: _loc("SDL.Chat.Speaker") },
     whisper: [game.user.id]
   });
 }
@@ -121,7 +121,7 @@ export function postDate() {
  */
 export function moveTime(direction, args) {
   if ( !game.user.isGM ) {
-    ui.notifications.warn("SDC.Chat.GMOnly", { localize: true });
+    ui.notifications.warn("SDL.Chat.GMOnly", { localize: true });
     return;
   }
   const calendar = game.time.calendar;
@@ -138,7 +138,7 @@ export function moveTime(direction, args) {
   } else {
     const seconds = parseDuration(text || "1 hour", calendar);
     if ( !seconds ) {
-      ui.notifications.warn(_loc("SDC.Chat.Usage", { command: direction > 0 ? "/advance" : "/rewind" }));
+      ui.notifications.warn(_loc("SDL.Chat.Usage", { command: direction > 0 ? "/advance" : "/rewind" }));
       return;
     }
     delta = seconds * direction;

@@ -5,7 +5,7 @@ import { BAR_OUTLINE, BAR_TRIM_CHOICES, BAR_TRIM_KINDS, barTrim, BOWL_OUTLINE, f
   skyTrimKind } from "../scripts/trim.mjs";
 
 const strings = JSON.parse(readFileSync(new URL("../lang/en.json", import.meta.url), "utf8"));
-const barTrimName = kind => strings.SDC.Settings.BarTrim[kind.charAt(0).toUpperCase() + kind.slice(1)];
+const barTrimName = kind => strings.SDL.Settings.BarTrim[kind.charAt(0).toUpperCase() + kind.slice(1)];
 
 describe("the season trim", () => {
   it("walks the bar's lower edge from corner to corner", () => {
@@ -25,7 +25,7 @@ describe("the season trim", () => {
   });
 
   it("dresses the sky about the day wheel for each kind of season", () => {
-    const pieces = { winter: "sdc-icicle", spring: "sdc-blossom", summer: "sdc-sunflower", fall: "sdc-fallen" };
+    const pieces = { winter: "sdl-icicle", spring: "sdl-blossom", summer: "sdl-sunflower", fall: "sdl-fallen" };
     for ( const [kind, piece] of Object.entries(pieces) ) {
       const trim = skyTrim(kind);
       expect(trim).toContain(piece);
@@ -63,10 +63,10 @@ describe("the festivals' and adventures' trim", () => {
       "DND5E.CALENDAR.Harptos.Festival.Highharvestide": "harvest",
       "DND5E.CALENDAR.Greyhawk.Festival.Brewfest": "harvest",
       "DND5E.CALENDAR.Harptos.Festival.FeastOfTheMoon": "moonfeast",
-      "SDC.Calendar.Exandria.Festival.RenewalFestival": "greengrass",
-      "SDC.Calendar.Exandria.Festival.Zenith": "midsummer",
-      "SDC.Calendar.Exandria.Festival.HarvestsClose": "harvest",
-      "SDC.Calendar.Exandria.Festival.WintersCrest": "midwinter"
+      "SDL.Calendar.Exandria.Festival.RenewalFestival": "greengrass",
+      "SDL.Calendar.Exandria.Festival.Zenith": "midsummer",
+      "SDL.Calendar.Exandria.Festival.HarvestsClose": "harvest",
+      "SDL.Calendar.Exandria.Festival.WintersCrest": "midwinter"
     };
     for ( const [name, kind] of Object.entries(festivals) ) {
       expect(festivalTrimKind(name)).toBe(kind);

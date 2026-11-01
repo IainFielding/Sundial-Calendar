@@ -12,7 +12,7 @@ describe("the sun catalogue", () => {
   });
 
   it("names Oerth's sun Liga", () => {
-    expect(SUNS.greyhawk.map(s => s.name)).toEqual(["SDC.Sun.Liga"]);
+    expect(SUNS.greyhawk.map(s => s.name)).toEqual(["SDL.Sun.Liga"]);
   });
 
   it("gives every sun a name in the language file, a colour and its own id", () => {

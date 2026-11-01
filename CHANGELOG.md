@@ -1,6 +1,18 @@
 # Changelog
 
-All notable changes to Simple D&D Calendar.
+All notable changes to Sundial Calendar.
+
+## 2.0.0 — Unreleased
+
+### Changed
+
+- **Simple D&D Calendar is now Sundial Calendar.** The module has a new name, a new module id
+  (`sogrom-sundial-calendar`) and a new home at <https://github.com/IainFielding/Sundial-Calendar>. Foundry sees it
+  as a new module: uninstall Simple D&D Calendar, install Sundial Calendar from its manifest URL and set its options
+  again. See [Upgrading from Simple D&D Calendar](README.md#upgrading-from-simple-dd-calendar).
+- **For module and world script authors:** the hooks are now `sogrom-sundial-calendar.moons` and
+  `sogrom-sundial-calendar.suns`, the settings live under `sogrom-sundial-calendar`, and the calendar's CSS classes,
+  ids and custom properties start `sdl-` in place of `sdc-` (`#sdl-calendar`, `--sdl-gold` and so on).
 
 ## 1.6.1 — 2026-11-01
 

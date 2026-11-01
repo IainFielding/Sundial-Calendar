@@ -25,11 +25,11 @@ export const CALENDAR_OF_EXANDRIA = {
     values: [
       ["Horisal", 29], ["Misuthar", 30], ["Dualahei", 30], ["Thunsheer", 31], ["Unndilar", 28], ["Brussendar", 31],
       ["Sydenstar", 32], ["Fessuran", 29], ["Quenpillar", 27], ["Cuersaar", 29], ["Duscar", 32]
-    ].map(([name, days], i) => ({ name: `SDC.Calendar.Exandria.Month.${name}`, ordinal: i + 1, days }))
+    ].map(([name, days], i) => ({ name: `SDL.Calendar.Exandria.Month.${name}`, ordinal: i + 1, days }))
   },
   days: {
     values: ["Miresen", "Grissen", "Whelsen", "Conthsen", "Folsen", "Yulisen", "Daleysen"]
-      .map((name, i) => ({ name: `SDC.Calendar.Exandria.Day.${name}`, ordinal: i + 1 })),
+      .map((name, i) => ({ name: `SDL.Calendar.Exandria.Day.${name}`, ordinal: i + 1 })),
     daysPerYear: 328,
     hoursPerDay: 24,
     minutesPerHour: 60,
@@ -37,10 +37,10 @@ export const CALENDAR_OF_EXANDRIA = {
   },
   seasons: {
     values: [
-      { name: "SDC.Calendar.Exandria.Season.Spring", dayStart: 71, dayEnd: 144 }, // 13 Dualahei–25 Unndilar
-      { name: "SDC.Calendar.Exandria.Season.Summer", dayStart: 145, dayEnd: 212 }, // 26 Unndilar–2 Fessuran
-      { name: "SDC.Calendar.Exandria.Season.Autumn", dayStart: 213, dayEnd: 296 }, // 3 Fessuran–1 Duscar
-      { name: "SDC.Calendar.Exandria.Season.Winter", dayStart: 297, dayEnd: 70 } // 2 Duscar–12 Dualahei
+      { name: "SDL.Calendar.Exandria.Season.Spring", dayStart: 71, dayEnd: 144 }, // 13 Dualahei–25 Unndilar
+      { name: "SDL.Calendar.Exandria.Season.Summer", dayStart: 145, dayEnd: 212 }, // 26 Unndilar–2 Fessuran
+      { name: "SDL.Calendar.Exandria.Season.Autumn", dayStart: 213, dayEnd: 296 }, // 3 Fessuran–1 Duscar
+      { name: "SDL.Calendar.Exandria.Season.Winter", dayStart: 297, dayEnd: 70 } // 2 Duscar–12 Dualahei
     ]
   },
   festivals: [
@@ -55,7 +55,7 @@ export const CALENDAR_OF_EXANDRIA = {
     ["HazelFestival", 9, 10], ["CivilizationsDawn", 9, 22],
     ["NightOfAscension", 10, 13], ["ZansCup", 10, 21],
     ["BarrenEve", 11, 2], ["Embertide", 11, 5], ["WintersCrest", 11, 20]
-  ].map(([name, month, day]) => ({ name: `SDC.Calendar.Exandria.Festival.${name}`, month, day }))
+  ].map(([name, month, day]) => ({ name: `SDL.Calendar.Exandria.Festival.${name}`, month, day }))
 };
 
 /**
@@ -72,11 +72,11 @@ export const CALENDAR_OF_KRYNN = {
     values: [
       "Newkolt", "Deepkolt", "Brookgreen", "Yurthgreen", "Fleurgreen", "Holmswelt",
       "Fierswelt", "Paleswelt", "Reapember", "Gildember", "Darkember", "Frostkolt"
-    ].map((name, i) => ({ name: `SDC.Calendar.Krynn.Month.${name}`, ordinal: i + 1, days: 28 }))
+    ].map((name, i) => ({ name: `SDL.Calendar.Krynn.Month.${name}`, ordinal: i + 1, days: 28 }))
   },
   days: {
     values: ["Linaras", "Palast", "Magetag", "Kirinor", "Misham", "Bakukal", "Bracha"]
-      .map((name, i) => ({ name: `SDC.Calendar.Krynn.Day.${name}`, ordinal: i + 1 })),
+      .map((name, i) => ({ name: `SDL.Calendar.Krynn.Day.${name}`, ordinal: i + 1 })),
     daysPerYear: 336,
     hoursPerDay: 24,
     minutesPerHour: 60,
@@ -84,10 +84,10 @@ export const CALENDAR_OF_KRYNN = {
   },
   seasons: {
     values: [
-      { name: "SDC.Calendar.Krynn.Season.Spring", monthStart: 3, monthEnd: 5 }, // Brookgreen–Fleurgreen
-      { name: "SDC.Calendar.Krynn.Season.Summer", monthStart: 6, monthEnd: 8 }, // Holmswelt–Paleswelt
-      { name: "SDC.Calendar.Krynn.Season.Autumn", monthStart: 9, monthEnd: 11 }, // Reapember–Darkember
-      { name: "SDC.Calendar.Krynn.Season.Winter", monthStart: 12, monthEnd: 2 } // Frostkolt–Deepkolt
+      { name: "SDL.Calendar.Krynn.Season.Spring", monthStart: 3, monthEnd: 5 }, // Brookgreen–Fleurgreen
+      { name: "SDL.Calendar.Krynn.Season.Summer", monthStart: 6, monthEnd: 8 }, // Holmswelt–Paleswelt
+      { name: "SDL.Calendar.Krynn.Season.Autumn", monthStart: 9, monthEnd: 11 }, // Reapember–Darkember
+      { name: "SDL.Calendar.Krynn.Season.Winter", monthStart: 12, monthEnd: 2 } // Frostkolt–Deepkolt
     ]
   }
 };
@@ -108,23 +108,23 @@ export const CALENDAR_OF_KRYNN = {
  */
 export const CALENDARS = {
   exandria: {
-    label: "SDC.Calendar.Exandria.Name",
-    hint: "SDC.Calendar.Exandria.Hint",
+    label: "SDL.Calendar.Exandria.Name",
+    hint: "SDL.Calendar.Exandria.Hint",
     config: CALENDAR_OF_EXANDRIA,
     // The Harptos class gives D&D 5e's festival lookup, so the module finds the holidays. Harptos writes a festival's
     // name in place of its date, as its festivals are days outside the months; Exandria's own formats keep the date.
     cls: () => formattedClass(dnd5e.dataModels.calendar.CalendarHarptos, {
-      monthDay: "SDC.Calendar.Exandria.Format.MonthDay",
-      monthDayYear: "SDC.Calendar.Exandria.Format.MonthDayYear"
+      monthDay: "SDL.Calendar.Exandria.Format.MonthDay",
+      monthDayYear: "SDL.Calendar.Exandria.Format.MonthDayYear"
     })
   },
   krynn: {
-    label: "SDC.Calendar.Krynn.Name",
-    hint: "SDC.Calendar.Krynn.Hint",
+    label: "SDL.Calendar.Krynn.Name",
+    hint: "SDL.Calendar.Krynn.Hint",
     config: CALENDAR_OF_KRYNN,
     cls: () => formattedClass(dnd5e.dataModels.calendar.CalendarData5e, {
-      monthDay: "SDC.Calendar.Krynn.Format.MonthDay",
-      monthDayYear: "SDC.Calendar.Krynn.Format.MonthDayYear"
+      monthDay: "SDL.Calendar.Krynn.Format.MonthDay",
+      monthDayYear: "SDL.Calendar.Krynn.Format.MonthDayYear"
     })
   }
 };

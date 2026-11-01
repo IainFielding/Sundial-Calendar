@@ -106,7 +106,7 @@ async function validateStyleUrls(manifest) {
 
 /**
  * Every language file must parse, and every string key the scripts and templates use must be in each of them: a
- * missing key shows in the game as the key itself, such as "SDC.Phase.Dawn".
+ * missing key shows in the game as the key itself, such as "SDL.Phase.Dawn".
  *
  * Every script is read, not just those the manifest loads, since the rest are imported by them. Keys are found as
  * whole string literals; a key built from pieces, such as a moon phase's, is checked by the unit tests instead.
@@ -121,7 +121,7 @@ async function validateLanguages(manifest) {
   const used = new Set();
   for ( const rel of files ) {
     const source = await readFile(resolve(root, rel), "utf8");
-    for ( const [, key] of source.matchAll(/["'`](SDC\.[A-Za-z0-9.]+)["'`]/g) ) used.add(key);
+    for ( const [, key] of source.matchAll(/["'`](SDL\.[A-Za-z0-9.]+)["'`]/g) ) used.add(key);
   }
 
   for ( const { lang, path } of manifest.languages ?? [] ) {

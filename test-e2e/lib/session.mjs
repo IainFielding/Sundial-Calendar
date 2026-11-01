@@ -43,10 +43,10 @@ export class Session {
     page.on("console", msg => session.consoleLog.push(`[${msg.type()}] ${msg.text()}`));
     page.on("pageerror", err => session.consoleLog.push(`[pageerror] ${err.message}\n${err.stack ?? ""}`));
 
-    // No canvas: nothing tested draws on it, and software WebGL under headless Chromium is fragile. `SDC_CANVAS=1` turns
+    // No canvas: nothing tested draws on it, and software WebGL under headless Chromium is fragile. `SDL_CANVAS=1` turns
     // it on, for screenshots that want a scene behind the calendar.
     // `core.noCanvas` is a client setting, kept in localStorage, so it is set before the page loads.
-    const noCanvas = process.env.SDC_CANVAS !== "1";
+    const noCanvas = process.env.SDL_CANVAS !== "1";
     await page.addInitScript(noCanvas => {
       try { window.localStorage.setItem("core.noCanvas", String(noCanvas)); } catch { /* storage blocked */ }
       // A failed render is an unhandled rejection, which never fires `pageerror`.

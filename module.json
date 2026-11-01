@@ -1,6 +1,6 @@
 {
-  "id": "sogrom-simple-dnd-calendar",
-  "title": "Simple D&D Calendar",
+  "id": "sogrom-sundial-calendar",
+  "title": "Sundial Calendar",
   "description": "A new look for D&D 5e's calendar: a framed bar across the top of the screen with the time and the time controls, and beneath it a band of the year's seasons and a bowl of sky with a day wheel that turns through the day and moons that wax and wane.",
   "version": "#{VERSION}#",
   "compatibility": {
@@ -37,7 +37,7 @@
   "media": [
     {
       "type": "setup",
-      "url": "modules/sogrom-simple-dnd-calendar/assets/cover.jpg",
+      "url": "modules/sogrom-sundial-calendar/assets/cover.jpg",
       "loop": false
     }
   ],
@@ -52,7 +52,7 @@
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "license": "LICENSE",
-  "bugs": "https://github.com/IainFielding/simple-dnd-calendar/issues",
-  "changelog": "https://github.com/IainFielding/simple-dnd-calendar/blob/main/CHANGELOG.md",
-  "readme": "https://github.com/IainFielding/simple-dnd-calendar#readme"
+  "bugs": "https://github.com/IainFielding/Sundial-Calendar/issues",
+  "changelog": "https://github.com/IainFielding/Sundial-Calendar/blob/main/CHANGELOG.md",
+  "readme": "https://github.com/IainFielding/Sundial-Calendar#readme"
 }

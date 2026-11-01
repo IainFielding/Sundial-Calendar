@@ -1,18 +1,18 @@
 # GM Guide
 
-Everything a GM sets up for Simple D&D Calendar, from turning the calendar on to the settings that dress it for your campaign.
+Everything a GM sets up for Sundial Calendar, from turning the calendar on to the settings that dress it for your campaign.
 
-The module replaces the look of D&D 5e's own calendar. The calendar's date, time, festivals and seasons are still D&D 5e's, set in D&D 5e's settings. Simple D&D Calendar adds the bar, the sky, the moons and the settings below.
+The module replaces the look of D&D 5e's own calendar. The calendar's date, time, festivals and seasons are still D&D 5e's, set in D&D 5e's settings. Sundial Calendar adds the bar, the sky, the moons and the settings below.
 
 ## Getting started
 
 ### 1. Install and enable the module
 
-Install the module as described in the [README](../README.md#installing), then turn on **Simple D&D Calendar** under **Manage Modules** in a D&D 5e world. It needs Foundry VTT 14 and D&D 5e 6.x.
+Install the module as described in the [README](../README.md#installing), then turn on **Sundial Calendar** under **Manage Modules** in a D&D 5e world. It needs Foundry VTT 14 and D&D 5e 6.x.
 
 ### 2. Turn on D&D 5e's calendar
 
-D&D 5e's calendar is off in a new world, and Simple D&D Calendar only shows once it's on.
+D&D 5e's calendar is off in a new world, and Sundial Calendar only shows once it's on.
 
 The first time a GM loads the world with the module active, the module offers to turn it on. Choose **Turn It On**. If you choose **Not Now**, it won't ask again, but you can turn the calendar on yourself: in **Game Settings → Configure Settings**, open D&D 5e's **Configure Calendar** and tick **Enabled**.
 
@@ -41,7 +41,7 @@ Set the starting date with the calendar button on the bar (**Set Date**), or mov
 
 ## Settings
 
-The module's settings are in **Game Settings → Configure Settings → Simple D&D Calendar**. Settings marked **World** are the GM's choice, for everyone. Settings marked **Player** are each player's own choice, for their own screen.
+The module's settings are in **Game Settings → Configure Settings → Sundial Calendar**. Settings marked **World** are the GM's choice, for everyone. Settings marked **Player** are each player's own choice, for their own screen.
 
 | Setting | Who | Default | What it does |
 | --- | --- | --- | --- |
@@ -162,4 +162,4 @@ A jump over several days posts only the last dawn, not one for every day passed.
 
 ## For module and world-script authors
 
-The moons of any calendar can be changed, or added for a homebrew calendar, with the `sogrom-simple-dnd-calendar.moons` hook. See [Changing the moons](moons.md#changing-the-moons).
+The moons of any calendar can be changed, or added for a homebrew calendar, with the `sogrom-sundial-calendar.moons` hook. See [Changing the moons](moons.md#changing-the-moons).

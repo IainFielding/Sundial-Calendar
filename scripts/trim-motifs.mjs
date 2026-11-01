@@ -98,7 +98,7 @@ export function hang(path, random, cls, { min, max, offset = 0, turn = 0, scale 
     if ( upright && (facesDown(path, s) > 0.5) ) p.deg = 0;
     const size = scale[0] + (random() * (scale[1] - scale[0]));
     const inner = piece(random, i++, s);
-    if ( inner ) parts.push(`<g class="sdc-piece${cls(p)}" ${place(p, (random() - 0.5) * 2 * turn, size)}>${inner}</g>`);
+    if ( inner ) parts.push(`<g class="sdl-piece${cls(p)}" ${place(p, (random() - 0.5) * 2 * turn, size)}>${inner}</g>`);
   });
   return parts.join("");
 }
@@ -120,7 +120,7 @@ export function drift(path, random, cls, { min, max, offset }, piece) {
   let i = 0;
   walk(path, random, min, max, s => {
     const p = point(path, s, offset[0] + (random() * (offset[1] - offset[0])));
-    parts.push(`<g class="sdc-piece${cls(p)}" transform="translate(${f(p.x)} ${f(p.y)})">${piece(random, i++)}</g>`);
+    parts.push(`<g class="sdl-piece${cls(p)}" transform="translate(${f(p.x)} ${f(p.y)})">${piece(random, i++)}</g>`);
   });
   return parts.join("");
 }
@@ -130,45 +130,45 @@ export function drift(path, random, cls, { min, max, offset }, piece) {
 /* -------------------------------------------- */
 
 /** A coin, seen face on. */
-export const coin = (kind = "gold") => `<g class="sdc-coin c-${kind}"><circle r="2.1"/><circle class="rim" r="1.4"/></g>`;
+export const coin = (kind = "gold") => `<g class="sdl-coin c-${kind}"><circle r="2.1"/><circle class="rim" r="1.4"/></g>`;
 
 /** A cut gem, its colour a class. */
-export const gem = colour => `<path class="sdc-jewel c-${colour}" d="M-1.8,0L-1,-1.2H1L1.8,0L0,2.6Z"/>`
-  + "<path class=\"sdc-jewel-shine\" d=\"M-.6,-.6L-.2,.6\"/>";
+export const gem = colour => `<path class="sdl-jewel c-${colour}" d="M-1.8,0L-1,-1.2H1L1.8,0L0,2.6Z"/>`
+  + "<path class=\"sdl-jewel-shine\" d=\"M-.6,-.6L-.2,.6\"/>";
 
 /** A flame standing on its base, about its own middle. */
-export const flame = kind => `<path class="sdc-flame c-${kind ?? "fire"}" transform="translate(0 -2)" d="${FLAME}"/>`;
+export const flame = kind => `<path class="sdl-flame c-${kind ?? "fire"}" transform="translate(0 -2)" d="${FLAME}"/>`;
 
 /** A closed book, its spine to the frame, in a colour. */
-export const book = colour => `<g class="sdc-book c-${colour}"><rect x="-1.6" y="0" width="3.2" height="4.6" rx=".3"/>`
+export const book = colour => `<g class="sdl-book c-${colour}"><rect x="-1.6" y="0" width="3.2" height="4.6" rx=".3"/>`
   + "<path class=\"band\" d=\"M-1.6,1H1.6M-1.6,3.6H1.6\"/></g>";
 
 /** A candle standing on its base, burning towards the frame: upright, along the bar's lower edge. */
-export const candle = (height = 4) => `<g class="sdc-candle"><rect class="wax" x="-.9" y="${f(-height)}" width="1.8" `
-  + `height="${f(height)}"/><path class="sdc-flame small" transform="translate(0 ${f(-height - 1.8)}) scale(.45)" `
+export const candle = (height = 4) => `<g class="sdl-candle"><rect class="wax" x="-.9" y="${f(-height)}" width="1.8" `
+  + `height="${f(height)}"/><path class="sdl-flame small" transform="translate(0 ${f(-height - 1.8)}) scale(.45)" `
   + `d="${FLAME}"/></g>`;
 
 /** A key, hanging bow down. */
-export const key = () => "<g class=\"sdc-key\"><path d=\"M0,0V5M0,2.2H1.2M0,3.4H.9\"/><circle cy=\"6.4\" r=\"1.4\"/></g>";
+export const key = () => "<g class=\"sdl-key\"><path d=\"M0,0V5M0,2.2H1.2M0,3.4H.9\"/><circle cy=\"6.4\" r=\"1.4\"/></g>";
 
 /** A lantern on a short chain. */
-export const lantern = () => "<g class=\"sdc-lamp\"><path class=\"chain\" d=\"M0,0V2\"/>"
+export const lantern = () => "<g class=\"sdl-lamp\"><path class=\"chain\" d=\"M0,0V2\"/>"
   + "<path class=\"cage\" d=\"M-1.4,2H1.4L1.8,3V6.4L1.4,7.2H-1.4L-1.8,6.4V3Z\"/>"
   + "<rect class=\"light\" x=\"-1\" y=\"3\" width=\"2\" height=\"3.4\"/></g>";
 
 /** A disc of a moon, its lit colour a class. */
-export const moon = colour => `<g class="sdc-orb c-${colour}"><circle r="2.4"/><circle class="shade" cx=".7" cy="-.6" r="1.8"/></g>`;
+export const moon = colour => `<g class="sdl-orb c-${colour}"><circle r="2.4"/><circle class="shade" cx=".7" cy="-.6" r="1.8"/></g>`;
 
 /** A puff of cloud, about its middle. */
-export const cloud = () => "<path class=\"sdc-cloud\" d=\"M-5,1.5A1.8,1.8 0 0 1 -3.6,-1A2.4,2.4 0 0 1 .6,-2"
+export const cloud = () => "<path class=\"sdl-cloud\" d=\"M-5,1.5A1.8,1.8 0 0 1 -3.6,-1A2.4,2.4 0 0 1 .6,-2"
   + "A2,2 0 0 1 4,-.4A1.6,1.6 0 0 1 5,1.5Z\"/>";
 
 /** A small planet, perhaps with a ring. */
-export const planet = (colour, ringed) => `<g class="sdc-planet c-${colour}"><circle r="2.6"/>`
+export const planet = (colour, ringed) => `<g class="sdl-planet c-${colour}"><circle r="2.6"/>`
   + `${ringed ? "<ellipse class=\"ring\" rx=\"4.2\" ry=\"1.1\" transform=\"rotate(-18)\"/>" : ""}</g>`;
 
 /** A playing card, hanging by a corner, with a mark on its face. */
-export const card = mark => "<g class=\"sdc-card\"><rect x=\"-2\" y=\"0\" width=\"4\" height=\"5.6\" rx=\".5\"/>"
+export const card = mark => "<g class=\"sdl-card\"><rect x=\"-2\" y=\"0\" width=\"4\" height=\"5.6\" rx=\".5\"/>"
   + `<path class="mark" transform="translate(0 2.8) scale(.55)" d="${mark}"/></g>`;
 
 /** A stone, uneven, about its middle. */
@@ -178,31 +178,31 @@ export const stone = random => {
     const r = 1.6 + (random() * 1.1);
     return `${f(r * Math.cos(a))},${f(r * Math.sin(a))}`;
   });
-  return `<path class="sdc-stone" d="M${corners.join("L")}Z"/>`;
+  return `<path class="sdl-stone" d="M${corners.join("L")}Z"/>`;
 };
 
 /** A pennant, hanging point down, in two colours. */
-export const pennant = (a, b) => `<g class="sdc-pennant"><path class="c-${a}" d="M-2.2,0H2.2L0,7Z"/>`
+export const pennant = (a, b) => `<g class="sdl-pennant"><path class="c-${a}" d="M-2.2,0H2.2L0,7Z"/>`
   + `<path class="c-${b}" d="M-2.2,0H0L0,7Z"/></g>`;
 
 /** A shell, a scallop, opening downwards. */
-export const shell = () => "<g class=\"sdc-shell\"><path d=\"M0,0L-2.6,3.2A3,2.4 0 0 0 2.6,3.2Z\"/>"
+export const shell = () => "<g class=\"sdl-shell\"><path d=\"M0,0L-2.6,3.2A3,2.4 0 0 0 2.6,3.2Z\"/>"
   + "<path class=\"ribs\" d=\"M0,0L-1.4,4.2M0,0V4.5M0,0L1.4,4.2\"/></g>";
 
 /** A crystal, pointing out from the frame. */
-export const crystal = (length, kind) => `<g class="sdc-crystal c-${kind}">`
+export const crystal = (length, kind) => `<g class="sdl-crystal c-${kind}">`
   + `<path d="M-1.3,0L-1.1,${f(length * 0.75)}L0,${f(length)}L1.1,${f(length * 0.75)}L1.3,0Z"/>`
   + `<path class="facet" d="M0,0V${f(length)}"/></g>`;
 
 /** A drip, hanging from the frame. */
-export const drip = (length, kind) => `<path class="sdc-drip c-${kind}" `
+export const drip = (length, kind) => `<path class="sdl-drip c-${kind}" `
   + `d="M-1,0C-.6,${f(length * 0.5)} -.9,${f(length)} 0,${f(length + 1)}C.9,${f(length)} .6,${f(length * 0.5)} 1,0Z"/>`;
 
 /** A bubble, about its middle. */
-export const bubble = r => `<circle class="sdc-bubble" r="${f(r)}"/>`;
+export const bubble = r => `<circle class="sdl-bubble" r="${f(r)}"/>`;
 
 /** A flower of round petals, about its middle, its colour a class. */
-export const flower = (petals, colour, size = 1.6) => `<g class="sdc-bloom c-${colour}">${Array.from({ length: petals }, (_, i) => {
+export const flower = (petals, colour, size = 1.6) => `<g class="sdl-bloom c-${colour}">${Array.from({ length: petals }, (_, i) => {
   const a = (i * 2 * Math.PI) / petals;
   return `<circle cx="${f(size * 1.1 * Math.cos(a))}" cy="${f(size * 1.1 * Math.sin(a))}" r="${f(size)}"/>`;
 }).join("")}<circle class="heart" r="${f(size * 0.7)}"/></g>`;

@@ -1,8 +1,8 @@
 # Developer Guide
 
-How to integrate a module or world script with Simple D&D Calendar: adding your own calendar to D&D 5e, giving it moons, and working with the calendar bar.
+How to integrate a module or world script with Sundial Calendar: adding your own calendar to D&D 5e, giving it moons, and working with the calendar bar.
 
-The module id is `sogrom-simple-dnd-calendar`. Everything here targets Foundry VTT 14 and D&D 5e 6.x.
+The module id is `sogrom-sundial-calendar`. Everything here targets Foundry VTT 14 and D&D 5e 6.x.
 
 ## How the pieces fit
 
@@ -10,9 +10,9 @@ The module id is `sogrom-simple-dnd-calendar`. Everything here targets Foundry V
 | --- | --- | --- |
 | The calendars: years, months, weekdays, seasons, festivals, sunrise and sunset | D&D 5e (built on Foundry's `CalendarData`) | Register a calendar in the `dnd5e.setupCalendar` hook |
 | The calendar bar's buttons | D&D 5e | The `dnd5e.prepareCalendarButtons` hook |
-| The moons | Simple D&D Calendar | The `sogrom-simple-dnd-calendar.moons` hook |
-| The suns | Simple D&D Calendar | The `sogrom-simple-dnd-calendar.suns` hook |
-| The sky, trims, darkness, chat commands and announcements | Simple D&D Calendar | Read from your calendar: see [What the module reads from a calendar](#what-the-module-reads-from-a-calendar) |
+| The moons | Sundial Calendar | The `sogrom-sundial-calendar.moons` hook |
+| The suns | Sundial Calendar | The `sogrom-sundial-calendar.suns` hook |
+| The sky, trims, darkness, chat commands and announcements | Sundial Calendar | Read from your calendar: see [What the module reads from a calendar](#what-the-module-reads-from-a-calendar) |
 
 So a new calendar takes two steps. Register it with D&D 5e, which makes it a choice in **Configure Calendar** and gives it festivals and seasons. Then give it moons through this module. The two are independent: your calendar works without this module, and the moons are only drawn when it's active.
 
@@ -105,7 +105,7 @@ Define the class inside the hook, or anywhere `dnd5e.dataModels` already exists:
 
 ### Festivals
 
-Simple D&D Calendar finds a day's festival in either of D&D 5e's two ways:
+Sundial Calendar finds a day's festival in either of D&D 5e's two ways:
 
 - **A festival day.** With a class that has `findFestivalDay(components)`, such as `CalendarHarptos`, each entry in `festivals` is a day, by month and day of the month, both counted from 1. Harptos puts its festivals on the extra day at the end of a 31-day month.
 - **A festival month.** Any month whose `name` is a localization key containing `.Festival.`, such as `"SUNDERED.Festival.Lanternweek"`, is a festival for all its days. This is how Greyhawk's festival weeks work.
@@ -122,10 +122,10 @@ To add another to the module, add it to `CALENDARS` in `scripts/calendars.mjs`, 
 
 ## Adding moons
 
-Give your calendar moons in the `sogrom-simple-dnd-calendar.moons` hook. It fires once, during Foundry's `setup`, before the calendar first draws. It's passed every calendar's moons, keyed by the same `value` you registered the calendar under, and the world's calendar:
+Give your calendar moons in the `sogrom-sundial-calendar.moons` hook. It fires once, during Foundry's `setup`, before the calendar first draws. It's passed every calendar's moons, keyed by the same `value` you registered the calendar under, and the world's calendar:
 
 ```js
-Hooks.on("sogrom-simple-dnd-calendar.moons", (moons, calendar) => {
+Hooks.on("sogrom-sundial-calendar.moons", (moons, calendar) => {
   moons["sundered-isles"] = [
     {
       id: "pallid",
@@ -148,7 +148,7 @@ Hooks.on("sogrom-simple-dnd-calendar.moons", (moons, calendar) => {
 });
 ```
 
-If Simple D&D Calendar isn't installed or active, the hook never fires, so this is safe in a module that only recommends it.
+If Sundial Calendar isn't installed or active, the hook never fires, so this is safe in a module that only recommends it.
 
 ### Moon fields
 
@@ -175,7 +175,7 @@ A period that divides the year exactly keeps the moon's phases on the same dates
 The same hook can change D&D 5e's calendars' moons:
 
 ```js
-Hooks.on("sogrom-simple-dnd-calendar.moons", moons => {
+Hooks.on("sogrom-sundial-calendar.moons", moons => {
   moons.greyhawk.find(m => m.id === "luna").period = 28;    // Change one.
   moons.harptos[0].trail = undefined;                       // Take the Tears away.
   moons.gregorian = [];                                     // No moon at all.
@@ -186,10 +186,10 @@ The built-in keys are `gregorian`, `greyhawk`, `harptos` and `khorvaire`, and th
 
 ## Changing the suns
 
-Every world has a sun, so a calendar with none listed gets the usual one: yellow, named "The Sun". To name, recolour or resize it, or to give a world more than one, use the `sogrom-simple-dnd-calendar.suns` hook. It fires during `setup`, just after the moons' hook, and is passed every calendar's suns keyed the same way, and the world's calendar:
+Every world has a sun, so a calendar with none listed gets the usual one: yellow, named "The Sun". To name, recolour or resize it, or to give a world more than one, use the `sogrom-sundial-calendar.suns` hook. It fires during `setup`, just after the moons' hook, and is passed every calendar's suns keyed the same way, and the world's calendar:
 
 ```js
-Hooks.on("sogrom-simple-dnd-calendar.suns", suns => {
+Hooks.on("sogrom-sundial-calendar.suns", suns => {
   suns["sundered-isles"] = [
     { id: "ember", name: "The Ember", color: "#ffb347", size: 1.1 },
     { id: "spark", name: "The Spark", color: "#cfe8ff", size: 0.6, offset: 2 }   // Rises two hours after the Ember.
@@ -214,7 +214,7 @@ The built-in suns are in `scripts/suns.mjs`.
 
 ## What the module reads from a calendar
 
-Simple D&D Calendar works with any calendar D&D 5e can use. These are the parts it reads, and what a calendar without them gets:
+Sundial Calendar works with any calendar D&D 5e can use. These are the parts it reads, and what a calendar without them gets:
 
 | What | Read from | Without it |
 | --- | --- | --- |
@@ -259,7 +259,7 @@ dnd5e.ui.calendar?.refresh?.();
 
 ### Styling
 
-The calendar is `#sdc-calendar`, which carries:
+The calendar is `#sdl-calendar`, which carries:
 
 | Attribute or class | Set to |
 | --- | --- |
@@ -269,11 +269,11 @@ The calendar is `#sdc-calendar`, which carries:
 | `data-day-phase` | The part of the day: `dawn` (the hour before sunrise), `day`, `dusk` (the hour after sunset) or `night`. |
 | `.expanded` | Present while the calendar is open, absent while it's folded up to the bar. |
 
-Moons are `.sdc-moon` elements in `.sdc-moons`, with their colour in `--moon-color`. The Tears are `.sdc-tears`. Suns are `.sdc-sun` elements in the same container, before the moons, with their colour at the moment in `--sun-color`.
+Moons are `.sdl-moon` elements in `.sdl-moons`, with their colour in `--moon-color`. The Tears are `.sdl-tears`. Suns are `.sdl-sun` elements in the same container, before the moons, with their colour at the moment in `--sun-color`.
 
 ## The module's API
 
-`game.modules.get("sogrom-simple-dnd-calendar").api`, available from `init`, has:
+`game.modules.get("sogrom-sundial-calendar").api`, available from `init`, has:
 
 | Property | |
 | --- | --- |
@@ -285,7 +285,7 @@ Moons are `.sdc-moon` elements in `.sdc-moons`, with their colour in `--moon-col
 For example, the Pallid Moon's phase now:
 
 ```js
-const { moons, sky } = game.modules.get("sogrom-simple-dnd-calendar").api;
+const { moons, sky } = game.modules.get("sogrom-sundial-calendar").api;
 const pallid = moons["sundered-isles"].find(m => m.id === "pallid");
 const phase = sky.moonPhase(game.time.calendar, pallid, game.time.worldTime);
 console.log(sky.phaseName(phase));   // "Full", "WaxingCrescent"...
@@ -293,7 +293,7 @@ console.log(sky.phaseName(phase));   // "Full", "WaxingCrescent"...
 
 ### Settings
 
-The module's settings can be read with `game.settings.get("sogrom-simple-dnd-calendar", key)`:
+The module's settings can be read with `game.settings.get("sogrom-sundial-calendar", key)`:
 
 | Key | Scope | Values |
 | --- | --- | --- |
@@ -326,7 +326,7 @@ A module that adds the Calendar of the Sundered Isles, with two moons.
   "languages": [{ "lang": "en", "name": "English", "path": "lang/en.json" }],
   "relationships": {
     "systems": [{ "id": "dnd5e", "type": "system", "compatibility": { "minimum": "6.0.0" } }],
-    "recommends": [{ "id": "sogrom-simple-dnd-calendar", "type": "module", "reason": "Draws the calendar's moons." }]
+    "recommends": [{ "id": "sogrom-sundial-calendar", "type": "module", "reason": "Draws the calendar's moons." }]
   }
 }
 ```
@@ -353,8 +353,8 @@ Hooks.once("dnd5e.setupCalendar", () => {
   });
 });
 
-// Give it moons, if Simple D&D Calendar is active.
-Hooks.on("sogrom-simple-dnd-calendar.moons", moons => {
+// Give it moons, if Sundial Calendar is active.
+Hooks.on("sogrom-sundial-calendar.moons", moons => {
   moons["sundered-isles"] = [
     { id: "pallid", name: "SUNDERED.Moon.Pallid", period: 27.5, color: "#eaeef7", epoch: { year: 812, day: 0 }, epochPhase: 0.5 },
     { id: "ember", name: "SUNDERED.Moon.Ember", period: 61, color: "#f09a6b", epoch: { year: 812, day: 14, hour: 6 }, trail: "tears" }

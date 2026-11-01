@@ -1,6 +1,6 @@
 # The Moons
 
-D&D 5e's calendars give the days, months, festivals and seasons of each world, but no moons. Simple D&D Calendar adds them: each of D&D 5e's calendars has its world's moons, worked out from a period and one moment when each moon's phase is known. From that, the calendar knows every moon's phase at any moment, past or future, and the same date always shows the same sky.
+D&D 5e's calendars give the days, months, festivals and seasons of each world, but no moons. Sundial Calendar adds them: each of D&D 5e's calendars has its world's moons, worked out from a period and one moment when each moon's phase is known. From that, the calendar knows every moon's phase at any moment, past or future, and the same date always shows the same sky.
 
 This page covers how the moons move, and the moons of each calendar.
 
@@ -132,7 +132,7 @@ A calendar not listed here has no moons, until a module or world script adds som
 
 ## Changing the moons
 
-Modules and world scripts can change any calendar's moons, or give moons to a calendar of their own, in the `sogrom-simple-dnd-calendar.moons` hook. It fires once, during Foundry's `setup`, before the calendar is first drawn. It is passed the moons of every calendar, keyed by the calendar's value in `CONFIG.DND5E.calendar.calendars`, and the world's calendar.
+Modules and world scripts can change any calendar's moons, or give moons to a calendar of their own, in the `sogrom-sundial-calendar.moons` hook. It fires once, during Foundry's `setup`, before the calendar is first drawn. It is passed the moons of every calendar, keyed by the calendar's value in `CONFIG.DND5E.calendar.calendars`, and the world's calendar.
 
 Each moon has:
 
@@ -149,7 +149,7 @@ Each moon has:
 For example, to give a homebrew calendar a red moon that was full at midnight starting its first day:
 
 ```js
-Hooks.on("sogrom-simple-dnd-calendar.moons", moons => {
+Hooks.on("sogrom-sundial-calendar.moons", moons => {
   moons.myCalendar = [
     { id: "blood", name: "The Blood Moon", period: 33, color: "#e05a4f", epoch: { year: 1, day: 0 }, epochPhase: 0.5 }
   ];
@@ -159,7 +159,7 @@ Hooks.on("sogrom-simple-dnd-calendar.moons", moons => {
 Or to slow Selûne to an even 30 days:
 
 ```js
-Hooks.on("sogrom-simple-dnd-calendar.moons", moons => {
+Hooks.on("sogrom-sundial-calendar.moons", moons => {
   moons.harptos[0].period = 30;
 });
 ```
