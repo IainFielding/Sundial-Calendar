@@ -9,6 +9,13 @@ All notable changes to Sundial Calendar.
 - **Scenes can be left off the sky.** With **Darken Scenes at Night** on, each scene has **Follow the Sky** in its
   configuration, on the **Environment** tab under **Darkness**. Untick it for a dungeon, the Underdark or anywhere
   else with no sky, and its darkness stays as you set it, without locking it.
+- **Warm light at dawn and dusk.** While the scene's darkness follows the sky, its light turns pale gold around
+  sunrise and deep amber around sunset, coming and going with the darkness. Each player's Foundry works it out for
+  itself, so nothing is saved to the scene, and a scene with a tint of its own keeps it. **Warm Light at Dawn and
+  Dusk** turns it off.
+- **The weather in the sky.** Set a scene's weather and the sky shows it: clouds drifting past the sun and moons, and
+  rain, a storm with lightning, snow, a blizzard, fog or autumn leaves. Each player sees the weather of the scene
+  they're looking at, and can turn it off with **Show the Weather in the Sky**.
 
 ### Changed
 

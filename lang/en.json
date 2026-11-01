@@ -131,6 +131,14 @@
         "Name": "Darken Scenes at Night",
         "Hint": "Keep the active scene's darkness in step with the sky: light by day, fading through the late afternoon and twilight as the sun sinks, dark at night, and a little lighter under a bright moon. Untick Follow the Sky in a scene's configuration to leave that scene alone, and scenes with their darkness locked are left alone too."
       },
+      "WarmLight": {
+        "Name": "Warm Light at Dawn and Dusk",
+        "Hint": "While Darken Scenes at Night is on, tint the active scene's light gold around sunrise and amber around sunset. Scenes that don't follow the sky, have their darkness locked or have a tint of their own are left alone."
+      },
+      "SkyWeather": {
+        "Name": "Show the Weather in the Sky",
+        "Hint": "Draw the weather of the scene you're looking at in the calendar's sky: clouds drifting across it, and rain, snow, fog or falling leaves."
+      },
       "SeasonalDaylight": {
         "Name": "Long Summer Days",
         "Hint": "Move sunrise and sunset with the seasons: sixteen hours of daylight at midsummer and eight at midwinter. D&D 5e's dawn and dusk recovery, the day wheel and the scene's darkness all follow."

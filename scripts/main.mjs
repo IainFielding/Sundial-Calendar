@@ -1,3 +1,4 @@
+import { registerAmbienceHooks, refreshWarmLight, warmLightNow } from "./ambience.mjs";
 import { registerAnnouncements } from "./announce.mjs";
 import { addCalendars, registerCalendarsSetting } from "./calendars.mjs";
 import { CalendarsMenu } from "./calendars-menu.mjs";
@@ -5,7 +6,7 @@ import { registerChatCommands } from "./chat.mjs";
 import { MODULE_ID } from "./constants.mjs";
 import { darknessNow, registerDarknessHooks, syncDarkness } from "./darkness.mjs";
 import { patchDaylight } from "./daylight.mjs";
-import { createCalendarHUD } from "./hud.mjs";
+import { createCalendarHUD, weatherScene } from "./hud.mjs";
 import { MOONS } from "./moons.mjs";
 import * as sky from "./sky.mjs";
 import { SUNS } from "./suns.mjs";
@@ -86,7 +87,30 @@ Hooks.once("init", () => {
     config: true,
     type: Boolean,
     default: false,
-    onChange: () => syncDarkness()
+    onChange: () => {
+      syncDarkness();
+      refreshWarmLight({ force: true });
+    }
+  });
+
+  game.settings.register(MODULE_ID, "warmLight", {
+    name: "SDL.Settings.WarmLight.Name",
+    hint: "SDL.Settings.WarmLight.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: () => refreshWarmLight({ force: true })
+  });
+
+  game.settings.register(MODULE_ID, "skyWeather", {
+    name: "SDL.Settings.SkyWeather.Name",
+    hint: "SDL.Settings.SkyWeather.Hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: () => dnd5e.ui.calendar?.refreshWeather?.()
   });
 
   game.settings.register(MODULE_ID, "seasonalDaylight", {
@@ -99,6 +123,7 @@ Hooks.once("init", () => {
     onChange: () => {
       dnd5e.ui.calendar?.refresh?.();
       syncDarkness();
+      refreshWarmLight({ force: true });
     }
   });
 
@@ -127,6 +152,8 @@ Hooks.once("init", () => {
 
   patchDaylight(CONFIG.time.worldCalendarClass);
   registerDarknessHooks();
+  registerAmbienceHooks();
+  registerWeatherHooks();
   registerChatCommands();
   registerAnnouncements();
 
@@ -138,7 +165,7 @@ Hooks.once("init", () => {
   CONFIG.DND5E.calendar.application = createCalendarHUD(CalendarHUD);
 
   game.modules.get(MODULE_ID).api = { moons: foundry.utils.deepClone(MOONS), suns: foundry.utils.deepClone(SUNS), sky,
-    darknessNow };
+    darknessNow, warmLightNow };
 });
 
 /* -------------------------------------------- */
@@ -174,6 +201,19 @@ Hooks.once("ready", () => {
   migrateSeasonTrim();
   offerToEnable();
 });
+
+/* -------------------------------------------- */
+
+/**
+ * Keep the sky's weather in step with the scene each user is looking at.
+ */
+function registerWeatherHooks() {
+  const refresh = () => dnd5e.ui.calendar?.refreshWeather?.();
+  Hooks.on("canvasReady", refresh);
+  Hooks.on("updateScene", (scene, changes) => {
+    if ( (("weather" in changes) || changes.active) && (scene === weatherScene()) ) refresh();
+  });
+}
 
 /* -------------------------------------------- */
 

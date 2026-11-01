@@ -3,6 +3,7 @@ import { festivalKey as festivalKeyOf, festivalName, formatComponents, moonEvent
 import { MODULE_ID } from "./constants.mjs";
 import * as sky from "./sky.mjs";
 import { BAR_TRIM_CHOICES, barTrim, festivalTrimKind, seededRandom, skyTrim, skyTrimKind } from "./trim.mjs";
+import { weatherKind, weatherPicture } from "./weather.mjs";
 
 /**
  * The shape of the sky picture under the control bar, in CSS pixels. The bowl and the day wheel share a centre above
@@ -254,11 +255,14 @@ export function createCalendarHUD(CalendarHUD) {
         bowlTrim: find(".sdl-trim-bowl"),
         festivalIcon: find(".sdl-festival-icon"),
         moonEventIcon: find(".sdl-moon-event-icon"),
-        moons: find(".sdl-moons")
+        moons: find(".sdl-moons"),
+        weather: find(".sdl-weather-layer")
       };
       this.#text = {};
       delete this.element.dataset.skyTrim;
       delete this.element.dataset.barTrim;
+      delete this.element.dataset.weather;
+      this.refreshWeather();
       const calendar = game.time.calendar;
       // The suns go in first, so the moons pass in front of them.
       this.#suns = worldSuns().map(config => {
@@ -311,6 +315,22 @@ export function createCalendarHUD(CalendarHUD) {
     refresh() {
       this.#text = {};
       this.#draw(this.#shown ?? game.time.worldTime);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Draw the weather of the scene this user is looking at in the sky, unless they've turned it off. A user with the
+     * canvas off is looking at no scene, so they see the active one's.
+     */
+    refreshWeather() {
+      if ( !this.#el.weather ) return;
+      const show = game.settings.get(MODULE_ID, "skyWeather");
+      const kind = show ? weatherKind(weatherScene()?.weather) : "";
+      if ( (this.element.dataset.weather ?? "") === kind ) return;
+      if ( kind ) this.element.dataset.weather = kind;
+      else delete this.element.dataset.weather;
+      this.#el.weather.innerHTML = weatherPicture(kind, SKY, `${foundry.utils.getRoute("ui/particles")}/`);
     }
 
     /* -------------------------------------------- */
@@ -589,4 +609,14 @@ export function createCalendarHUD(CalendarHUD) {
       if ( this.shouldDisplay ) dnd5e.ui.calendar?.animateTo?.(worldTime);
     }
   };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * The scene whose weather the sky shows: the one this user is looking at, or the active one with the canvas off.
+ * @returns {Scene|undefined}
+ */
+export function weatherScene() {
+  return game.scenes.viewed ?? game.scenes.active;
 }

@@ -392,3 +392,33 @@ describe("the Tears of Selûne", () => {
     expect(sky.aboveHorizon(angle)).toBe(false);
   });
 });
+
+describe("the warm light of dawn and dusk", () => {
+  it("has none in the middle of the day or the night", () => {
+    expect(sky.goldenLight(12).intensity).toBe(0);
+    expect(sky.goldenLight(0).intensity).toBe(0);
+    expect(sky.goldenLight(23).intensity).toBe(0);
+  });
+
+  it("is warmest with the sun on the horizon, and fades either side", () => {
+    const evening = [16.5, 17, 17.5, 18, 18.25, 18.5, 18.75].map(h => sky.goldenLight(h).intensity);
+    expect(sky.goldenLight(18).intensity).toBe(sky.GOLDEN_INTENSITY);
+    expect(Math.max(...evening)).toBe(sky.GOLDEN_INTENSITY);
+    for ( let i = 1; i < 4; i++ ) expect(evening[i]).toBeGreaterThan(evening[i - 1]);
+    for ( let i = 4; i < evening.length; i++ ) expect(evening[i]).toBeLessThan(evening[i - 1]);
+  });
+
+  it("is gold in the morning and amber in the evening", () => {
+    expect(sky.goldenLight(6).hue).toBe(sky.DAWN_HUE);
+    expect(sky.goldenLight(5).hue).toBe(sky.DAWN_HUE);
+    expect(sky.goldenLight(18).hue).toBe(sky.DUSK_HUE);
+    expect(sky.goldenLight(19).hue).toBe(sky.DUSK_HUE);
+  });
+
+  it("follows the sunrise and sunset it is given", () => {
+    expect(sky.goldenLight(20, 4, 20).intensity).toBe(sky.GOLDEN_INTENSITY);
+    expect(sky.goldenLight(19.5, 4, 20).intensity).toBeGreaterThan(0);
+    expect(sky.goldenLight(19.5, 4, 20).intensity).toBeLessThan(sky.GOLDEN_INTENSITY);
+    expect(sky.goldenLight(18, 4, 20).intensity).toBe(0);
+  });
+});

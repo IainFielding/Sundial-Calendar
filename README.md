@@ -87,6 +87,28 @@ The transition mirrors the movement of the sun rather than changing abruptly. Br
 
 Moonlight can soften the darkness after sunset. A bright full moon riding high in the sky leaves the scene noticeably brighter than a moonless night, helping the world feel connected to the celestial events displayed by the calendar.
 
+Each scene can opt out. Untick **Follow the Sky** in a dungeon's or the Underdark's configuration and its darkness stays as you set it.
+
+### Dawn and Dusk
+
+The light turns warm as the sun meets the horizon: pale gold around sunrise and deep amber around sunset, coming and going with the darkness. A scene with a tint of its own keeps it.
+
+| Dawn | Noon | Dusk |
+| --- | --- | --- |
+| ![The camp in pale gold light at sunrise](docs/screenshots/light-dawn.png) | ![The camp in plain daylight at noon](docs/screenshots/light-noon.png) | ![The camp in amber light at sunset](docs/screenshots/light-dusk.png) |
+
+### Weather in the Sky
+
+Set a scene's weather and the sky follows: clouds drift across the bowl, past the sun and moons, and rain, snow, fog or falling leaves sweep over it. Storms bring dark clouds and the odd flash of lightning. Each player sees the weather of the scene they're looking at.
+
+| Clouds | Rain | Storm |
+| --- | --- | --- |
+| ![Clouds drifting past the sun](docs/screenshots/weather-clouds.png) | ![Rain over the sky](docs/screenshots/weather-rain.png) | ![A storm at dusk, with dark clouds](docs/screenshots/weather-storm.png) |
+| **Snow** | **Blizzard** | **Fog** |
+| ![Snow falling past the moon](docs/screenshots/weather-snow.png) | ![A blizzard driving across the sky](docs/screenshots/weather-blizzard.png) | ![Fog drifting over the sky at dawn](docs/screenshots/weather-fog.png) |
+| **Autumn Leaves** | | |
+| ![Autumn leaves blowing past the sun](docs/screenshots/weather-leaves.png) | | |
+
 
 ## Installing
 
@@ -111,7 +133,7 @@ Foundry VTT 14 and D&D 5e 6.x.
 
 ## Credits
 
-The battlemap behind the calendar in the screenshots is [Caravan Camp (Grasslands)](https://www.czepeku.com/fantasy/maps/caravan-camp/grasslands) and is not distributed with the module.
+The battlemaps behind the calendar in the screenshots are Czepeku's [Caravan Camp (Grasslands)](https://www.czepeku.com/fantasy/maps/caravan-camp/grasslands) and Caravan Roadblock, and are not distributed with the module.
 
 For more of Czepeku's work, visit https://www.czepeku.com. 
 

@@ -409,6 +409,82 @@ test("the active scene darkens at night, once the GM turns it on", async ctx => 
   await gm.eval(flag => game.scenes.active.update({ [flag]: true }), flag);
 });
 
+test("the active scene's light turns gold at dawn and amber at dusk", async ctx => {
+  const { gm, player } = ctx;
+  const tint = () => player.eval(moduleId => game.modules.get(moduleId).api.warmLightNow(game.scenes.active), MODULE_ID);
+  await gm.eval(() => game.scenes.active.update({ "environment.darknessLock": false, "environment.base.intensity": 0 }));
+
+  // Only while the scene's darkness follows the sky.
+  await setTime(ctx, { year: 1501, day: 14, hour: 18 });
+  assertEqual(await tint(), null, "the light at sunset with Darken Scenes at Night off");
+  await gm.eval(moduleId => game.settings.set(moduleId, "sceneDarkness", true), MODULE_ID);
+  const dusk = await tint();
+  assert(dusk && (dusk.intensity > 0.4), `the light at sunset: ${JSON.stringify(dusk)}`);
+
+  await setTime(ctx, { year: 1501, day: 14, hour: 6 });
+  const dawn = await tint();
+  assert(dawn && (dawn.intensity > 0.4), `the light at sunrise: ${JSON.stringify(dawn)}`);
+  assert(dawn.hue > dusk.hue, `dawn's gold is paler than dusk's amber: ${dawn.hue}, ${dusk.hue}`);
+
+  await setTime(ctx, { year: 1501, day: 14, hour: 12 });
+  assertEqual(await tint(), null, "the light at noon");
+
+  // A scene with a tint of its own, its darkness locked, or off the sky keeps its own light.
+  await setTime(ctx, { year: 1501, day: 14, hour: 18 });
+  const flag = `flags.${MODULE_ID}.followSky`;
+  for ( const [what, change, undo] of [
+    ["a scene with its own tint", { "environment.base.intensity": 0.5 }, { "environment.base.intensity": 0 }],
+    ["a locked scene", { "environment.darknessLock": true }, { "environment.darknessLock": false }],
+    ["a scene off the sky", { [flag]: false }, { [flag]: true }]
+  ] ) {
+    await gm.eval(change => game.scenes.active.update(change), change);
+    assertEqual(await tint(), null, what);
+    await gm.eval(undo => game.scenes.active.update(undo), undo);
+  }
+
+  await gm.eval(moduleId => game.settings.set(moduleId, "warmLight", false), MODULE_ID);
+  assertEqual(await tint(), null, "the light at sunset with Warm Light off");
+  await gm.eval(moduleId => game.settings.set(moduleId, "warmLight", true), MODULE_ID);
+  assert(await tint(), "the light at sunset with Warm Light back on");
+});
+
+test("the sky shows the scene's weather, unless a player turns it off", async ({ gm, player }) => {
+  const shown = session => session.eval(() => {
+    const root = document.getElementById("sdl-calendar");
+    const layer = root.querySelector(".sdl-weather-layer");
+    return { kind: root.dataset.weather ?? "", drawn: layer.childElementCount,
+      image: layer.querySelector("image")?.getAttribute("href") ?? "" };
+  });
+  const until = (session, kind) => waitFor(session, kind => {
+    return ((document.getElementById("sdl-calendar").dataset.weather ?? "") === kind) ? "ok" : null;
+  }, kind, `the sky's weather to be "${kind}"`);
+
+  await gm.eval(() => game.scenes.active.update({ weather: "rain" }));
+  for ( const session of [gm, player] ) await until(session, "rain");
+  assert((await shown(player)).drawn > 0, "rain drawn in the sky");
+
+  // A storm is a storm, not rain; snow is drawn with Foundry's own snowflakes, which load.
+  await gm.eval(() => game.scenes.active.update({ weather: "rainStorm" }));
+  await until(player, "storm");
+  await gm.eval(() => game.scenes.active.update({ weather: "snow" }));
+  await until(player, "snow");
+  const snow = await shown(player);
+  assert(snow.image.endsWith("ui/particles/snow.png"), `the snowflake: ${snow.image}`);
+  assert(await player.eval(href => fetch(href).then(r => r.ok), snow.image), "the snowflake image loads");
+
+  // Each player can turn it off for themselves.
+  await player.eval(moduleId => game.settings.set(moduleId, "skyWeather", false), MODULE_ID);
+  await until(player, "");
+  assertEqual((await shown(player)).drawn, 0, "nothing drawn once turned off");
+  assertEqual((await shown(gm)).kind, "snow", "the GM still sees the snow");
+  await player.eval(moduleId => game.settings.set(moduleId, "skyWeather", true), MODULE_ID);
+  await until(player, "snow");
+
+  await gm.eval(() => game.scenes.active.update({ weather: "" }));
+  for ( const session of [gm, player] ) await until(session, "");
+  assertEqual((await shown(gm)).drawn, 0, "nothing drawn with no weather");
+});
+
 test("each player picks the calendar's style for themselves", async ({ gm, player }) => {
   const look = session => session.eval(() => {
     const root = document.getElementById("sdl-calendar");

@@ -42,7 +42,7 @@
 
                 {{!-- The bowl of the sky --}}
                 <path class="sdl-bowl" d="{{ bowlPath }}" fill="url(#sdl-bowl-fill)"/>
-                <g clip-path="url(#sdl-bowl-clip)">
+                <g class="sdl-stars" clip-path="url(#sdl-bowl-clip)">
                     <circle class="sdl-bowl-ring" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="118"/>
                     <circle class="sdl-bowl-ring dashed" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="139"/>
                     {{#each stars}}<circle class="sdl-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}" opacity="{{ o }}"/>{{/each}}
@@ -68,6 +68,17 @@
                 <g class="sdl-trim-bowl"></g>
             </svg>
             <div class="sdl-moons"></div>
+            {{!-- The scene's weather, over the sky, the sun and the moons --}}
+            <svg class="sdl-weather" viewBox="0 0 {{ sky.width }} {{ sky.height }}" width="{{ sky.width }}" height="{{ sky.height }}" aria-hidden="true">
+                <defs>
+                    <clipPath id="sdl-weather-clip"><path d="{{ bowlPath }}"/></clipPath>
+                    <radialGradient id="sdl-fog-puff">
+                        <stop offset="0" class="sdl-stop-fog-0"/>
+                        <stop offset="1" class="sdl-stop-fog-1"/>
+                    </radialGradient>
+                </defs>
+                <g class="sdl-weather-layer" clip-path="url(#sdl-weather-clip)"></g>
+            </svg>
         </div>
     </div>
 </div>
