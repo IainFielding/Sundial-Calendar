@@ -121,21 +121,15 @@ https://github.com/IainFielding/Sundial-Calendar/releases/latest/download/module
 
 Then turn on **Sundial Calendar** under **Manage Modules** in a D&D 5e world.
 
-### Upgrading from Simple D&D Calendar
-
-Sundial Calendar was called Simple D&D Calendar before 2.0.0. The new name comes with a new module id, so Foundry sees
-it as a different module and won't update the old one to it. Uninstall **Simple D&D Calendar**, install **Sundial
-Calendar** from the manifest URL above, and set its options again under **Configure Settings**.
-
 ## Compatibility
 
 Foundry VTT 14 and D&D 5e 6.x.
 
 ## Credits
 
-The battlemaps behind the calendar in the screenshots are Czepeku's [Caravan Camp (Grasslands)](https://www.czepeku.com/fantasy/maps/caravan-camp/grasslands) and Caravan Roadblock, and are not distributed with the module.
+The battlemap behind the calendar in the screenshots is Czepeku's Caravan Roadblock, and is not distributed with the module.
 
-For more of Czepeku's work, visit https://www.czepeku.com. 
+For more of Czepeku's work, visit https://www.czepeku.com.
 
 ## Licence
 
