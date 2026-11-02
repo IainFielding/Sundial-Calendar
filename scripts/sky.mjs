@@ -355,25 +355,6 @@ export function daylight(calendar, components, midsummerDay = midsummer(calendar
   return { sunrise: round(noon - (length / 2)), sunset: round(noon + (length / 2)) };
 }
 
-/**
- * The SVG path for the day wheel's day face, for a wheel of radius `r` drawn about (0, 0) with noon
- * at the bottom. The wheel turns a whole turn a day, so daylight takes up its share of the turn, from where the
- * wheel's lowest point will be at sunrise round to where it will be at sunset.
- * @param {number} sunrise   In hours.
- * @param {number} sunset    In hours.
- * @param {number} hoursPerDay
- * @param {number} r
- * @returns {{face: string}}
- */
-export function dayFacePaths(sunrise, sunset, hoursPerDay, r) {
-  const span = wrap(sunset - sunrise, hoursPerDay) / hoursPerDay * 360;
-  const from = wheelPoint(sunset, hoursPerDay, r);
-  const to = wheelPoint(sunrise, hoursPerDay, r);
-  return {
-    face: `M0,0 L${from} A${r} ${r} 0 ${span > 180 ? 1 : 0} 1 ${to} Z`
-  };
-}
-
 /** How long dawn's and dusk's glow lasts either side of the night, in hours, as {@link dayPhase} counts them. */
 export const TWILIGHT_HOURS = 1;
 
