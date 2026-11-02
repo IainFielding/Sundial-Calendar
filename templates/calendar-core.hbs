@@ -37,14 +37,12 @@
                         <stop offset="1" class="sdl-stop-twilight-2"/>
                     </radialGradient>
                     <clipPath id="sdl-bowl-clip"><path d="{{ bowlPath }}"/></clipPath>
-                    <clipPath id="sdl-day-clip"><path class="sdl-wheel-day-clip" d="{{ dayFace.face }}"/></clipPath>
                 </defs>
 
                 {{!-- The bowl of the sky --}}
                 <path class="sdl-bowl" d="{{ bowlPath }}" fill="url(#sdl-bowl-fill)"/>
                 <g class="sdl-stars" clip-path="url(#sdl-bowl-clip)">
-                    <circle class="sdl-bowl-ring" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="118"/>
-                    <circle class="sdl-bowl-ring dashed" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="139"/>
+                    <circle class="sdl-bowl-ring dashed" cx="{{ sky.cx }}" cy="{{ sky.cy }}" r="{{ sky.orbit }}"/>
                     {{#each stars}}<circle class="sdl-star" cx="{{ x }}" cy="{{ y }}" r="{{ r }}" opacity="{{ o }}"/>{{/each}}
                 </g>
 
@@ -56,11 +54,8 @@
                         <path class="sdl-wheel-day" d="{{ twilight.core }}" fill="url(#sdl-day-fill)"/>
                         <g class="sdl-wheel-day-fade" fill="url(#sdl-day-fill)">{{#each twilight.day}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
                         <g class="sdl-wheel-twilight" fill="url(#sdl-twilight-fill)">{{#each twilight.glow}}<path d="{{ d }}" fill-opacity="{{ opacity }}"/>{{/each}}</g>
-                        <circle class="sdl-wheel-ring" r="88"/>
-                        <circle class="sdl-wheel-ring" r="58"/>
-                        <g clip-path="url(#sdl-day-clip)">{{#each rays}}<polygon class="sdl-ray" points="{{ this }}"/>{{/each}}</g>
-                        <circle class="sdl-wheel-rim" r="{{ sky.wheel }}"/>
                         {{#each ticks}}<polygon class="sdl-tick" points="{{ this }}"/>{{/each}}
+                        <circle class="sdl-wheel-rim" r="{{ sky.wheel }}"/>
                     </g>
                 </g>
 

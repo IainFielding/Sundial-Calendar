@@ -10,7 +10,7 @@ import { weatherKind, weatherPicture } from "./weather.mjs";
  * the picture's top edge, so only the lower part of each shows: the bowl as a deep half-dish, the wheel as the arc
  * of whichever half of the day is turned down into view.
  */
-export const SKY = Object.freeze({ width: 320, height: 120, cx: 160, cy: -40, bowl: 160, wheel: 100, orbit: 128 });
+export const SKY = Object.freeze({ width: 320, height: 120, cx: 160, cy: -40, bowl: 160, wheel: 116, orbit: 138 });
 
 /** The season bar's width. Its background is one year three times this wide, so a third of the year shows. */
 const SEASON_BAR_WIDTH = 460;
@@ -181,7 +181,7 @@ export function createCalendarHUD(CalendarHUD) {
     /* -------------------------------------------- */
 
     /**
-     * The fixed parts of the sky picture: the bowl's stars, the wheel's rays and ticks, and the season bar.
+     * The fixed parts of the sky picture: the bowl's stars, the wheel's ticks, and the season bar.
      * @returns {object}
      */
     #prepareSky() {
@@ -203,22 +203,20 @@ export function createCalendarHUD(CalendarHUD) {
       };
       const ticks = Array.from({ length: 24 }, (_, i) => {
         const a = i * 15;
-        return [point(wheel - 1, a - 2.2), point(wheel - 1, a + 2.2), point(wheel - (i % 6 ? 6 : 10), a)].join(" ");
-      });
-      const rays = Array.from({ length: 11 }, (_, i) => {
-        const a = 15 + (i * 15);
-        return [point(62, a - 4), point(62, a + 4), point(84, a)].join(" ");
+        const quarter = (i % 6) === 0;
+        const spread = quarter ? 3 : 2.2;
+        // The base sits under the rim, which is drawn over it, so each tick grows out of the rim.
+        return [point(wheel, a - spread), point(wheel, a + spread), point(wheel - (quarter ? 14 : 6), a)].join(" ");
       });
       const nightStars = Array.from({ length: 12 }, (_, i) => {
-        const [x, y] = point(56 + ((i * 37) % 34), 195 + (i * 13.5)).split(",");
+        const [x, y] = point(66 + ((i * 37) % 40), 195 + (i * 13.5)).split(",");
         return { x, y, r: (i % 3 ? 0.9 : 1.6) };
       });
       return {
         sky: SKY,
         bowlPath: `M${(cx - halfChord).toFixed(1)},0 A${bowl} ${bowl} 0 0 0 ${(cx + halfChord).toFixed(1)},0 Z`,
         rimPath: `M${(cx - halfChord).toFixed(1)},0 A${bowl} ${bowl} 0 0 0 ${(cx + halfChord).toFixed(1)},0`,
-        stars, ticks, rays, nightStars,
-        dayFace: sky.dayFacePaths(6, 18, 24, wheel),
+        stars, ticks, nightStars,
         twilight: sky.twilightPaths(6, 18, 24, wheel),
         seasonGradient: sky.seasonGradient(game.time.calendar),
         seasonWidth: SEASON_BAR_WIDTH * 3
@@ -248,7 +246,6 @@ export function createCalendarHUD(CalendarHUD) {
         season: find(".sdl-season"),
         wheel: find(".sdl-wheel"),
         wheelDay: find(".sdl-wheel-day"),
-        wheelDayClip: find(".sdl-wheel-day-clip"),
         dayFade: find(".sdl-wheel-day-fade"),
         twilight: find(".sdl-wheel-twilight"),
         barTrim: find(".sdl-trim-bar"),
@@ -453,8 +450,6 @@ export function createCalendarHUD(CalendarHUD) {
       const daylight = `${sunrise.toFixed(2)}-${sunset.toFixed(2)}`;
       if ( this.#text.daylight !== daylight ) {
         this.#text.daylight = daylight;
-        const { face } = sky.dayFacePaths(sunrise, sunset, hoursPerDay, SKY.wheel);
-        el.wheelDayClip.setAttribute("d", face);
         const twilight = sky.twilightPaths(sunrise, sunset, hoursPerDay, SKY.wheel);
         const layers = paths => paths.map(({ d, opacity }) => `<path d="${d}" fill-opacity="${opacity}"/>`).join("");
         el.wheelDay.setAttribute("d", twilight.core);

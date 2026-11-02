@@ -309,11 +309,9 @@
 #sdl-calendar .sdl-stop-twilight-0 { stop-color: var(--sdl-twilight-0); }
 #sdl-calendar .sdl-stop-twilight-1 { stop-color: var(--sdl-twilight-1); }
 #sdl-calendar .sdl-stop-twilight-2 { stop-color: var(--sdl-twilight-2); }
-#sdl-calendar .sdl-wheel-ring { fill: none; stroke: rgb(255 255 255 / 30%); stroke-width: 1; }
-#sdl-calendar .sdl-ray { fill: rgb(255 255 255 / 38%); }
 #sdl-calendar .sdl-night-star { fill: rgb(255 255 255 / 85%); }
 #sdl-calendar .sdl-wheel-rim { fill: none; stroke: var(--sdl-gold); stroke-width: 3; }
-#sdl-calendar .sdl-tick { fill: var(--sdl-gold-light); }
+#sdl-calendar .sdl-tick { fill: var(--sdl-gold); stroke: rgb(0 0 0 / 45%); stroke-width: 0.6; stroke-linejoin: round; }
 #sdl-calendar .sdl-rim { fill: none; stroke: var(--sdl-gold); stroke-width: 2.5; }
 
 /* Moons ride the bowl between the wheel and its rim. */

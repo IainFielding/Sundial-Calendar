@@ -19,6 +19,9 @@ All notable changes to Sundial Calendar.
 
 ### Changed
 
+- **A cleaner sky.** The day wheel is bigger and the band of night sky round it thinner, with one dashed ring
+  marking the path the sun and moons take. The rays and rings on the wheel's face are gone, and its hour notches are
+  gold like its rim, longer at midnight, dawn, noon and dusk.
 - **Simple D&D Calendar is now Sundial Calendar.** The module has a new name, a new module id
   (`sogrom-sundial-calendar`) and a new home at <https://github.com/IainFielding/Sundial-Calendar>. Foundry sees it
   as a new module: uninstall Simple D&D Calendar, install Sundial Calendar from its manifest URL and set its options

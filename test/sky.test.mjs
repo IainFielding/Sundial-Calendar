@@ -188,12 +188,6 @@ describe("the length of the day", () => {
     const winter = makeCalendar({ months, seasons: [{ name: "Winter", dayStart: 331, dayEnd: 60 }] });
     expect(sky.midsummer(winter)).toBe(150);
   });
-
-  it("draws the day face on the bottom of the wheel, as wide as the day is long", () => {
-    expect(sky.dayFacePaths(6, 18, 24, 100)).toEqual({ face: "M0,0 L100,0 A100 100 0 0 1 -100,0 Z" });
-    expect(sky.dayFacePaths(4, 20, 24, 100).face).toBe("M0,0 L86.6,-50 A100 100 0 1 1 -86.6,-50 Z");
-    expect(sky.dayFacePaths(8, 16, 24, 100).face).toBe("M0,0 L86.6,50 A100 100 0 0 1 -86.6,50 Z");
-  });
 });
 
 describe("the season band", () => {
